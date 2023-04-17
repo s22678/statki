@@ -6,9 +6,17 @@ import (
 	"github.com/s22678/statki/connect"
 )
 
+const (
+	url = "https://go-pjatk-server.fly.dev"
+)
+
 func main() {
-	err := connect.InitGame()
+	c := connect.Connection{
+		Url: url,
+	}
+	err := c.InitGame()
 	if err != nil {
 		log.Fatal(err)
 	}
+	c.Status()
 }
