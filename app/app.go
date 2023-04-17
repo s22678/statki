@@ -17,7 +17,7 @@ const (
 )
 
 type Board struct {
-	board []string "json:board"
+	Board []string "json:board"
 }
 
 type Application struct {
@@ -59,7 +59,7 @@ func (a *Application) Board() {
 			RulerTextColor(color.BgYellow).
 			NewConfig(),
 	)
-	board.Import(b.board)
+	board.Import(b.Board)
 	board.Display()
 	// a.c.InitGame(nil, "", "", false)
 }
