@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	game_endpoint = "/api/game"
+	gameEndpoint = "/api/game"
 )
 
 // func InitGame() error
@@ -18,8 +18,13 @@ const (
 // func Status() (*StatusResponse, error)
 // func Fire(coord string) (string, error)
 
+type ConnectInterface interface {
+	InitGame() error
+	Status() (*StatusResponse, error)
+}
+
 type Connection struct {
-	token string
+	Token string
 	Url   string
 }
 
@@ -53,12 +58,12 @@ func (s *Connection) InitGame() error {
 
 	reader := bytes.NewReader(b)
 	log.Println(string(b))
-	resp, err := http.Post(s.Url+game_endpoint, "application/json", reader)
+	resp, err := http.Post(s.Url+gameEndpoint, "application/json", reader)
 	if err != nil {
 		log.Println(resp)
 		log.Println(err)
 	}
-	s.token = resp.Header.Get("X-Auth-Token")
+	s.Token = resp.Header.Get("X-Auth-Token")
 	fmt.Println(resp.Header.Get("X-Auth-Token"))
 	return err
 }
@@ -66,12 +71,12 @@ func (s *Connection) InitGame() error {
 func (s *Connection) Status() (*StatusResponse, error) {
 	sr := StatusResponse{}
 	client := http.Client{}
-	req, err := http.NewRequest("GET", s.Url+game_endpoint, nil)
+	req, err := http.NewRequest("GET", s.Url+gameEndpoint, nil)
 	if err != nil {
 		log.Println(req)
 		log.Println(err)
 	}
-	req.Header.Set("X-Auth-Token", s.token)
+	req.Header.Set("X-Auth-Token", s.Token)
 	r, err := client.Do(req)
 	if err != nil {
 		log.Println(req)
