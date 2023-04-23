@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/s22678/statki/app"
 	"github.com/s22678/statki/connect"
@@ -20,7 +22,6 @@ func main() {
 	defer f.Close()
 
 	log.SetOutput(f)
-	log.Println("This is a test log entry")
 	c := connect.Connection{
 		Url: url,
 	}
@@ -28,9 +29,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	c.Status()
 	a := app.Application{
 		Con: c,
 	}
-	a.Board()
+
+	for {
+		fmt.Println(c.Status())
+		a.Board()
+		time.Sleep(1 * time.Second)
+	}
 }

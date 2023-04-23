@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"reflect"
 
 	"github.com/fatih/color"
 	gui "github.com/grupawp/warships-lightgui"
@@ -16,27 +17,26 @@ const (
 	boardEndpoint         = "/api/game/board"
 )
 
-type Board struct {
+type GameBoard struct {
 	Board []string "json:board"
 }
 
 type Application struct {
-	Con connect.Connection
+	Con   connect.Connection
+	GB    GameBoard
+	board *gui.Board
 }
 
-func (a *Application) Board() {
-	b := Board{}
+func downloadBoard(a *Application) {
 	client := http.Client{}
 	req, err := http.NewRequest("GET", a.Con.Url+boardEndpoint, nil)
 	if err != nil {
-		log.Println(req)
-		log.Println(err)
+		log.Println(req, err)
 	}
 	req.Header.Set("X-Auth-Token", a.Con.Token)
 	r, err := client.Do(req)
 	if err != nil {
-		log.Println(req)
-		log.Println(err)
+		log.Println(req, err)
 	}
 	defer r.Body.Close()
 	body, err := io.ReadAll(r.Body)
@@ -44,13 +44,14 @@ func (a *Application) Board() {
 		log.Println(err)
 	}
 
-	err = json.Unmarshal(body, &b)
+	err = json.Unmarshal(body, &a.GB)
 	if err != nil {
 		log.Println(err)
 	}
-
 	log.Println(string(body))
+}
 
+func initGameBoard(a *Application) *gui.Board {
 	board := gui.New(
 		gui.ConfigParams().
 			HitChar('#').
@@ -59,7 +60,15 @@ func (a *Application) Board() {
 			RulerTextColor(color.BgYellow).
 			NewConfig(),
 	)
-	board.Import(b.Board)
-	board.Display()
+	board.Import(a.GB.Board)
+	return board
+}
+
+func (a *Application) Board() {
+	if reflect.DeepEqual(a.GB, GameBoard{}) {
+		downloadBoard(a)
+		a.board = initGameBoard(a)
+	}
+	a.board.Display()
 	// a.c.InitGame(nil, "", "", false)
 }

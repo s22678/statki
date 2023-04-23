@@ -73,14 +73,12 @@ func (s *Connection) Status() (*StatusResponse, error) {
 	client := http.Client{}
 	req, err := http.NewRequest("GET", s.Url+gameEndpoint, nil)
 	if err != nil {
-		log.Println(req)
-		log.Println(err)
+		log.Println(req, err)
 	}
 	req.Header.Set("X-Auth-Token", s.Token)
 	r, err := client.Do(req)
 	if err != nil {
-		log.Println(req)
-		log.Println(err)
+		log.Println(req, err)
 	}
 	defer r.Body.Close()
 	body, err := io.ReadAll(r.Body)
