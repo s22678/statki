@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/fatih/color v1.13.0
-	github.com/grupawp/warships-lightgui v1.1.0
+	github.com/grupawp/warships-lightgui/v2 v2.0.0
 )
 
 require (
