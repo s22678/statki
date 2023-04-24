@@ -11,6 +11,7 @@ import (
 
 const (
 	gameEndpoint = "/api/game"
+	listEndpoint = "/api/game/list"
 )
 
 // func InitGame() error
@@ -40,6 +41,11 @@ type StatusResponse struct {
 	Timer            int      `json:"timer,omitempty"`
 }
 
+type Player struct {
+	Game_status string `json:"game_status,omitempty"`
+	Nick        string `json:"nick,omitempty"`
+}
+
 var (
 	gameConnectionInit = map[string]interface{}{
 		"coords":      nil,
@@ -48,13 +54,12 @@ var (
 		"target_nick": "",
 		"wpbot":       true,
 	}
-
-	// players = map[[]string]interface{} {
-	// 	nicks
-	// }
 )
 
-func (s *Connection) InitGame() error {
+func (s *Connection) InitGame(playWithBot bool, targetNick string, myNick string) error {
+	gameConnectionInit["wpbot"] = playWithBot
+	gameConnectionInit["target_nick"] = targetNick
+	gameConnectionInit["nick"] = myNick
 	b, err := json.Marshal(gameConnectionInit)
 	if err != nil {
 		log.Println(err)
@@ -100,30 +105,30 @@ func (s *Connection) Status() (*StatusResponse, error) {
 	return &sr, err
 }
 
-// func (s *Connection) ListPlayers() error {
-// 	sr := StatusResponse{}
-// 	client := http.Client{}
-// 	req, err := http.NewRequest("GET", s.Url+gameEndpoint, nil)
-// 	if err != nil {
-// 		log.Println(req, err)
-// 	}
-// 	req.Header.Set("X-Auth-Token", s.Token)
-// 	r, err := client.Do(req)
-// 	if err != nil {
-// 		log.Println(req, err)
-// 	}
-// 	defer r.Body.Close()
-// 	body, err := io.ReadAll(r.Body)
-// 	if err != nil {
-// 		log.Println(err)
-// 	}
+func (s *Connection) ListPlayers() ([]Player, error) {
+	players := []Player{}
+	client := http.Client{}
+	req, err := http.NewRequest("GET", s.Url+listEndpoint, nil)
+	if err != nil {
+		log.Println(req, err)
+	}
 
-// 	err = json.Unmarshal(body, &sr)
-// 	if err != nil {
-// 		log.Println(err)
-// 	}
+	r, err := client.Do(req)
+	if err != nil {
+		log.Println(req, err)
+	}
+	defer r.Body.Close()
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err)
+	}
 
-// 	log.Println(string(body))
+	err = json.Unmarshal(body, &players)
+	if err != nil {
+		log.Println(err)
+	}
 
-// 	return &sr, err
-// }
+	log.Println("lista graczy: ", string(body))
+
+	return players, err
+}

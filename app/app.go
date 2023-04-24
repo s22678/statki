@@ -13,11 +13,12 @@ import (
 )
 
 const (
+	Left                  = iota // indicates player's board (on the left side)
+	Right                        // indicates enemy's board (on the right side)
 	maxConnectionAttempts = 10
 	boardEndpoint         = "/api/game/board"
 	fireEndpoint          = "/api/game/fire"
-	Left                  = iota // indicates player's board (on the left side)
-	Right                        // indicates enemy's board (on the right side)
+	descEndpoint          = "/api/game/desc"
 )
 
 type GameBoard struct {
@@ -74,7 +75,6 @@ func (a *Application) initGameBoard(gameBoard []string) {
 }
 
 func (a *Application) Board() {
-	// if reflect.DeepEqual(a.GB, GameBoard{}) {
 	if a.board == nil {
 		log.Println("Board empty, downloading the board...")
 		b, err := a.downloadBoard()
@@ -104,6 +104,10 @@ func (a *Application) Fire(coord string) (string, error) {
 	reader := bytes.NewReader(b)
 	log.Println(string(b))
 	request, err := http.NewRequest("POST", a.Con.Url+fireEndpoint, reader)
+	if err != nil {
+		log.Println(err)
+		return "", nil
+	}
 	request.Header.Add("X-Auth-Token", a.Con.Token)
 	client := &http.Client{}
 	res, err := client.Do(request)
@@ -113,6 +117,10 @@ func (a *Application) Fire(coord string) (string, error) {
 	}
 	defer res.Body.Close()
 	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		log.Println(err)
+		return "", nil
+	}
 	log.Println("Fire response body", string(body))
 	err = json.Unmarshal(body, &fireResponse)
 	if err != nil {
@@ -148,4 +156,32 @@ func (a *Application) UpdateEnemyBoard(coord string) {
 		log.Println(err)
 	}
 	a.board.Display()
+}
+
+func (a *Application) GetDescritpion() (*connect.StatusResponse, error) {
+	sr := connect.StatusResponse{}
+	client := http.Client{}
+	req, err := http.NewRequest("GET", a.Con.Url+descEndpoint, nil)
+	if err != nil {
+		log.Println(req, err)
+	}
+	req.Header.Set("X-Auth-Token", a.Con.Token)
+	r, err := client.Do(req)
+	if err != nil {
+		log.Println(req, err)
+	}
+	defer r.Body.Close()
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = json.Unmarshal(body, &sr)
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println("App description: ", string(body))
+
+	return &sr, err
 }

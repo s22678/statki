@@ -1,0 +1,1268 @@
+2023/04/24 11:12:43 {"coords":null,"desc":"","nick":"marcin","target_nick":"","wpbot":true}
+2023/04/24 11:12:44 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:12:44 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:12:44 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:12:45 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:12:45 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot"}
+2023/04/24 11:12:46 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot"}
+2023/04/24 11:12:46 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot"}
+2023/04/24 11:12:47 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7"],"should_fire":true,"timer":60}
+2023/04/24 11:12:47 App description:  {"nick":"marcin","desc":"n/a","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_desc":"Siejący trwogę, latający WP Bot. 1000 walk wygranych przed czasem. Giń przeciwniku!","opp_shots":["F7"],"should_fire":true,"timer":59}
+2023/04/24 11:12:47 Board empty, downloading the board...
+2023/04/24 11:12:48 {"board":["A1","A2","A3","A4","C5","C7","D7","E3","E4","E9","E10","G2","G9","H4","H6","H9","I4","I9","J2","J4"]}
+2023/04/24 11:12:48 board downloaded
+2023/04/24 11:12:48 Update player board:  2 F7
+2023/04/24 11:12:53 {"coord":"D4"}
+2023/04/24 11:12:53 Fire response body {"result":"miss"}
+2023/04/24 11:12:53 Update enemy board:  2 D4
+2023/04/24 11:12:54 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7"],"timer":53}
+2023/04/24 11:12:55 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7","D5"],"should_fire":true,"timer":60}
+2023/04/24 11:12:55 Update player board:  2 F7
+2023/04/24 11:12:55 Update player board:  2 D5
+2023/04/24 11:12:56 {"coord":"D3"}
+2023/04/24 11:12:56 Fire response body {"result":"miss"}
+2023/04/24 11:12:56 Update enemy board:  2 D3
+2023/04/24 11:12:57 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7","D5","G4"],"should_fire":true,"timer":60}
+2023/04/24 11:12:57 Update player board:  2 F7
+2023/04/24 11:12:57 Update player board:  2 D5
+2023/04/24 11:12:57 Update player board:  2 G4
+2023/04/24 11:12:59 {"coord":"C4"}
+2023/04/24 11:12:59 Fire response body {"result":"sunk"}
+2023/04/24 11:12:59 Update enemy board:  2 C4
+2023/04/24 11:13:01 {"coord":"C3"}
+2023/04/24 11:13:01 Fire response body {"result":"miss"}
+2023/04/24 11:13:01 Update enemy board:  2 C3
+2023/04/24 11:13:02 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7","D5","G4"],"timer":58}
+2023/04/24 11:13:03 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7","D5","G4","C8"],"should_fire":true,"timer":60}
+2023/04/24 11:13:03 Update player board:  2 F7
+2023/04/24 11:13:03 Update player board:  2 D5
+2023/04/24 11:13:03 Update player board:  2 G4
+2023/04/24 11:13:03 Update player board:  2 C8
+2023/04/24 11:13:08 {"coord":"E4"}
+2023/04/24 11:13:08 Fire response body {"result":"miss"}
+2023/04/24 11:13:08 Update enemy board:  2 E4
+2023/04/24 11:13:08 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7","D5","G4","C8"],"timer":54}
+2023/04/24 11:13:09 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7","D5","G4","C8","C3"],"should_fire":true,"timer":59}
+2023/04/24 11:13:09 Update player board:  2 F7
+2023/04/24 11:13:09 Update player board:  2 D5
+2023/04/24 11:13:09 Update player board:  2 G4
+2023/04/24 11:13:09 Update player board:  2 C8
+2023/04/24 11:13:09 Update player board:  2 C3
+2023/04/24 11:15:46 {"coords":null,"desc":"","nick":"marcin","target_nick":"","wpbot":true}
+2023/04/24 11:15:46 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:15:46 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:15:47 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:15:47 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:15:48 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","should_fire":true,"timer":60}
+2023/04/24 11:15:48 App description:  {"nick":"marcin","desc":"n/a","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_desc":"Siejący trwogę, latający WP Bot. 1000 walk wygranych przed czasem. Giń przeciwniku!","should_fire":true,"timer":60}
+2023/04/24 11:15:48 Board empty, downloading the board...
+2023/04/24 11:15:49 {"board":["A1","B1","B3","B4","C1","D6","D7","D8","D9","F2","G6","H2","H3","H4","H8","H9","J1","J4","J5","J9"]}
+2023/04/24 11:15:49 board downloaded
+2023/04/24 11:15:49 {"coord":"A1"}
+2023/04/24 11:15:50 Fire response body {"result":"miss"}
+2023/04/24 11:15:50 Update enemy board:  2 A1
+2023/04/24 11:15:50 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","timer":58}
+2023/04/24 11:15:51 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5"],"should_fire":true,"timer":60}
+2023/04/24 11:15:51 Update player board:  1 D6
+2023/04/24 11:15:51 Update player board:  2 D5
+2023/04/24 11:15:52 {"coord":"A2"}
+2023/04/24 11:15:52 Fire response body {"result":"miss"}
+2023/04/24 11:15:52 Update enemy board:  2 A2
+2023/04/24 11:15:53 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6"],"should_fire":true,"timer":60}
+2023/04/24 11:15:53 Update player board:  1 D6
+2023/04/24 11:15:53 Update player board:  2 D5
+2023/04/24 11:15:53 Update player board:  2 E6
+2023/04/24 11:15:54 {"coord":"A3"}
+2023/04/24 11:15:54 Fire response body {"result":"miss"}
+2023/04/24 11:15:54 Update enemy board:  2 A3
+2023/04/24 11:15:55 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7"],"timer":58}
+2023/04/24 11:15:56 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8"],"should_fire":true,"timer":60}
+2023/04/24 11:15:56 Update player board:  1 D6
+2023/04/24 11:15:56 Update player board:  2 D5
+2023/04/24 11:15:56 Update player board:  2 E6
+2023/04/24 11:15:56 Update player board:  1 D7
+2023/04/24 11:15:56 Update player board:  1 D8
+2023/04/24 11:15:56 Update player board:  2 E8
+2023/04/24 11:15:57 {"coord":"A"}
+2023/04/24 11:15:57 Fire response body {"message":"wrong coord format"}
+2023/04/24 11:15:57 Update enemy board:  0 A
+2023/04/24 11:15:57 invalid coordinate
+2023/04/24 11:15:57 invalid coordinate
+2023/04/24 11:15:59 {"coord":"A4"}
+2023/04/24 11:15:59 Fire response body {"result":"miss"}
+2023/04/24 11:15:59 Update enemy board:  2 A4
+2023/04/24 11:16:00 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8"],"timer":56}
+2023/04/24 11:16:01 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7"],"should_fire":true,"timer":60}
+2023/04/24 11:16:01 Update player board:  1 D6
+2023/04/24 11:16:01 Update player board:  2 D5
+2023/04/24 11:16:01 Update player board:  2 E6
+2023/04/24 11:16:01 Update player board:  1 D7
+2023/04/24 11:16:01 Update player board:  1 D8
+2023/04/24 11:16:01 Update player board:  2 E8
+2023/04/24 11:16:01 Update player board:  1 D9
+2023/04/24 11:16:01 Update player board:  2 H7
+2023/04/24 11:16:03 {"coord":"A5"}
+2023/04/24 11:16:03 Fire response body {"result":"hit"}
+2023/04/24 11:16:03 Update enemy board:  2 A5
+2023/04/24 11:16:05 {"coord":"A6"}
+2023/04/24 11:16:05 Fire response body {"result":"sunk"}
+2023/04/24 11:16:05 Update enemy board:  2 A6
+2023/04/24 11:16:07 {"coord":"A7"}
+2023/04/24 11:16:07 Fire response body {"result":"miss"}
+2023/04/24 11:16:07 Update enemy board:  2 A7
+2023/04/24 11:16:08 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7"],"timer":58}
+2023/04/24 11:16:09 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3"],"should_fire":true,"timer":60}
+2023/04/24 11:16:09 Update player board:  1 D6
+2023/04/24 11:16:09 Update player board:  2 D5
+2023/04/24 11:16:09 Update player board:  2 E6
+2023/04/24 11:16:09 Update player board:  1 D7
+2023/04/24 11:16:09 Update player board:  1 D8
+2023/04/24 11:16:09 Update player board:  2 E8
+2023/04/24 11:16:09 Update player board:  1 D9
+2023/04/24 11:16:09 Update player board:  2 H7
+2023/04/24 11:16:09 Update player board:  1 H3
+2023/04/24 11:16:09 Update player board:  2 G3
+2023/04/24 11:16:10 {"coord":"A8"}
+2023/04/24 11:16:10 Fire response body {"result":"miss"}
+2023/04/24 11:16:10 Update enemy board:  2 A8
+2023/04/24 11:16:10 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3"],"timer":59}
+2023/04/24 11:16:11 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3"],"should_fire":true,"timer":60}
+2023/04/24 11:16:11 Update player board:  1 D6
+2023/04/24 11:16:11 Update player board:  2 D5
+2023/04/24 11:16:11 Update player board:  2 E6
+2023/04/24 11:16:11 Update player board:  1 D7
+2023/04/24 11:16:11 Update player board:  1 D8
+2023/04/24 11:16:11 Update player board:  2 E8
+2023/04/24 11:16:11 Update player board:  1 D9
+2023/04/24 11:16:11 Update player board:  2 H7
+2023/04/24 11:16:11 Update player board:  1 H3
+2023/04/24 11:16:11 Update player board:  2 G3
+2023/04/24 11:16:11 Update player board:  2 I3
+2023/04/24 11:16:12 {"coord":"A9"}
+2023/04/24 11:16:13 Fire response body {"result":"sunk"}
+2023/04/24 11:16:13 Update enemy board:  2 A9
+2023/04/24 11:16:16 {"coord":"B1"}
+2023/04/24 11:16:16 Fire response body {"result":"hit"}
+2023/04/24 11:16:16 Update enemy board:  2 B1
+2023/04/24 11:16:19 {"coord":"B2"}
+2023/04/24 11:16:19 Fire response body {"result":"sunk"}
+2023/04/24 11:16:19 Update enemy board:  2 B2
+2023/04/24 11:16:21 {"coord":"B3"}
+2023/04/24 11:16:21 Fire response body {"result":"miss"}
+2023/04/24 11:16:21 Update enemy board:  2 B3
+2023/04/24 11:16:22 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4"],"timer":58}
+2023/04/24 11:16:23 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4"],"should_fire":true,"timer":60}
+2023/04/24 11:16:23 Update player board:  1 D6
+2023/04/24 11:16:23 Update player board:  2 D5
+2023/04/24 11:16:23 Update player board:  2 E6
+2023/04/24 11:16:23 Update player board:  1 D7
+2023/04/24 11:16:23 Update player board:  1 D8
+2023/04/24 11:16:23 Update player board:  2 E8
+2023/04/24 11:16:23 Update player board:  1 D9
+2023/04/24 11:16:23 Update player board:  2 H7
+2023/04/24 11:16:23 Update player board:  1 H3
+2023/04/24 11:16:23 Update player board:  2 G3
+2023/04/24 11:16:23 Update player board:  2 I3
+2023/04/24 11:16:23 Update player board:  1 H4
+2023/04/24 11:16:23 Update player board:  2 G4
+2023/04/24 11:16:24 {"coord":"B4"}
+2023/04/24 11:16:25 Fire response body {"result":"miss"}
+2023/04/24 11:16:25 Update enemy board:  2 B4
+2023/04/24 11:16:25 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4"],"timer":58}
+2023/04/24 11:16:26 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4"],"should_fire":true,"timer":59}
+2023/04/24 11:16:26 Update player board:  1 D6
+2023/04/24 11:16:26 Update player board:  2 D5
+2023/04/24 11:16:26 Update player board:  2 E6
+2023/04/24 11:16:26 Update player board:  1 D7
+2023/04/24 11:16:26 Update player board:  1 D8
+2023/04/24 11:16:26 Update player board:  2 E8
+2023/04/24 11:16:26 Update player board:  1 D9
+2023/04/24 11:16:26 Update player board:  2 H7
+2023/04/24 11:16:26 Update player board:  1 H3
+2023/04/24 11:16:26 Update player board:  2 G3
+2023/04/24 11:16:26 Update player board:  2 I3
+2023/04/24 11:16:26 Update player board:  1 H4
+2023/04/24 11:16:26 Update player board:  2 G4
+2023/04/24 11:16:26 Update player board:  2 I4
+2023/04/24 11:16:28 {"coord":"B5"}
+2023/04/24 11:16:28 Fire response body {"result":"miss"}
+2023/04/24 11:16:28 Update enemy board:  2 B5
+2023/04/24 11:16:28 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4"],"timer":57}
+2023/04/24 11:16:30 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5"],"should_fire":true,"timer":59}
+2023/04/24 11:16:30 Update player board:  1 D6
+2023/04/24 11:16:30 Update player board:  2 D5
+2023/04/24 11:16:30 Update player board:  2 E6
+2023/04/24 11:16:30 Update player board:  1 D7
+2023/04/24 11:16:30 Update player board:  1 D8
+2023/04/24 11:16:30 Update player board:  2 E8
+2023/04/24 11:16:30 Update player board:  1 D9
+2023/04/24 11:16:30 Update player board:  2 H7
+2023/04/24 11:16:30 Update player board:  1 H3
+2023/04/24 11:16:30 Update player board:  2 G3
+2023/04/24 11:16:30 Update player board:  2 I3
+2023/04/24 11:16:30 Update player board:  1 H4
+2023/04/24 11:16:30 Update player board:  2 G4
+2023/04/24 11:16:30 Update player board:  2 I4
+2023/04/24 11:16:30 Update player board:  2 H5
+2023/04/24 11:16:31 {"coord":"B6"}
+2023/04/24 11:16:31 Fire response body {"result":"miss"}
+2023/04/24 11:16:31 Update enemy board:  2 B6
+2023/04/24 11:16:31 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5"],"timer":58}
+2023/04/24 11:16:33 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3"],"should_fire":true,"timer":60}
+2023/04/24 11:16:33 Update player board:  1 D6
+2023/04/24 11:16:33 Update player board:  2 D5
+2023/04/24 11:16:33 Update player board:  2 E6
+2023/04/24 11:16:33 Update player board:  1 D7
+2023/04/24 11:16:33 Update player board:  1 D8
+2023/04/24 11:16:33 Update player board:  2 E8
+2023/04/24 11:16:33 Update player board:  1 D9
+2023/04/24 11:16:33 Update player board:  2 H7
+2023/04/24 11:16:33 Update player board:  1 H3
+2023/04/24 11:16:33 Update player board:  2 G3
+2023/04/24 11:16:33 Update player board:  2 I3
+2023/04/24 11:16:33 Update player board:  1 H4
+2023/04/24 11:16:33 Update player board:  2 G4
+2023/04/24 11:16:33 Update player board:  2 I4
+2023/04/24 11:16:33 Update player board:  2 H5
+2023/04/24 11:16:33 Update player board:  1 H2
+2023/04/24 11:16:33 Update player board:  2 D3
+2023/04/24 11:16:33 {"coord":"B7"}
+2023/04/24 11:16:33 Fire response body {"result":"miss"}
+2023/04/24 11:16:33 Update enemy board:  2 B7
+2023/04/24 11:16:34 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2"],"should_fire":true,"timer":60}
+2023/04/24 11:16:34 Update player board:  1 D6
+2023/04/24 11:16:34 Update player board:  2 D5
+2023/04/24 11:16:34 Update player board:  2 E6
+2023/04/24 11:16:34 Update player board:  1 D7
+2023/04/24 11:16:34 Update player board:  1 D8
+2023/04/24 11:16:34 Update player board:  2 E8
+2023/04/24 11:16:34 Update player board:  1 D9
+2023/04/24 11:16:34 Update player board:  2 H7
+2023/04/24 11:16:34 Update player board:  1 H3
+2023/04/24 11:16:34 Update player board:  2 G3
+2023/04/24 11:16:34 Update player board:  2 I3
+2023/04/24 11:16:34 Update player board:  1 H4
+2023/04/24 11:16:34 Update player board:  2 G4
+2023/04/24 11:16:34 Update player board:  2 I4
+2023/04/24 11:16:34 Update player board:  2 H5
+2023/04/24 11:16:34 Update player board:  1 H2
+2023/04/24 11:16:34 Update player board:  2 D3
+2023/04/24 11:16:34 Update player board:  2 B2
+2023/04/24 11:16:35 {"coord":"B8"}
+2023/04/24 11:16:35 Fire response body {"result":"miss"}
+2023/04/24 11:16:35 Update enemy board:  2 B8
+2023/04/24 11:16:36 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2"],"timer":58}
+2023/04/24 11:16:37 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9"],"should_fire":true,"timer":59}
+2023/04/24 11:16:37 Update player board:  1 D6
+2023/04/24 11:16:37 Update player board:  2 D5
+2023/04/24 11:16:37 Update player board:  2 E6
+2023/04/24 11:16:37 Update player board:  1 D7
+2023/04/24 11:16:37 Update player board:  1 D8
+2023/04/24 11:16:37 Update player board:  2 E8
+2023/04/24 11:16:37 Update player board:  1 D9
+2023/04/24 11:16:37 Update player board:  2 H7
+2023/04/24 11:16:37 Update player board:  1 H3
+2023/04/24 11:16:37 Update player board:  2 G3
+2023/04/24 11:16:37 Update player board:  2 I3
+2023/04/24 11:16:37 Update player board:  1 H4
+2023/04/24 11:16:37 Update player board:  2 G4
+2023/04/24 11:16:37 Update player board:  2 I4
+2023/04/24 11:16:37 Update player board:  2 H5
+2023/04/24 11:16:37 Update player board:  1 H2
+2023/04/24 11:16:37 Update player board:  2 D3
+2023/04/24 11:16:37 Update player board:  2 B2
+2023/04/24 11:16:37 Update player board:  2 G9
+2023/04/24 11:16:37 {"coord":"B9"}
+2023/04/24 11:16:38 Fire response body {"result":"miss"}
+2023/04/24 11:16:38 Update enemy board:  2 B9
+2023/04/24 11:16:38 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9"],"timer":58}
+2023/04/24 11:16:39 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8"],"should_fire":true,"timer":60}
+2023/04/24 11:16:39 Update player board:  1 D6
+2023/04/24 11:16:39 Update player board:  2 D5
+2023/04/24 11:16:39 Update player board:  2 E6
+2023/04/24 11:16:39 Update player board:  1 D7
+2023/04/24 11:16:39 Update player board:  1 D8
+2023/04/24 11:16:39 Update player board:  2 E8
+2023/04/24 11:16:39 Update player board:  1 D9
+2023/04/24 11:16:39 Update player board:  2 H7
+2023/04/24 11:16:39 Update player board:  1 H3
+2023/04/24 11:16:39 Update player board:  2 G3
+2023/04/24 11:16:39 Update player board:  2 I3
+2023/04/24 11:16:39 Update player board:  1 H4
+2023/04/24 11:16:39 Update player board:  2 G4
+2023/04/24 11:16:39 Update player board:  2 I4
+2023/04/24 11:16:39 Update player board:  2 H5
+2023/04/24 11:16:39 Update player board:  1 H2
+2023/04/24 11:16:39 Update player board:  2 D3
+2023/04/24 11:16:39 Update player board:  2 B2
+2023/04/24 11:16:39 Update player board:  2 G9
+2023/04/24 11:16:39 Update player board:  2 I8
+2023/04/24 11:16:40 {"coord":"C1"}
+2023/04/24 11:16:40 Fire response body {"result":"miss"}
+2023/04/24 11:16:40 Update enemy board:  2 C1
+2023/04/24 11:16:41 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2"],"should_fire":true,"timer":60}
+2023/04/24 11:16:41 Update player board:  1 D6
+2023/04/24 11:16:41 Update player board:  2 D5
+2023/04/24 11:16:41 Update player board:  2 E6
+2023/04/24 11:16:41 Update player board:  1 D7
+2023/04/24 11:16:41 Update player board:  1 D8
+2023/04/24 11:16:41 Update player board:  2 E8
+2023/04/24 11:16:41 Update player board:  1 D9
+2023/04/24 11:16:41 Update player board:  2 H7
+2023/04/24 11:16:41 Update player board:  1 H3
+2023/04/24 11:16:41 Update player board:  2 G3
+2023/04/24 11:16:41 Update player board:  2 I3
+2023/04/24 11:16:41 Update player board:  1 H4
+2023/04/24 11:16:41 Update player board:  2 G4
+2023/04/24 11:16:41 Update player board:  2 I4
+2023/04/24 11:16:41 Update player board:  2 H5
+2023/04/24 11:16:41 Update player board:  1 H2
+2023/04/24 11:16:41 Update player board:  2 D3
+2023/04/24 11:16:41 Update player board:  2 B2
+2023/04/24 11:16:41 Update player board:  2 G9
+2023/04/24 11:16:41 Update player board:  2 I8
+2023/04/24 11:16:41 Update player board:  2 E2
+2023/04/24 11:16:42 {"coord":"C2"}
+2023/04/24 11:16:42 Fire response body {"result":"miss"}
+2023/04/24 11:16:42 Update enemy board:  2 C2
+2023/04/24 11:16:42 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2"],"timer":59}
+2023/04/24 11:16:44 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3"],"timer":58}
+2023/04/24 11:16:45 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8"],"should_fire":true,"timer":59}
+2023/04/24 11:16:45 Update player board:  1 D6
+2023/04/24 11:16:45 Update player board:  2 D5
+2023/04/24 11:16:45 Update player board:  2 E6
+2023/04/24 11:16:45 Update player board:  1 D7
+2023/04/24 11:16:45 Update player board:  1 D8
+2023/04/24 11:16:45 Update player board:  2 E8
+2023/04/24 11:16:45 Update player board:  1 D9
+2023/04/24 11:16:45 Update player board:  2 H7
+2023/04/24 11:16:45 Update player board:  1 H3
+2023/04/24 11:16:45 Update player board:  2 G3
+2023/04/24 11:16:45 Update player board:  2 I3
+2023/04/24 11:16:45 Update player board:  1 H4
+2023/04/24 11:16:45 Update player board:  2 G4
+2023/04/24 11:16:45 Update player board:  2 I4
+2023/04/24 11:16:45 Update player board:  2 H5
+2023/04/24 11:16:45 Update player board:  1 H2
+2023/04/24 11:16:45 Update player board:  2 D3
+2023/04/24 11:16:45 Update player board:  2 B2
+2023/04/24 11:16:45 Update player board:  2 G9
+2023/04/24 11:16:45 Update player board:  2 I8
+2023/04/24 11:16:45 Update player board:  2 E2
+2023/04/24 11:16:45 Update player board:  1 B4
+2023/04/24 11:16:45 Update player board:  1 B3
+2023/04/24 11:16:45 Update player board:  2 A8
+2023/04/24 11:16:45 {"coord":"C3"}
+2023/04/24 11:16:45 Fire response body {"result":"miss"}
+2023/04/24 11:16:45 Update enemy board:  2 C3
+2023/04/24 11:16:46 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8"],"timer":59}
+2023/04/24 11:16:47 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9"],"should_fire":true,"timer":59}
+2023/04/24 11:16:47 Update player board:  1 D6
+2023/04/24 11:16:47 Update player board:  2 D5
+2023/04/24 11:16:47 Update player board:  2 E6
+2023/04/24 11:16:47 Update player board:  1 D7
+2023/04/24 11:16:47 Update player board:  1 D8
+2023/04/24 11:16:47 Update player board:  2 E8
+2023/04/24 11:16:47 Update player board:  1 D9
+2023/04/24 11:16:47 Update player board:  2 H7
+2023/04/24 11:16:47 Update player board:  1 H3
+2023/04/24 11:16:47 Update player board:  2 G3
+2023/04/24 11:16:47 Update player board:  2 I3
+2023/04/24 11:16:47 Update player board:  1 H4
+2023/04/24 11:16:47 Update player board:  2 G4
+2023/04/24 11:16:47 Update player board:  2 I4
+2023/04/24 11:16:47 Update player board:  2 H5
+2023/04/24 11:16:47 Update player board:  1 H2
+2023/04/24 11:16:47 Update player board:  2 D3
+2023/04/24 11:16:47 Update player board:  2 B2
+2023/04/24 11:16:47 Update player board:  2 G9
+2023/04/24 11:16:47 Update player board:  2 I8
+2023/04/24 11:16:47 Update player board:  2 E2
+2023/04/24 11:16:47 Update player board:  1 B4
+2023/04/24 11:16:47 Update player board:  1 B3
+2023/04/24 11:16:47 Update player board:  2 A8
+2023/04/24 11:16:47 Update player board:  2 I9
+2023/04/24 11:16:47 {"coord":"C4"}
+2023/04/24 11:16:47 Fire response body {"result":"miss"}
+2023/04/24 11:16:47 Update enemy board:  2 C4
+2023/04/24 11:16:47 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7"],"should_fire":true,"timer":60}
+2023/04/24 11:16:47 Update player board:  1 D6
+2023/04/24 11:16:47 Update player board:  2 D5
+2023/04/24 11:16:47 Update player board:  2 E6
+2023/04/24 11:16:47 Update player board:  1 D7
+2023/04/24 11:16:47 Update player board:  1 D8
+2023/04/24 11:16:47 Update player board:  2 E8
+2023/04/24 11:16:47 Update player board:  1 D9
+2023/04/24 11:16:47 Update player board:  2 H7
+2023/04/24 11:16:47 Update player board:  1 H3
+2023/04/24 11:16:47 Update player board:  2 G3
+2023/04/24 11:16:47 Update player board:  2 I3
+2023/04/24 11:16:47 Update player board:  1 H4
+2023/04/24 11:16:47 Update player board:  2 G4
+2023/04/24 11:16:47 Update player board:  2 I4
+2023/04/24 11:16:47 Update player board:  2 H5
+2023/04/24 11:16:47 Update player board:  1 H2
+2023/04/24 11:16:47 Update player board:  2 D3
+2023/04/24 11:16:47 Update player board:  2 B2
+2023/04/24 11:16:47 Update player board:  2 G9
+2023/04/24 11:16:47 Update player board:  2 I8
+2023/04/24 11:16:47 Update player board:  2 E2
+2023/04/24 11:16:47 Update player board:  1 B4
+2023/04/24 11:16:47 Update player board:  1 B3
+2023/04/24 11:16:47 Update player board:  2 A8
+2023/04/24 11:16:47 Update player board:  2 I9
+2023/04/24 11:16:47 Update player board:  2 G7
+2023/04/24 11:16:48 {"coord":"C5"}
+2023/04/24 11:16:48 Fire response body {"result":"miss"}
+2023/04/24 11:16:48 Update enemy board:  2 C5
+2023/04/24 11:16:48 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7"],"timer":59}
+2023/04/24 11:16:50 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6"],"should_fire":true,"timer":59}
+2023/04/24 11:16:50 Update player board:  1 D6
+2023/04/24 11:16:50 Update player board:  2 D5
+2023/04/24 11:16:50 Update player board:  2 E6
+2023/04/24 11:16:50 Update player board:  1 D7
+2023/04/24 11:16:50 Update player board:  1 D8
+2023/04/24 11:16:50 Update player board:  2 E8
+2023/04/24 11:16:50 Update player board:  1 D9
+2023/04/24 11:16:50 Update player board:  2 H7
+2023/04/24 11:16:50 Update player board:  1 H3
+2023/04/24 11:16:50 Update player board:  2 G3
+2023/04/24 11:16:50 Update player board:  2 I3
+2023/04/24 11:16:50 Update player board:  1 H4
+2023/04/24 11:16:50 Update player board:  2 G4
+2023/04/24 11:16:50 Update player board:  2 I4
+2023/04/24 11:16:50 Update player board:  2 H5
+2023/04/24 11:16:50 Update player board:  1 H2
+2023/04/24 11:16:50 Update player board:  2 D3
+2023/04/24 11:16:50 Update player board:  2 B2
+2023/04/24 11:16:50 Update player board:  2 G9
+2023/04/24 11:16:50 Update player board:  2 I8
+2023/04/24 11:16:50 Update player board:  2 E2
+2023/04/24 11:16:50 Update player board:  1 B4
+2023/04/24 11:16:50 Update player board:  1 B3
+2023/04/24 11:16:50 Update player board:  2 A8
+2023/04/24 11:16:50 Update player board:  2 I9
+2023/04/24 11:16:50 Update player board:  2 G7
+2023/04/24 11:16:50 Update player board:  2 J6
+2023/04/24 11:16:50 {"coord":"C6"}
+2023/04/24 11:16:50 Fire response body {"result":"miss"}
+2023/04/24 11:16:50 Update enemy board:  2 C6
+2023/04/24 11:16:50 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6"],"timer":59}
+2023/04/24 11:16:51 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4"],"should_fire":true,"timer":60}
+2023/04/24 11:16:51 Update player board:  1 D6
+2023/04/24 11:16:51 Update player board:  2 D5
+2023/04/24 11:16:51 Update player board:  2 E6
+2023/04/24 11:16:51 Update player board:  1 D7
+2023/04/24 11:16:51 Update player board:  1 D8
+2023/04/24 11:16:51 Update player board:  2 E8
+2023/04/24 11:16:51 Update player board:  1 D9
+2023/04/24 11:16:51 Update player board:  2 H7
+2023/04/24 11:16:51 Update player board:  1 H3
+2023/04/24 11:16:51 Update player board:  2 G3
+2023/04/24 11:16:51 Update player board:  2 I3
+2023/04/24 11:16:51 Update player board:  1 H4
+2023/04/24 11:16:51 Update player board:  2 G4
+2023/04/24 11:16:51 Update player board:  2 I4
+2023/04/24 11:16:51 Update player board:  2 H5
+2023/04/24 11:16:51 Update player board:  1 H2
+2023/04/24 11:16:51 Update player board:  2 D3
+2023/04/24 11:16:51 Update player board:  2 B2
+2023/04/24 11:16:51 Update player board:  2 G9
+2023/04/24 11:16:51 Update player board:  2 I8
+2023/04/24 11:16:51 Update player board:  2 E2
+2023/04/24 11:16:51 Update player board:  1 B4
+2023/04/24 11:16:51 Update player board:  1 B3
+2023/04/24 11:16:51 Update player board:  2 A8
+2023/04/24 11:16:51 Update player board:  2 I9
+2023/04/24 11:16:51 Update player board:  2 G7
+2023/04/24 11:16:51 Update player board:  2 J6
+2023/04/24 11:16:51 Update player board:  2 F4
+2023/04/24 11:16:51 {"coord":"C7"}
+2023/04/24 11:16:52 Fire response body {"result":"miss"}
+2023/04/24 11:16:52 Update enemy board:  2 C7
+2023/04/24 11:16:52 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9"],"should_fire":true,"timer":60}
+2023/04/24 11:16:52 Update player board:  1 D6
+2023/04/24 11:16:52 Update player board:  2 D5
+2023/04/24 11:16:52 Update player board:  2 E6
+2023/04/24 11:16:52 Update player board:  1 D7
+2023/04/24 11:16:52 Update player board:  1 D8
+2023/04/24 11:16:52 Update player board:  2 E8
+2023/04/24 11:16:52 Update player board:  1 D9
+2023/04/24 11:16:52 Update player board:  2 H7
+2023/04/24 11:16:52 Update player board:  1 H3
+2023/04/24 11:16:52 Update player board:  2 G3
+2023/04/24 11:16:52 Update player board:  2 I3
+2023/04/24 11:16:52 Update player board:  1 H4
+2023/04/24 11:16:52 Update player board:  2 G4
+2023/04/24 11:16:52 Update player board:  2 I4
+2023/04/24 11:16:52 Update player board:  2 H5
+2023/04/24 11:16:52 Update player board:  1 H2
+2023/04/24 11:16:52 Update player board:  2 D3
+2023/04/24 11:16:52 Update player board:  2 B2
+2023/04/24 11:16:52 Update player board:  2 G9
+2023/04/24 11:16:52 Update player board:  2 I8
+2023/04/24 11:16:52 Update player board:  2 E2
+2023/04/24 11:16:52 Update player board:  1 B4
+2023/04/24 11:16:52 Update player board:  1 B3
+2023/04/24 11:16:52 Update player board:  2 A8
+2023/04/24 11:16:52 Update player board:  2 I9
+2023/04/24 11:16:52 Update player board:  2 G7
+2023/04/24 11:16:52 Update player board:  2 J6
+2023/04/24 11:16:52 Update player board:  2 F4
+2023/04/24 11:16:52 Update player board:  2 B9
+2023/04/24 11:16:52 {"coord":"C8"}
+2023/04/24 11:16:52 Fire response body {"result":"miss"}
+2023/04/24 11:16:52 Update enemy board:  2 C8
+2023/04/24 11:16:53 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8"],"should_fire":true,"timer":60}
+2023/04/24 11:16:53 Update player board:  1 D6
+2023/04/24 11:16:53 Update player board:  2 D5
+2023/04/24 11:16:53 Update player board:  2 E6
+2023/04/24 11:16:53 Update player board:  1 D7
+2023/04/24 11:16:53 Update player board:  1 D8
+2023/04/24 11:16:53 Update player board:  2 E8
+2023/04/24 11:16:53 Update player board:  1 D9
+2023/04/24 11:16:53 Update player board:  2 H7
+2023/04/24 11:16:53 Update player board:  1 H3
+2023/04/24 11:16:53 Update player board:  2 G3
+2023/04/24 11:16:53 Update player board:  2 I3
+2023/04/24 11:16:53 Update player board:  1 H4
+2023/04/24 11:16:53 Update player board:  2 G4
+2023/04/24 11:16:53 Update player board:  2 I4
+2023/04/24 11:16:53 Update player board:  2 H5
+2023/04/24 11:16:53 Update player board:  1 H2
+2023/04/24 11:16:53 Update player board:  2 D3
+2023/04/24 11:16:53 Update player board:  2 B2
+2023/04/24 11:16:53 Update player board:  2 G9
+2023/04/24 11:16:53 Update player board:  2 I8
+2023/04/24 11:16:53 Update player board:  2 E2
+2023/04/24 11:16:53 Update player board:  1 B4
+2023/04/24 11:16:53 Update player board:  1 B3
+2023/04/24 11:16:53 Update player board:  2 A8
+2023/04/24 11:16:53 Update player board:  2 I9
+2023/04/24 11:16:53 Update player board:  2 G7
+2023/04/24 11:16:53 Update player board:  2 J6
+2023/04/24 11:16:53 Update player board:  2 F4
+2023/04/24 11:16:53 Update player board:  2 B9
+2023/04/24 11:16:53 Update player board:  2 F8
+2023/04/24 11:16:54 {"coord":"C9"}
+2023/04/24 11:16:54 Fire response body {"result":"miss"}
+2023/04/24 11:16:54 Update enemy board:  2 C9
+2023/04/24 11:16:54 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8"],"timer":59}
+2023/04/24 11:16:55 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10"],"should_fire":true,"timer":59}
+2023/04/24 11:16:55 Update player board:  1 D6
+2023/04/24 11:16:55 Update player board:  2 D5
+2023/04/24 11:16:55 Update player board:  2 E6
+2023/04/24 11:16:55 Update player board:  1 D7
+2023/04/24 11:16:55 Update player board:  1 D8
+2023/04/24 11:16:55 Update player board:  2 E8
+2023/04/24 11:16:55 Update player board:  1 D9
+2023/04/24 11:16:55 Update player board:  2 H7
+2023/04/24 11:16:55 Update player board:  1 H3
+2023/04/24 11:16:55 Update player board:  2 G3
+2023/04/24 11:16:55 Update player board:  2 I3
+2023/04/24 11:16:55 Update player board:  1 H4
+2023/04/24 11:16:55 Update player board:  2 G4
+2023/04/24 11:16:55 Update player board:  2 I4
+2023/04/24 11:16:55 Update player board:  2 H5
+2023/04/24 11:16:55 Update player board:  1 H2
+2023/04/24 11:16:55 Update player board:  2 D3
+2023/04/24 11:16:55 Update player board:  2 B2
+2023/04/24 11:16:55 Update player board:  2 G9
+2023/04/24 11:16:55 Update player board:  2 I8
+2023/04/24 11:16:55 Update player board:  2 E2
+2023/04/24 11:16:55 Update player board:  1 B4
+2023/04/24 11:16:55 Update player board:  1 B3
+2023/04/24 11:16:55 Update player board:  2 A8
+2023/04/24 11:16:55 Update player board:  2 I9
+2023/04/24 11:16:55 Update player board:  2 G7
+2023/04/24 11:16:55 Update player board:  2 J6
+2023/04/24 11:16:55 Update player board:  2 F4
+2023/04/24 11:16:55 Update player board:  2 B9
+2023/04/24 11:16:55 Update player board:  2 F8
+2023/04/24 11:16:55 Update player board:  2 H10
+2023/04/24 11:16:56 {"coord":"D1"}
+2023/04/24 11:16:57 Fire response body {"result":"miss"}
+2023/04/24 11:16:57 Update enemy board:  2 D1
+2023/04/24 11:16:57 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10"],"timer":58}
+2023/04/24 11:16:58 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7"],"should_fire":true,"timer":59}
+2023/04/24 11:16:58 Update player board:  1 D6
+2023/04/24 11:16:58 Update player board:  2 D5
+2023/04/24 11:16:58 Update player board:  2 E6
+2023/04/24 11:16:58 Update player board:  1 D7
+2023/04/24 11:16:58 Update player board:  1 D8
+2023/04/24 11:16:58 Update player board:  2 E8
+2023/04/24 11:16:58 Update player board:  1 D9
+2023/04/24 11:16:58 Update player board:  2 H7
+2023/04/24 11:16:58 Update player board:  1 H3
+2023/04/24 11:16:58 Update player board:  2 G3
+2023/04/24 11:16:58 Update player board:  2 I3
+2023/04/24 11:16:58 Update player board:  1 H4
+2023/04/24 11:16:58 Update player board:  2 G4
+2023/04/24 11:16:58 Update player board:  2 I4
+2023/04/24 11:16:58 Update player board:  2 H5
+2023/04/24 11:16:58 Update player board:  1 H2
+2023/04/24 11:16:58 Update player board:  2 D3
+2023/04/24 11:16:58 Update player board:  2 B2
+2023/04/24 11:16:58 Update player board:  2 G9
+2023/04/24 11:16:58 Update player board:  2 I8
+2023/04/24 11:16:58 Update player board:  2 E2
+2023/04/24 11:16:58 Update player board:  1 B4
+2023/04/24 11:16:58 Update player board:  1 B3
+2023/04/24 11:16:58 Update player board:  2 A8
+2023/04/24 11:16:58 Update player board:  2 I9
+2023/04/24 11:16:58 Update player board:  2 G7
+2023/04/24 11:16:58 Update player board:  2 J6
+2023/04/24 11:16:58 Update player board:  2 F4
+2023/04/24 11:16:58 Update player board:  2 B9
+2023/04/24 11:16:58 Update player board:  2 F8
+2023/04/24 11:16:58 Update player board:  2 H10
+2023/04/24 11:16:58 Update player board:  2 B7
+2023/04/24 11:16:59 {"coord":"DD2"}
+2023/04/24 11:17:00 Fire response body {"message":"strconv.Atoi: parsing \"D2\": invalid syntax"}
+2023/04/24 11:17:00 Update enemy board:  0 DD2
+2023/04/24 11:17:00 invalid coordinate
+2023/04/24 11:17:00 invalid coordinate
+2023/04/24 11:17:01 {"coord":"D3"}
+2023/04/24 11:17:01 Fire response body {"result":"miss"}
+2023/04/24 11:17:01 Update enemy board:  2 D3
+2023/04/24 11:17:02 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7"],"timer":56}
+2023/04/24 11:17:03 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1"],"should_fire":true,"timer":59}
+2023/04/24 11:17:03 Update player board:  1 D6
+2023/04/24 11:17:03 Update player board:  2 D5
+2023/04/24 11:17:03 Update player board:  2 E6
+2023/04/24 11:17:03 Update player board:  1 D7
+2023/04/24 11:17:03 Update player board:  1 D8
+2023/04/24 11:17:03 Update player board:  2 E8
+2023/04/24 11:17:03 Update player board:  1 D9
+2023/04/24 11:17:03 Update player board:  2 H7
+2023/04/24 11:17:03 Update player board:  1 H3
+2023/04/24 11:17:03 Update player board:  2 G3
+2023/04/24 11:17:03 Update player board:  2 I3
+2023/04/24 11:17:03 Update player board:  1 H4
+2023/04/24 11:17:03 Update player board:  2 G4
+2023/04/24 11:17:03 Update player board:  2 I4
+2023/04/24 11:17:03 Update player board:  2 H5
+2023/04/24 11:17:03 Update player board:  1 H2
+2023/04/24 11:17:03 Update player board:  2 D3
+2023/04/24 11:17:03 Update player board:  2 B2
+2023/04/24 11:17:03 Update player board:  2 G9
+2023/04/24 11:17:03 Update player board:  2 I8
+2023/04/24 11:17:03 Update player board:  2 E2
+2023/04/24 11:17:03 Update player board:  1 B4
+2023/04/24 11:17:03 Update player board:  1 B3
+2023/04/24 11:17:03 Update player board:  2 A8
+2023/04/24 11:17:03 Update player board:  2 I9
+2023/04/24 11:17:03 Update player board:  2 G7
+2023/04/24 11:17:03 Update player board:  2 J6
+2023/04/24 11:17:03 Update player board:  2 F4
+2023/04/24 11:17:03 Update player board:  2 B9
+2023/04/24 11:17:03 Update player board:  2 F8
+2023/04/24 11:17:03 Update player board:  2 H10
+2023/04/24 11:17:03 Update player board:  2 B7
+2023/04/24 11:17:03 Update player board:  2 D1
+2023/04/24 11:17:04 {"coord":"D2"}
+2023/04/24 11:17:05 Fire response body {"result":"miss"}
+2023/04/24 11:17:05 Update enemy board:  2 D2
+2023/04/24 11:17:05 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6"],"should_fire":true,"timer":60}
+2023/04/24 11:17:05 Update player board:  1 D6
+2023/04/24 11:17:05 Update player board:  2 D5
+2023/04/24 11:17:05 Update player board:  2 E6
+2023/04/24 11:17:05 Update player board:  1 D7
+2023/04/24 11:17:05 Update player board:  1 D8
+2023/04/24 11:17:05 Update player board:  2 E8
+2023/04/24 11:17:05 Update player board:  1 D9
+2023/04/24 11:17:05 Update player board:  2 H7
+2023/04/24 11:17:05 Update player board:  1 H3
+2023/04/24 11:17:05 Update player board:  2 G3
+2023/04/24 11:17:05 Update player board:  2 I3
+2023/04/24 11:17:05 Update player board:  1 H4
+2023/04/24 11:17:05 Update player board:  2 G4
+2023/04/24 11:17:05 Update player board:  2 I4
+2023/04/24 11:17:05 Update player board:  2 H5
+2023/04/24 11:17:05 Update player board:  1 H2
+2023/04/24 11:17:05 Update player board:  2 D3
+2023/04/24 11:17:05 Update player board:  2 B2
+2023/04/24 11:17:05 Update player board:  2 G9
+2023/04/24 11:17:05 Update player board:  2 I8
+2023/04/24 11:17:05 Update player board:  2 E2
+2023/04/24 11:17:05 Update player board:  1 B4
+2023/04/24 11:17:05 Update player board:  1 B3
+2023/04/24 11:17:05 Update player board:  2 A8
+2023/04/24 11:17:05 Update player board:  2 I9
+2023/04/24 11:17:05 Update player board:  2 G7
+2023/04/24 11:17:05 Update player board:  2 J6
+2023/04/24 11:17:05 Update player board:  2 F4
+2023/04/24 11:17:05 Update player board:  2 B9
+2023/04/24 11:17:05 Update player board:  2 F8
+2023/04/24 11:17:05 Update player board:  2 H10
+2023/04/24 11:17:05 Update player board:  2 B7
+2023/04/24 11:17:05 Update player board:  2 D1
+2023/04/24 11:17:05 Update player board:  2 F6
+2023/04/24 11:17:07 {"coord":"D4"}
+2023/04/24 11:17:07 Fire response body {"result":"miss"}
+2023/04/24 11:17:07 Update enemy board:  2 D4
+2023/04/24 11:17:08 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6"],"timer":58}
+2023/04/24 11:17:09 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7"],"should_fire":true,"timer":59}
+2023/04/24 11:17:09 Update player board:  1 D6
+2023/04/24 11:17:09 Update player board:  2 D5
+2023/04/24 11:17:09 Update player board:  2 E6
+2023/04/24 11:17:09 Update player board:  1 D7
+2023/04/24 11:17:09 Update player board:  1 D8
+2023/04/24 11:17:09 Update player board:  2 E8
+2023/04/24 11:17:09 Update player board:  1 D9
+2023/04/24 11:17:09 Update player board:  2 H7
+2023/04/24 11:17:09 Update player board:  1 H3
+2023/04/24 11:17:09 Update player board:  2 G3
+2023/04/24 11:17:09 Update player board:  2 I3
+2023/04/24 11:17:09 Update player board:  1 H4
+2023/04/24 11:17:09 Update player board:  2 G4
+2023/04/24 11:17:09 Update player board:  2 I4
+2023/04/24 11:17:09 Update player board:  2 H5
+2023/04/24 11:17:09 Update player board:  1 H2
+2023/04/24 11:17:09 Update player board:  2 D3
+2023/04/24 11:17:09 Update player board:  2 B2
+2023/04/24 11:17:09 Update player board:  2 G9
+2023/04/24 11:17:09 Update player board:  2 I8
+2023/04/24 11:17:09 Update player board:  2 E2
+2023/04/24 11:17:09 Update player board:  1 B4
+2023/04/24 11:17:09 Update player board:  1 B3
+2023/04/24 11:17:09 Update player board:  2 A8
+2023/04/24 11:17:09 Update player board:  2 I9
+2023/04/24 11:17:09 Update player board:  2 G7
+2023/04/24 11:17:09 Update player board:  2 J6
+2023/04/24 11:17:09 Update player board:  2 F4
+2023/04/24 11:17:09 Update player board:  2 B9
+2023/04/24 11:17:09 Update player board:  2 F8
+2023/04/24 11:17:09 Update player board:  2 H10
+2023/04/24 11:17:09 Update player board:  2 B7
+2023/04/24 11:17:09 Update player board:  2 D1
+2023/04/24 11:17:09 Update player board:  2 F6
+2023/04/24 11:17:09 Update player board:  2 I7
+2023/04/24 11:17:11 {"coord":"D5"}
+2023/04/24 11:17:11 Fire response body {"result":"miss"}
+2023/04/24 11:17:11 Update enemy board:  2 D5
+2023/04/24 11:17:11 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7"],"timer":57}
+2023/04/24 11:17:12 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3"],"should_fire":true,"timer":59}
+2023/04/24 11:17:12 Update player board:  1 D6
+2023/04/24 11:17:12 Update player board:  2 D5
+2023/04/24 11:17:12 Update player board:  2 E6
+2023/04/24 11:17:12 Update player board:  1 D7
+2023/04/24 11:17:12 Update player board:  1 D8
+2023/04/24 11:17:12 Update player board:  2 E8
+2023/04/24 11:17:12 Update player board:  1 D9
+2023/04/24 11:17:12 Update player board:  2 H7
+2023/04/24 11:17:12 Update player board:  1 H3
+2023/04/24 11:17:12 Update player board:  2 G3
+2023/04/24 11:17:12 Update player board:  2 I3
+2023/04/24 11:17:12 Update player board:  1 H4
+2023/04/24 11:17:12 Update player board:  2 G4
+2023/04/24 11:17:12 Update player board:  2 I4
+2023/04/24 11:17:12 Update player board:  2 H5
+2023/04/24 11:17:12 Update player board:  1 H2
+2023/04/24 11:17:12 Update player board:  2 D3
+2023/04/24 11:17:12 Update player board:  2 B2
+2023/04/24 11:17:12 Update player board:  2 G9
+2023/04/24 11:17:12 Update player board:  2 I8
+2023/04/24 11:17:12 Update player board:  2 E2
+2023/04/24 11:17:12 Update player board:  1 B4
+2023/04/24 11:17:12 Update player board:  1 B3
+2023/04/24 11:17:12 Update player board:  2 A8
+2023/04/24 11:17:12 Update player board:  2 I9
+2023/04/24 11:17:12 Update player board:  2 G7
+2023/04/24 11:17:12 Update player board:  2 J6
+2023/04/24 11:17:12 Update player board:  2 F4
+2023/04/24 11:17:12 Update player board:  2 B9
+2023/04/24 11:17:12 Update player board:  2 F8
+2023/04/24 11:17:12 Update player board:  2 H10
+2023/04/24 11:17:12 Update player board:  2 B7
+2023/04/24 11:17:12 Update player board:  2 D1
+2023/04/24 11:17:12 Update player board:  2 F6
+2023/04/24 11:17:12 Update player board:  2 I7
+2023/04/24 11:17:12 Update player board:  2 E3
+2023/04/24 11:17:14 {"coord":"DD6"}
+2023/04/24 11:17:14 Fire response body {"message":"strconv.Atoi: parsing \"D6\": invalid syntax"}
+2023/04/24 11:17:14 Update enemy board:  0 DD6
+2023/04/24 11:17:14 invalid coordinate
+2023/04/24 11:17:14 invalid coordinate
+2023/04/24 11:17:17 {"coord":"D7"}
+2023/04/24 11:17:18 Fire response body {"result":"miss"}
+2023/04/24 11:17:18 Update enemy board:  2 D7
+2023/04/24 11:17:18 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9"],"timer":54}
+2023/04/24 11:17:19 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3"],"should_fire":true,"timer":60}
+2023/04/24 11:17:19 Update player board:  1 D6
+2023/04/24 11:17:19 Update player board:  2 D5
+2023/04/24 11:17:19 Update player board:  2 E6
+2023/04/24 11:17:19 Update player board:  1 D7
+2023/04/24 11:17:19 Update player board:  1 D8
+2023/04/24 11:17:19 Update player board:  2 E8
+2023/04/24 11:17:19 Update player board:  1 D9
+2023/04/24 11:17:19 Update player board:  2 H7
+2023/04/24 11:17:19 Update player board:  1 H3
+2023/04/24 11:17:19 Update player board:  2 G3
+2023/04/24 11:17:19 Update player board:  2 I3
+2023/04/24 11:17:19 Update player board:  1 H4
+2023/04/24 11:17:19 Update player board:  2 G4
+2023/04/24 11:17:19 Update player board:  2 I4
+2023/04/24 11:17:19 Update player board:  2 H5
+2023/04/24 11:17:19 Update player board:  1 H2
+2023/04/24 11:17:19 Update player board:  2 D3
+2023/04/24 11:17:19 Update player board:  2 B2
+2023/04/24 11:17:19 Update player board:  2 G9
+2023/04/24 11:17:19 Update player board:  2 I8
+2023/04/24 11:17:19 Update player board:  2 E2
+2023/04/24 11:17:19 Update player board:  1 B4
+2023/04/24 11:17:19 Update player board:  1 B3
+2023/04/24 11:17:19 Update player board:  2 A8
+2023/04/24 11:17:19 Update player board:  2 I9
+2023/04/24 11:17:19 Update player board:  2 G7
+2023/04/24 11:17:19 Update player board:  2 J6
+2023/04/24 11:17:19 Update player board:  2 F4
+2023/04/24 11:17:19 Update player board:  2 B9
+2023/04/24 11:17:19 Update player board:  2 F8
+2023/04/24 11:17:19 Update player board:  2 H10
+2023/04/24 11:17:19 Update player board:  2 B7
+2023/04/24 11:17:19 Update player board:  2 D1
+2023/04/24 11:17:19 Update player board:  2 F6
+2023/04/24 11:17:19 Update player board:  2 I7
+2023/04/24 11:17:19 Update player board:  2 E3
+2023/04/24 11:17:19 Update player board:  1 J9
+2023/04/24 11:17:19 Update player board:  2 J3
+2023/04/24 11:17:22 {"coord":"D8"}
+2023/04/24 11:17:22 Fire response body {"result":"miss"}
+2023/04/24 11:17:22 Update enemy board:  2 D8
+2023/04/24 11:17:22 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1"],"should_fire":true,"timer":60}
+2023/04/24 11:17:22 Update player board:  1 D6
+2023/04/24 11:17:22 Update player board:  2 D5
+2023/04/24 11:17:22 Update player board:  2 E6
+2023/04/24 11:17:22 Update player board:  1 D7
+2023/04/24 11:17:22 Update player board:  1 D8
+2023/04/24 11:17:22 Update player board:  2 E8
+2023/04/24 11:17:22 Update player board:  1 D9
+2023/04/24 11:17:22 Update player board:  2 H7
+2023/04/24 11:17:22 Update player board:  1 H3
+2023/04/24 11:17:22 Update player board:  2 G3
+2023/04/24 11:17:22 Update player board:  2 I3
+2023/04/24 11:17:22 Update player board:  1 H4
+2023/04/24 11:17:22 Update player board:  2 G4
+2023/04/24 11:17:22 Update player board:  2 I4
+2023/04/24 11:17:22 Update player board:  2 H5
+2023/04/24 11:17:22 Update player board:  1 H2
+2023/04/24 11:17:22 Update player board:  2 D3
+2023/04/24 11:17:22 Update player board:  2 B2
+2023/04/24 11:17:22 Update player board:  2 G9
+2023/04/24 11:17:22 Update player board:  2 I8
+2023/04/24 11:17:22 Update player board:  2 E2
+2023/04/24 11:17:22 Update player board:  1 B4
+2023/04/24 11:17:22 Update player board:  1 B3
+2023/04/24 11:17:22 Update player board:  2 A8
+2023/04/24 11:17:22 Update player board:  2 I9
+2023/04/24 11:17:22 Update player board:  2 G7
+2023/04/24 11:17:22 Update player board:  2 J6
+2023/04/24 11:17:22 Update player board:  2 F4
+2023/04/24 11:17:22 Update player board:  2 B9
+2023/04/24 11:17:22 Update player board:  2 F8
+2023/04/24 11:17:22 Update player board:  2 H10
+2023/04/24 11:17:22 Update player board:  2 B7
+2023/04/24 11:17:22 Update player board:  2 D1
+2023/04/24 11:17:22 Update player board:  2 F6
+2023/04/24 11:17:22 Update player board:  2 I7
+2023/04/24 11:17:22 Update player board:  2 E3
+2023/04/24 11:17:22 Update player board:  1 J9
+2023/04/24 11:17:22 Update player board:  2 J3
+2023/04/24 11:17:22 Update player board:  2 F1
+2023/04/24 11:17:25 {"coord":"d9"}
+2023/04/24 11:17:25 Fire response body {"result":"miss"}
+2023/04/24 11:17:25 Update enemy board:  2 d9
+2023/04/24 11:17:25 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10"],"should_fire":true,"timer":60}
+2023/04/24 11:17:25 Update player board:  1 D6
+2023/04/24 11:17:25 Update player board:  2 D5
+2023/04/24 11:17:25 Update player board:  2 E6
+2023/04/24 11:17:25 Update player board:  1 D7
+2023/04/24 11:17:25 Update player board:  1 D8
+2023/04/24 11:17:25 Update player board:  2 E8
+2023/04/24 11:17:25 Update player board:  1 D9
+2023/04/24 11:17:25 Update player board:  2 H7
+2023/04/24 11:17:25 Update player board:  1 H3
+2023/04/24 11:17:25 Update player board:  2 G3
+2023/04/24 11:17:25 Update player board:  2 I3
+2023/04/24 11:17:25 Update player board:  1 H4
+2023/04/24 11:17:25 Update player board:  2 G4
+2023/04/24 11:17:25 Update player board:  2 I4
+2023/04/24 11:17:25 Update player board:  2 H5
+2023/04/24 11:17:25 Update player board:  1 H2
+2023/04/24 11:17:25 Update player board:  2 D3
+2023/04/24 11:17:25 Update player board:  2 B2
+2023/04/24 11:17:25 Update player board:  2 G9
+2023/04/24 11:17:25 Update player board:  2 I8
+2023/04/24 11:17:25 Update player board:  2 E2
+2023/04/24 11:17:25 Update player board:  1 B4
+2023/04/24 11:17:25 Update player board:  1 B3
+2023/04/24 11:17:25 Update player board:  2 A8
+2023/04/24 11:17:25 Update player board:  2 I9
+2023/04/24 11:17:25 Update player board:  2 G7
+2023/04/24 11:17:25 Update player board:  2 J6
+2023/04/24 11:17:25 Update player board:  2 F4
+2023/04/24 11:17:25 Update player board:  2 B9
+2023/04/24 11:17:25 Update player board:  2 F8
+2023/04/24 11:17:25 Update player board:  2 H10
+2023/04/24 11:17:25 Update player board:  2 B7
+2023/04/24 11:17:25 Update player board:  2 D1
+2023/04/24 11:17:25 Update player board:  2 F6
+2023/04/24 11:17:25 Update player board:  2 I7
+2023/04/24 11:17:25 Update player board:  2 E3
+2023/04/24 11:17:25 Update player board:  1 J9
+2023/04/24 11:17:25 Update player board:  2 J3
+2023/04/24 11:17:25 Update player board:  2 F1
+2023/04/24 11:17:25 Update player board:  2 F10
+2023/04/24 11:17:28 {"coord":"D6"}
+2023/04/24 11:17:28 Fire response body {"result":"miss"}
+2023/04/24 11:17:28 Update enemy board:  2 D6
+2023/04/24 11:17:29 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10"],"timer":57}
+2023/04/24 11:17:30 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1"],"timer":56}
+2023/04/24 11:17:31 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10"],"should_fire":true,"timer":60}
+2023/04/24 11:17:31 Update player board:  1 D6
+2023/04/24 11:17:31 Update player board:  2 D5
+2023/04/24 11:17:31 Update player board:  2 E6
+2023/04/24 11:17:31 Update player board:  1 D7
+2023/04/24 11:17:31 Update player board:  1 D8
+2023/04/24 11:17:31 Update player board:  2 E8
+2023/04/24 11:17:31 Update player board:  1 D9
+2023/04/24 11:17:31 Update player board:  2 H7
+2023/04/24 11:17:31 Update player board:  1 H3
+2023/04/24 11:17:31 Update player board:  2 G3
+2023/04/24 11:17:31 Update player board:  2 I3
+2023/04/24 11:17:31 Update player board:  1 H4
+2023/04/24 11:17:31 Update player board:  2 G4
+2023/04/24 11:17:31 Update player board:  2 I4
+2023/04/24 11:17:31 Update player board:  2 H5
+2023/04/24 11:17:31 Update player board:  1 H2
+2023/04/24 11:17:31 Update player board:  2 D3
+2023/04/24 11:17:31 Update player board:  2 B2
+2023/04/24 11:17:31 Update player board:  2 G9
+2023/04/24 11:17:31 Update player board:  2 I8
+2023/04/24 11:17:31 Update player board:  2 E2
+2023/04/24 11:17:31 Update player board:  1 B4
+2023/04/24 11:17:31 Update player board:  1 B3
+2023/04/24 11:17:31 Update player board:  2 A8
+2023/04/24 11:17:31 Update player board:  2 I9
+2023/04/24 11:17:31 Update player board:  2 G7
+2023/04/24 11:17:31 Update player board:  2 J6
+2023/04/24 11:17:31 Update player board:  2 F4
+2023/04/24 11:17:31 Update player board:  2 B9
+2023/04/24 11:17:31 Update player board:  2 F8
+2023/04/24 11:17:31 Update player board:  2 H10
+2023/04/24 11:17:31 Update player board:  2 B7
+2023/04/24 11:17:31 Update player board:  2 D1
+2023/04/24 11:17:31 Update player board:  2 F6
+2023/04/24 11:17:31 Update player board:  2 I7
+2023/04/24 11:17:31 Update player board:  2 E3
+2023/04/24 11:17:31 Update player board:  1 J9
+2023/04/24 11:17:31 Update player board:  2 J3
+2023/04/24 11:17:31 Update player board:  2 F1
+2023/04/24 11:17:31 Update player board:  2 F10
+2023/04/24 11:17:31 Update player board:  1 B1
+2023/04/24 11:17:31 Update player board:  1 A1
+2023/04/24 11:17:31 Update player board:  1 C1
+2023/04/24 11:17:31 Update player board:  2 A10
+2023/04/24 11:17:31 {"coord":"E1"}
+2023/04/24 11:17:31 Fire response body {"result":"miss"}
+2023/04/24 11:17:31 Update enemy board:  2 E1
+2023/04/24 11:17:31 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6"],"should_fire":true,"timer":60}
+2023/04/24 11:17:31 Update player board:  1 D6
+2023/04/24 11:17:31 Update player board:  2 D5
+2023/04/24 11:17:31 Update player board:  2 E6
+2023/04/24 11:17:31 Update player board:  1 D7
+2023/04/24 11:17:31 Update player board:  1 D8
+2023/04/24 11:17:31 Update player board:  2 E8
+2023/04/24 11:17:31 Update player board:  1 D9
+2023/04/24 11:17:31 Update player board:  2 H7
+2023/04/24 11:17:31 Update player board:  1 H3
+2023/04/24 11:17:31 Update player board:  2 G3
+2023/04/24 11:17:31 Update player board:  2 I3
+2023/04/24 11:17:31 Update player board:  1 H4
+2023/04/24 11:17:31 Update player board:  2 G4
+2023/04/24 11:17:31 Update player board:  2 I4
+2023/04/24 11:17:31 Update player board:  2 H5
+2023/04/24 11:17:31 Update player board:  1 H2
+2023/04/24 11:17:31 Update player board:  2 D3
+2023/04/24 11:17:31 Update player board:  2 B2
+2023/04/24 11:17:31 Update player board:  2 G9
+2023/04/24 11:17:31 Update player board:  2 I8
+2023/04/24 11:17:31 Update player board:  2 E2
+2023/04/24 11:17:31 Update player board:  1 B4
+2023/04/24 11:17:31 Update player board:  1 B3
+2023/04/24 11:17:31 Update player board:  2 A8
+2023/04/24 11:17:31 Update player board:  2 I9
+2023/04/24 11:17:31 Update player board:  2 G7
+2023/04/24 11:17:31 Update player board:  2 J6
+2023/04/24 11:17:31 Update player board:  2 F4
+2023/04/24 11:17:31 Update player board:  2 B9
+2023/04/24 11:17:31 Update player board:  2 F8
+2023/04/24 11:17:31 Update player board:  2 H10
+2023/04/24 11:17:31 Update player board:  2 B7
+2023/04/24 11:17:31 Update player board:  2 D1
+2023/04/24 11:17:31 Update player board:  2 F6
+2023/04/24 11:17:31 Update player board:  2 I7
+2023/04/24 11:17:31 Update player board:  2 E3
+2023/04/24 11:17:31 Update player board:  1 J9
+2023/04/24 11:17:31 Update player board:  2 J3
+2023/04/24 11:17:31 Update player board:  2 F1
+2023/04/24 11:17:31 Update player board:  2 F10
+2023/04/24 11:17:31 Update player board:  1 B1
+2023/04/24 11:17:31 Update player board:  1 A1
+2023/04/24 11:17:31 Update player board:  1 C1
+2023/04/24 11:17:31 Update player board:  2 A10
+2023/04/24 11:17:31 Update player board:  2 A6
+2023/04/24 11:17:32 {"coord":"E2"}
+2023/04/24 11:17:33 Fire response body {"result":"miss"}
+2023/04/24 11:17:33 Update enemy board:  2 E2
+2023/04/24 11:17:33 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6"],"timer":59}
+2023/04/24 11:17:35 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6"],"should_fire":true,"timer":59}
+2023/04/24 11:17:35 Update player board:  1 D6
+2023/04/24 11:17:35 Update player board:  2 D5
+2023/04/24 11:17:35 Update player board:  2 E6
+2023/04/24 11:17:35 Update player board:  1 D7
+2023/04/24 11:17:35 Update player board:  1 D8
+2023/04/24 11:17:35 Update player board:  2 E8
+2023/04/24 11:17:35 Update player board:  1 D9
+2023/04/24 11:17:35 Update player board:  2 H7
+2023/04/24 11:17:35 Update player board:  1 H3
+2023/04/24 11:17:35 Update player board:  2 G3
+2023/04/24 11:17:35 Update player board:  2 I3
+2023/04/24 11:17:35 Update player board:  1 H4
+2023/04/24 11:17:35 Update player board:  2 G4
+2023/04/24 11:17:35 Update player board:  2 I4
+2023/04/24 11:17:35 Update player board:  2 H5
+2023/04/24 11:17:35 Update player board:  1 H2
+2023/04/24 11:17:35 Update player board:  2 D3
+2023/04/24 11:17:35 Update player board:  2 B2
+2023/04/24 11:17:35 Update player board:  2 G9
+2023/04/24 11:17:35 Update player board:  2 I8
+2023/04/24 11:17:35 Update player board:  2 E2
+2023/04/24 11:17:35 Update player board:  1 B4
+2023/04/24 11:17:35 Update player board:  1 B3
+2023/04/24 11:17:35 Update player board:  2 A8
+2023/04/24 11:17:35 Update player board:  2 I9
+2023/04/24 11:17:35 Update player board:  2 G7
+2023/04/24 11:17:35 Update player board:  2 J6
+2023/04/24 11:17:35 Update player board:  2 F4
+2023/04/24 11:17:35 Update player board:  2 B9
+2023/04/24 11:17:35 Update player board:  2 F8
+2023/04/24 11:17:35 Update player board:  2 H10
+2023/04/24 11:17:35 Update player board:  2 B7
+2023/04/24 11:17:35 Update player board:  2 D1
+2023/04/24 11:17:35 Update player board:  2 F6
+2023/04/24 11:17:35 Update player board:  2 I7
+2023/04/24 11:17:35 Update player board:  2 E3
+2023/04/24 11:17:35 Update player board:  1 J9
+2023/04/24 11:17:35 Update player board:  2 J3
+2023/04/24 11:17:35 Update player board:  2 F1
+2023/04/24 11:17:35 Update player board:  2 F10
+2023/04/24 11:17:35 Update player board:  1 B1
+2023/04/24 11:17:35 Update player board:  1 A1
+2023/04/24 11:17:35 Update player board:  1 C1
+2023/04/24 11:17:35 Update player board:  2 A10
+2023/04/24 11:17:35 Update player board:  2 A6
+2023/04/24 11:17:35 Update player board:  2 H6
+2023/04/24 11:17:36 {"coord":"E3E3"}
+2023/04/24 11:17:37 Fire response body {"message":"wrong coord format"}
+2023/04/24 11:17:37 Update enemy board:  0 E3E3
+2023/04/24 11:17:37 invalid coordinate
+2023/04/24 11:17:37 invalid coordinate
+2023/04/24 11:17:40 {"coord":"E4"}
+2023/04/24 11:17:40 Fire response body {"result":"hit"}
+2023/04/24 11:17:40 Update enemy board:  2 E4
+2023/04/24 11:17:43 {"coord":"E5"}
+2023/04/24 11:17:43 Fire response body {"result":"miss"}
+2023/04/24 11:17:43 Update enemy board:  2 E5
+2023/04/24 11:17:43 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8"],"timer":57}
+2023/04/24 11:17:44 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8"],"should_fire":true,"timer":60}
+2023/04/24 11:17:44 Update player board:  1 D6
+2023/04/24 11:17:44 Update player board:  2 D5
+2023/04/24 11:17:44 Update player board:  2 E6
+2023/04/24 11:17:44 Update player board:  1 D7
+2023/04/24 11:17:44 Update player board:  1 D8
+2023/04/24 11:17:44 Update player board:  2 E8
+2023/04/24 11:17:44 Update player board:  1 D9
+2023/04/24 11:17:44 Update player board:  2 H7
+2023/04/24 11:17:44 Update player board:  1 H3
+2023/04/24 11:17:44 Update player board:  2 G3
+2023/04/24 11:17:44 Update player board:  2 I3
+2023/04/24 11:17:44 Update player board:  1 H4
+2023/04/24 11:17:44 Update player board:  2 G4
+2023/04/24 11:17:44 Update player board:  2 I4
+2023/04/24 11:17:44 Update player board:  2 H5
+2023/04/24 11:17:44 Update player board:  1 H2
+2023/04/24 11:17:44 Update player board:  2 D3
+2023/04/24 11:17:44 Update player board:  2 B2
+2023/04/24 11:17:44 Update player board:  2 G9
+2023/04/24 11:17:44 Update player board:  2 I8
+2023/04/24 11:17:44 Update player board:  2 E2
+2023/04/24 11:17:44 Update player board:  1 B4
+2023/04/24 11:17:44 Update player board:  1 B3
+2023/04/24 11:17:44 Update player board:  2 A8
+2023/04/24 11:17:44 Update player board:  2 I9
+2023/04/24 11:17:44 Update player board:  2 G7
+2023/04/24 11:17:44 Update player board:  2 J6
+2023/04/24 11:17:44 Update player board:  2 F4
+2023/04/24 11:17:44 Update player board:  2 B9
+2023/04/24 11:17:44 Update player board:  2 F8
+2023/04/24 11:17:44 Update player board:  2 H10
+2023/04/24 11:17:44 Update player board:  2 B7
+2023/04/24 11:17:44 Update player board:  2 D1
+2023/04/24 11:17:44 Update player board:  2 F6
+2023/04/24 11:17:44 Update player board:  2 I7
+2023/04/24 11:17:44 Update player board:  2 E3
+2023/04/24 11:17:44 Update player board:  1 J9
+2023/04/24 11:17:44 Update player board:  2 J3
+2023/04/24 11:17:44 Update player board:  2 F1
+2023/04/24 11:17:44 Update player board:  2 F10
+2023/04/24 11:17:44 Update player board:  1 B1
+2023/04/24 11:17:44 Update player board:  1 A1
+2023/04/24 11:17:44 Update player board:  1 C1
+2023/04/24 11:17:44 Update player board:  2 A10
+2023/04/24 11:17:44 Update player board:  2 A6
+2023/04/24 11:17:44 Update player board:  2 H6
+2023/04/24 11:17:44 Update player board:  1 H8
+2023/04/24 11:17:44 Update player board:  2 G8
+2023/04/24 11:17:46 {"coord":"E6"}
+2023/04/24 11:17:46 Fire response body {"result":"miss"}
+2023/04/24 11:17:46 Update enemy board:  2 E6
+2023/04/24 11:17:47 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9"],"timer":58}
+2023/04/24 11:17:48 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9","J1"],"timer":57}
+2023/04/24 11:17:49 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9","J1","E4"],"should_fire":true,"timer":59}
+2023/04/24 11:17:49 Update player board:  1 D6
+2023/04/24 11:17:49 Update player board:  2 D5
+2023/04/24 11:17:49 Update player board:  2 E6
+2023/04/24 11:17:49 Update player board:  1 D7
+2023/04/24 11:17:49 Update player board:  1 D8
+2023/04/24 11:17:49 Update player board:  2 E8
+2023/04/24 11:17:49 Update player board:  1 D9
+2023/04/24 11:17:49 Update player board:  2 H7
+2023/04/24 11:17:49 Update player board:  1 H3
+2023/04/24 11:17:49 Update player board:  2 G3
+2023/04/24 11:17:49 Update player board:  2 I3
+2023/04/24 11:17:49 Update player board:  1 H4
+2023/04/24 11:17:49 Update player board:  2 G4
+2023/04/24 11:17:49 Update player board:  2 I4
+2023/04/24 11:17:49 Update player board:  2 H5
+2023/04/24 11:17:49 Update player board:  1 H2
+2023/04/24 11:17:49 Update player board:  2 D3
+2023/04/24 11:17:49 Update player board:  2 B2
+2023/04/24 11:17:49 Update player board:  2 G9
+2023/04/24 11:17:49 Update player board:  2 I8
+2023/04/24 11:17:49 Update player board:  2 E2
+2023/04/24 11:17:49 Update player board:  1 B4
+2023/04/24 11:17:49 Update player board:  1 B3
+2023/04/24 11:17:49 Update player board:  2 A8
+2023/04/24 11:17:49 Update player board:  2 I9
+2023/04/24 11:17:49 Update player board:  2 G7
+2023/04/24 11:17:49 Update player board:  2 J6
+2023/04/24 11:17:49 Update player board:  2 F4
+2023/04/24 11:17:49 Update player board:  2 B9
+2023/04/24 11:17:49 Update player board:  2 F8
+2023/04/24 11:17:49 Update player board:  2 H10
+2023/04/24 11:17:49 Update player board:  2 B7
+2023/04/24 11:17:49 Update player board:  2 D1
+2023/04/24 11:17:49 Update player board:  2 F6
+2023/04/24 11:17:49 Update player board:  2 I7
+2023/04/24 11:17:49 Update player board:  2 E3
+2023/04/24 11:17:49 Update player board:  1 J9
+2023/04/24 11:17:49 Update player board:  2 J3
+2023/04/24 11:17:49 Update player board:  2 F1
+2023/04/24 11:17:49 Update player board:  2 F10
+2023/04/24 11:17:49 Update player board:  1 B1
+2023/04/24 11:17:49 Update player board:  1 A1
+2023/04/24 11:17:49 Update player board:  1 C1
+2023/04/24 11:17:49 Update player board:  2 A10
+2023/04/24 11:17:49 Update player board:  2 A6
+2023/04/24 11:17:49 Update player board:  2 H6
+2023/04/24 11:17:49 Update player board:  1 H8
+2023/04/24 11:17:49 Update player board:  2 G8
+2023/04/24 11:17:49 Update player board:  1 H9
+2023/04/24 11:17:49 Update player board:  1 J1
+2023/04/24 11:17:49 Update player board:  2 E4
+2023/04/24 11:17:49 {"coord":"E7"}
+2023/04/24 11:17:49 Fire response body {"result":"miss"}
+2023/04/24 11:17:49 Update enemy board:  2 E7
+2023/04/24 11:17:50 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9","J1","E4"],"timer":59}
+2023/04/24 11:17:51 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9","J1","E4","F2","J5"],"timer":58}
+2023/04/24 11:17:52 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9","J1","E4","F2","J5","J4"],"timer":56}
+2023/04/24 11:17:53 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9","J1","E4","F2","J5","J4","D4"],"should_fire":true,"timer":59}
+2023/04/24 11:17:53 Update player board:  1 D6
+2023/04/24 11:17:53 Update player board:  2 D5
+2023/04/24 11:17:53 Update player board:  2 E6
+2023/04/24 11:17:53 Update player board:  1 D7
+2023/04/24 11:17:53 Update player board:  1 D8
+2023/04/24 11:17:53 Update player board:  2 E8
+2023/04/24 11:17:53 Update player board:  1 D9
+2023/04/24 11:17:53 Update player board:  2 H7
+2023/04/24 11:17:53 Update player board:  1 H3
+2023/04/24 11:17:53 Update player board:  2 G3
+2023/04/24 11:17:53 Update player board:  2 I3
+2023/04/24 11:17:53 Update player board:  1 H4
+2023/04/24 11:17:53 Update player board:  2 G4
+2023/04/24 11:17:53 Update player board:  2 I4
+2023/04/24 11:17:53 Update player board:  2 H5
+2023/04/24 11:17:53 Update player board:  1 H2
+2023/04/24 11:17:53 Update player board:  2 D3
+2023/04/24 11:17:53 Update player board:  2 B2
+2023/04/24 11:17:53 Update player board:  2 G9
+2023/04/24 11:17:53 Update player board:  2 I8
+2023/04/24 11:17:53 Update player board:  2 E2
+2023/04/24 11:17:53 Update player board:  1 B4
+2023/04/24 11:17:53 Update player board:  1 B3
+2023/04/24 11:17:53 Update player board:  2 A8
+2023/04/24 11:17:53 Update player board:  2 I9
+2023/04/24 11:17:53 Update player board:  2 G7
+2023/04/24 11:17:53 Update player board:  2 J6
+2023/04/24 11:17:53 Update player board:  2 F4
+2023/04/24 11:17:53 Update player board:  2 B9
+2023/04/24 11:17:53 Update player board:  2 F8
+2023/04/24 11:17:53 Update player board:  2 H10
+2023/04/24 11:17:53 Update player board:  2 B7
+2023/04/24 11:17:53 Update player board:  2 D1
+2023/04/24 11:17:53 Update player board:  2 F6
+2023/04/24 11:17:53 Update player board:  2 I7
+2023/04/24 11:17:53 Update player board:  2 E3
+2023/04/24 11:17:53 Update player board:  1 J9
+2023/04/24 11:17:53 Update player board:  2 J3
+2023/04/24 11:17:53 Update player board:  2 F1
+2023/04/24 11:17:53 Update player board:  2 F10
+2023/04/24 11:17:53 Update player board:  1 B1
+2023/04/24 11:17:53 Update player board:  1 A1
+2023/04/24 11:17:53 Update player board:  1 C1
+2023/04/24 11:17:53 Update player board:  2 A10
+2023/04/24 11:17:53 Update player board:  2 A6
+2023/04/24 11:17:53 Update player board:  2 H6
+2023/04/24 11:17:53 Update player board:  1 H8
+2023/04/24 11:17:53 Update player board:  2 G8
+2023/04/24 11:17:53 Update player board:  1 H9
+2023/04/24 11:17:53 Update player board:  1 J1
+2023/04/24 11:17:53 Update player board:  2 E4
+2023/04/24 11:17:53 Update player board:  1 F2
+2023/04/24 11:17:53 Update player board:  1 J5
+2023/04/24 11:17:53 Update player board:  1 J4
+2023/04/24 11:17:53 Update player board:  2 D4
+2023/04/24 11:17:53 {"coord":"E8"}
+2023/04/24 11:17:54 Fire response body {"result":"miss"}
+2023/04/24 11:17:54 Update enemy board:  2 E8
+2023/04/24 11:17:54 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9","J1","E4","F2","J5","J4","D4"],"timer":59}
+2023/04/24 11:17:55 {"nick":"marcin","game_status":"ended","last_game_status":"lose","opp_shots":["D6","D5","E6","D7","D8","E8","D9","H7","H3","G3","I3","H4","G4","I4","H5","H2","D3","B2","G9","I8","E2","B4","B3","A8","I9","G7","J6","F4","B9","F8","H10","B7","D1","F6","I7","E3","J9","J3","F1","F10","B1","A1","C1","A10","A6","H6","H8","G8","H9","J1","E4","F2","J5","J4","D4","G6"]}
+2023/04/24 11:19:09 {"coords":null,"desc":"","nick":"marcin","target_nick":"","wpbot":true}
+2023/04/24 11:19:09 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:19:09 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:19:09 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:19:10 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:19:10 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:19:11 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:19:11 {"nick":"marcin","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/04/24 11:19:12 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot"}
+2023/04/24 11:19:12 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot"}
+2023/04/24 11:19:13 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot"}
+2023/04/24 11:19:13 {"nick":"marcin","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F7"],"should_fire":true,"timer":60}
+2023/04/24 11:19:13 App description:  {"nick":"marcin","desc":"n/a","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_desc":"Siejący trwogę, latający WP Bot. 1000 walk wygranych przed czasem. Giń przeciwniku!","opp_shots":["F7"],"should_fire":true,"timer":60}
+2023/04/24 11:19:13 Board empty, downloading the board...
+2023/04/24 11:19:14 {"board":["A7","A8","A9","B2","B3","C8","D4","D5","E7","E9","E10","F5","G5","H3","H5","H8","I5","I8","J1","J8"]}
+2023/04/24 11:19:14 board downloaded
+2023/04/24 11:19:14 Update player board:  2 F7
