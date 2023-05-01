@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	Left                  = iota // indicates player's board (on the left side)
-	Right                        // indicates enemy's board (on the right side)
+	Left                  = 0 // indicates player's board (on the left side)
+	Right                 = 1 // indicates enemy's board (on the right side)
 	maxConnectionAttempts = 10
 	boardEndpoint         = "/api/game/board"
 	fireEndpoint          = "/api/game/fire"
