@@ -3,30 +3,31 @@ package connect
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	"errors"
 	"io"
 	"log"
 	"net/http"
 )
 
 const (
+	ServerUrl    = "https://go-pjatk-server.fly.dev"
 	gameEndpoint = "/api/game"
-	listEndpoint = "/api/game/list"
 )
 
-// func InitGame() error
-// func Board() ([]string, error)
-// func Status() (*StatusResponse, error)
-// func Fire(coord string) (string, error)
+var (
+	GameConnectionData = map[string]interface{}{
+		"coords":      nil,
+		"desc":        "",
+		"nick":        "Crimson_King",
+		"target_nick": "",
+		"wpbot":       true,
+	}
 
-type ConnectInterface interface {
-	InitGame() error
-	Status() (*StatusResponse, error)
-}
+	ErrEmptyTokenException = errors.New("the connection token is empty. re-initialize connection to the game server")
+)
 
 type Connection struct {
-	Token string
-	Url   string
+	token string
 }
 
 type StatusResponse struct {
@@ -41,58 +42,40 @@ type StatusResponse struct {
 	Timer            int      `json:"timer,omitempty"`
 }
 
-type Player struct {
-	Game_status string `json:"game_status,omitempty"`
-	Nick        string `json:"nick,omitempty"`
+func (connection *Connection) GetToken() (string, error) {
+	if len(connection.token) > 0 {
+		return connection.token, nil
+	}
+
+	return "", ErrEmptyTokenException
 }
 
-var (
-	gameConnectionInit = map[string]interface{}{
-		"coords":      nil,
-		"desc":        "",
-		"nick":        "Crimson_King",
-		"target_nick": "",
-		"wpbot":       true,
-	}
-)
-
-func (s *Connection) InitGame(playWithBot bool, targetNick string, myNick string) error {
-	gameConnectionInit["wpbot"] = playWithBot
-	gameConnectionInit["target_nick"] = targetNick
-	gameConnectionInit["nick"] = myNick
-	b, err := json.Marshal(gameConnectionInit)
+func (connection *Connection) InitGame(playWithBot bool, targetNick string, myNick string) error {
+	GameConnectionData["wpbot"] = playWithBot
+	GameConnectionData["target_nick"] = targetNick
+	GameConnectionData["nick"] = myNick
+	b, err := json.Marshal(GameConnectionData)
 	if err != nil {
 		log.Println(err)
 	}
 
 	reader := bytes.NewReader(b)
 	log.Println(string(b))
-	resp, err := http.Post(s.Url+gameEndpoint, "application/json", reader)
+	resp, err := http.Post(ServerUrl+gameEndpoint, "application/json", reader)
 	if err != nil {
 		log.Println(resp)
 		log.Println(err)
 	}
-	s.Token = resp.Header.Get("X-Auth-Token")
-	fmt.Println(resp.Header.Get("X-Auth-Token"))
+	connection.token = resp.Header.Get("X-Auth-Token")
+	log.Println(resp.Header.Get("X-Auth-Token"))
 	return err
 }
 
-func (s *Connection) Status() (*StatusResponse, error) {
+func (connection *Connection) Status() (*StatusResponse, error) {
 	sr := StatusResponse{}
-	client := http.Client{}
-	req, err := http.NewRequest("GET", s.Url+gameEndpoint, nil)
+	body, err := connection.GameAPIConnection("GET", gameEndpoint)
 	if err != nil {
-		log.Println(req, err)
-	}
-	req.Header.Set("X-Auth-Token", s.Token)
-	r, err := client.Do(req)
-	if err != nil {
-		log.Println(req, err)
-	}
-	defer r.Body.Close()
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		log.Println(err)
+		return nil, err
 	}
 
 	err = json.Unmarshal(body, &sr)
@@ -105,30 +88,30 @@ func (s *Connection) Status() (*StatusResponse, error) {
 	return &sr, err
 }
 
-func (s *Connection) ListPlayers() ([]Player, error) {
-	players := []Player{}
+func (connection *Connection) GameAPIConnection(HTTPMethod string, endpoint string) ([]byte, error) {
 	client := http.Client{}
-	req, err := http.NewRequest("GET", s.Url+listEndpoint, nil)
+	req, err := http.NewRequest(HTTPMethod, ServerUrl+endpoint, nil)
 	if err != nil {
 		log.Println(req, err)
+		return nil, err
 	}
 
+	if connection.token != "" {
+		req.Header.Set("X-Auth-Token", connection.token)
+	}
 	r, err := client.Do(req)
 	if err != nil {
 		log.Println(req, err)
+		return nil, err
 	}
+	log.Println(HTTPMethod, endpoint, r.Status)
 	defer r.Body.Close()
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Println(err)
+		return nil, err
 	}
 
-	err = json.Unmarshal(body, &players)
-	if err != nil {
-		log.Println(err)
-	}
-
-	log.Println("lista graczy: ", string(body))
-
-	return players, err
+	// TODO - should this method return a []byte?
+	return body, nil
 }

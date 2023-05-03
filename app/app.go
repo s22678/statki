@@ -7,8 +7,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/fatih/color"
-	gui "github.com/grupawp/warships-lightgui/v2"
 	"github.com/s22678/statki/connect"
 )
 
@@ -21,76 +19,11 @@ const (
 	descEndpoint          = "/api/game/desc"
 )
 
-type GameBoard struct {
-	Board []string "json:board"
-}
-
 type Application struct {
-	Con   connect.Connection
-	board *gui.Board
-}
-
-func (a *Application) downloadBoard() (*GameBoard, error) {
-	gb := &GameBoard{}
-	client := http.Client{}
-	req, err := http.NewRequest("GET", a.Con.Url+boardEndpoint, nil)
-	if err != nil {
-		log.Println(req, err)
-		return nil, err
-	}
-
-	req.Header.Set("X-Auth-Token", a.Con.Token)
-	r, err := client.Do(req)
-	if err != nil {
-		log.Println(req, err)
-		return nil, err
-	}
-
-	defer r.Body.Close()
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		log.Println(err)
-		return nil, err
-	}
-
-	err = json.Unmarshal(body, gb)
-	if err != nil {
-		log.Println(err)
-		return nil, err
-	}
-
-	log.Println(string(body))
-	return gb, nil
-}
-
-func (a *Application) initGameBoard(gameBoard []string) {
-	cfg := gui.NewConfig()
-	cfg.HitChar = '#'
-	cfg.HitColor = color.FgRed
-	cfg.BorderColor = color.BgRed
-	cfg.RulerTextColor = color.BgYellow
-
-	a.board = gui.New(cfg)
-	a.board.Import(gameBoard)
-}
-
-func (a *Application) Board() {
-	if a.board == nil {
-		log.Println("Board empty, downloading the board...")
-		b, err := a.downloadBoard()
-		if err != nil {
-			log.Println(err)
-			return
-		}
-		a.initGameBoard(b.Board)
-		log.Println("board downloaded")
-	}
-
-	a.board.Display()
+	Con connect.Connection
 }
 
 func (a *Application) Fire(coord string) (string, error) {
-	// TODO check if coord is a string [A-J][1-10]
 	fireResponse := map[string]string{
 		"result": "",
 	}
@@ -103,12 +36,13 @@ func (a *Application) Fire(coord string) (string, error) {
 
 	reader := bytes.NewReader(b)
 	log.Println(string(b))
-	request, err := http.NewRequest("POST", a.Con.Url+fireEndpoint, reader)
+	request, err := http.NewRequest("POST", connect.ServerUrl+fireEndpoint, reader)
 	if err != nil {
 		log.Println(err)
 		return "", nil
 	}
-	request.Header.Add("X-Auth-Token", a.Con.Token)
+	token, _ := a.Con.GetToken()
+	request.Header.Add("X-Auth-Token", token)
 	client := &http.Client{}
 	res, err := client.Do(request)
 	if err != nil {
@@ -130,42 +64,15 @@ func (a *Application) Fire(coord string) (string, error) {
 	return fireResponse["result"], nil
 }
 
-func (a *Application) UpdatePlayerBoard(coords []string) {
-	for _, coord := range coords {
-		state, err := a.board.HitOrMiss(Left, coord)
-		log.Println("Update player board: ", state, coord)
-		if err != nil {
-			log.Println(err)
-		}
-		err = a.board.Set(Left, coord, state)
-		if err != nil {
-			log.Println(err)
-		}
-	}
-	a.board.Display()
-}
-
-func (a *Application) UpdateEnemyBoard(coord string) {
-	state, err := a.board.HitOrMiss(Right, coord)
-	log.Println("Update enemy board: ", state, coord)
-	if err != nil {
-		log.Println(err)
-	}
-	err = a.board.Set(Right, coord, state)
-	if err != nil {
-		log.Println(err)
-	}
-	a.board.Display()
-}
-
 func (a *Application) GetDescritpion() (*connect.StatusResponse, error) {
 	sr := connect.StatusResponse{}
 	client := http.Client{}
-	req, err := http.NewRequest("GET", a.Con.Url+descEndpoint, nil)
+	req, err := http.NewRequest("GET", connect.ServerUrl+descEndpoint, nil)
 	if err != nil {
 		log.Println(req, err)
 	}
-	req.Header.Set("X-Auth-Token", a.Con.Token)
+	token, _ := a.Con.GetToken()
+	req.Header.Set("X-Auth-Token", token)
 	r, err := client.Do(req)
 	if err != nil {
 		log.Println(req, err)
@@ -184,4 +91,12 @@ func (a *Application) GetDescritpion() (*connect.StatusResponse, error) {
 	log.Println("App description: ", string(body))
 
 	return &sr, err
+}
+
+func (a *Application) QuitGame() error {
+	_, err := a.Con.GameAPIConnection("DELETE", "/api/game/abandon")
+	if err != nil {
+		return err
+	}
+	return nil
 }

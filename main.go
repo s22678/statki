@@ -2,50 +2,46 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"log"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 
 	"github.com/s22678/statki/app"
 	"github.com/s22678/statki/connect"
+	"github.com/s22678/statki/gamedata"
 )
 
 const (
-	url = "https://go-pjatk-server.fly.dev"
+	LogPath = "game.log"
 )
 
 var (
-	myNick = ""
+	ErrWrongResponseException = errors.New("there was an error in the response")
+	ErrPlayerQuitException    = errors.New("player quit the game")
+	ErrWrongCoordinates       = errors.New("coordinates did not match pattern [A-J]([0-9]|10), try again with correct coordinates")
+	LogFile                   *os.File
+	LogErr                    error
 )
 
+func init() {
+	LogFile, LogErr = os.OpenFile("game.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if LogErr != nil {
+		log.Fatalf("error opening file: %v", LogErr)
+	}
+	log.SetOutput(LogFile)
+}
+
 func main() {
-	f, err := os.OpenFile("game.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	defer f.Close()
-	c := connect.Connection{
-		Url: url,
-	}
-	log.SetOutput(f)
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("podaj nicka (twojego)")
-	myNick, err = reader.ReadString('\n')
-	myNick = strings.TrimSpace(myNick)
+	defer LogFile.Close()
 	for {
-		fmt.Println("1) pokaz graczy")
-		fmt.Println("2) zagraj z botem")
-		fmt.Println("3) zagraj online")
-		fmt.Println("4) zakoncz")
-		input, err := reader.ReadString('\n')
-		if err != nil {
-			log.Fatal(err)
-		}
+		input, _ := getPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) quit", false)
 		switch {
-		case strings.TrimSpace(input) == "1":
-			players, err := c.ListPlayers()
+		case input == "1":
+			players, err := gamedata.ListPlayers()
 			if err != nil {
 				log.Println(err)
 				continue
@@ -53,18 +49,23 @@ func main() {
 			for _, v := range players {
 				fmt.Println(v.Nick, v.Game_status)
 			}
-		case strings.TrimSpace(input) == "2":
-			playNewGame(&c, reader, true)
+		case input == "2":
+			c := connect.Connection{}
+			playNewGame(&c, true)
 		case strings.TrimSpace(input) == "3":
-
-			playNewGame(&c, reader, false)
-		case strings.TrimSpace(input) == "4":
+			c := connect.Connection{}
+			playNewGame(&c, false)
+		case input == "4":
 			return
+		default:
+			continue
 		}
-
 	}
 }
-func playNewGame(c *connect.Connection, reader *bufio.Reader, withBot bool) {
+
+func playNewGame(c *connect.Connection, withBot bool) {
+	var oppShotsDiff []string
+	myNick, _ := getPlayerInput("set your nickname!", false)
 	err := c.InitGame(withBot, "", myNick)
 	if err != nil {
 		log.Fatal(err)
@@ -92,54 +93,129 @@ func playNewGame(c *connect.Connection, reader *bufio.Reader, withBot bool) {
 	if err != nil {
 		log.Println(err)
 	}
-	a.Board()
+	gamedata.GetBoard(c)
+gameloop:
 	for sr.Game_status != "ended" {
-		if sr.Should_fire == true {
-			a.UpdatePlayerBoard(sr.Opp_shots)
-			fmt.Println("Nick przeciwnika: ", desc.Opponent, " Opis przeciwnika: ", desc.Opp_desc)
-			resp, err := fire(reader, a, desc)
-			if err != nil {
-				log.Println("ERROR", err)
+		var resp string
+		if sr.Should_fire {
+			oppShotsDiff = sr.Opp_shots[len(oppShotsDiff):len(sr.Opp_shots)]
+			log.Printf("DUDE: %s", oppShotsDiff)
+			gamedata.UpdatePlayerBoard(oppShotsDiff)
+			fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
+			resp, err = fire(a, desc)
+			if err == ErrPlayerQuitException {
+				log.Println(ErrPlayerQuitException)
+				a.QuitGame()
 				break
 			}
-			for resp != "miss" {
-				resp, err = fire(reader, a, desc)
-				if err != nil {
-					log.Println("ERROR", err)
-					break
+			for resp == "hit" || resp == "sunk" {
+				resp, err = fire(a, desc)
+				if err == ErrPlayerQuitException {
+					log.Println(ErrPlayerQuitException)
+					a.QuitGame()
+					break gameloop
 				}
 			}
 		} else {
 			time.Sleep(1000 * time.Millisecond)
 		}
 		sr, err = c.Status()
+		if err != nil {
+			log.Println("ERROR", err)
+			break
+		}
 		if sr.Last_game_status == "win" {
 			fmt.Println("WYGRANA!")
 		}
 		if sr.Last_game_status == "lose" {
 			fmt.Println("przegrana :(")
 		}
+		if sr.Last_game_status == "session not found" {
+			fmt.Println("przegrano walkowerem")
+		}
+
+		gamedata.UpdatePlayerBoard(oppShotsDiff)
+		gamedata.UpdateEnemyBoard(resp)
+		fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
 
 		// fmt.Println("Desc:", sr.Desc, " Game_status:", sr.Game_status, " Last_game_status:", sr.Last_game_status, " Nick:", sr.Nick, " Opp_desc:", sr.Opp_desc, " Opp_shots:", sr.Opp_shots, " Opponent:", sr.Opponent, " Should_fire:", sr.Should_fire, " Timer:", sr.Timer)
 	}
 }
 
-func fire(reader *bufio.Reader, a app.Application, desc *connect.StatusResponse) (string, error) {
-	fmt.Println("twoj ruch!")
-	input, err := reader.ReadString('\n')
-	input = strings.TrimSpace(input)
-	if err != nil {
-		fmt.Println("ups!")
-		return "", err
+func fire(a app.Application, desc *connect.StatusResponse) (string, error) {
+	input, err := getPlayerInput("your move!", true)
+	if err == ErrPlayerQuitException {
+		return "", ErrPlayerQuitException
 	}
-	resp, _ := a.Fire(input)
-	a.UpdateEnemyBoard(input)
+	gamedata.UpdateEnemyBoard(input)
 	fmt.Println("Nick przeciwnika: ", desc.Opponent, " Opis przeciwnika: ", desc.Opp_desc)
-	if resp == "miss" {
-		fmt.Println("pudlo")
-	} else {
-		fmt.Println("trafiony")
+	resp, err := a.Fire(input)
+	switch resp {
+	case "miss":
+		fmt.Println("miss")
+	case "hit":
+		fmt.Println("hit")
+	case "sunk":
+		fmt.Println("You've sunk the ship! Congrats!")
+	default:
+		return "", err
 	}
 	time.Sleep(300 * time.Millisecond)
 	return resp, nil
+}
+
+func getPlayerInput(message string, shot bool) (string, error) {
+	reader := bufio.NewReader(os.Stdin)
+	var input string
+	var err error
+	fmt.Println(message)
+	for {
+		input, err = reader.ReadString('\n')
+		if err != nil {
+			log.Println("getPlayerInput:", err)
+			fmt.Println("Unexpected error when getting the input, try again")
+			continue
+		}
+		input = strings.TrimSpace(input)
+		if input == "quit" || input == "exit" {
+			return "", ErrPlayerQuitException
+		}
+		if shot {
+			err = validateShotCoords(input)
+			if err != nil {
+				log.Println("getPlayerInput:", err)
+				fmt.Println(err)
+				continue
+			}
+		}
+		break
+	}
+	return input, nil
+}
+
+func validateShotCoords(coords string) error {
+	if len(coords) < 2 {
+		fmt.Println(ErrWrongCoordinates)
+		return ErrWrongCoordinates
+	}
+
+	matched, err := regexp.MatchString("[A-J]", string(coords[0]))
+	if !matched || err != nil {
+		return ErrWrongCoordinates
+	}
+
+	if len(coords) == 2 {
+		matched, err = regexp.MatchString("[0-9]", string(coords[1]))
+		if !matched || err != nil {
+			return ErrWrongCoordinates
+		}
+	}
+
+	if len(coords) > 2 {
+		matched, err = regexp.MatchString("10", coords[1:3])
+		if !matched || err != nil {
+			return ErrWrongCoordinates
+		}
+	}
+	return nil
 }
