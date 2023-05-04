@@ -26,6 +26,7 @@ var (
 
 	ErrEmptyTokenException      = errors.New("the connection token is empty. re-initialize connection to the game server")
 	ErrSessionNotFoundException = errors.New("the game is over")
+	ErrUnauthorizedException    = errors.New("error creating a new game, unauthorized")
 )
 
 type Connection struct {
@@ -53,7 +54,9 @@ func (connection *Connection) GetToken() (string, error) {
 }
 
 func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playerNick string, playerDescription string, playerShipsCoords string) error {
-	GameConnectionData["coords"] = strings.Split(playerShipsCoords, ",")
+	if playerShipsCoords != "" {
+		GameConnectionData["coords"] = strings.Split(playerShipsCoords, ",")
+	}
 	GameConnectionData["desc"] = playerDescription
 	GameConnectionData["nick"] = playerNick
 	GameConnectionData["target_nick"] = enemyNick
@@ -101,6 +104,10 @@ func (connection *Connection) GameAPIConnection(HTTPMethod string, endpoint stri
 
 	if r.StatusCode == 403 {
 		return body, ErrSessionNotFoundException
+	}
+
+	if r.StatusCode == 401 {
+		return body, ErrUnauthorizedException
 	}
 
 	// TODO - should this method return a []byte?
