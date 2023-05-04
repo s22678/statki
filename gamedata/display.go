@@ -37,7 +37,7 @@ func downloadShips(c *connect.Connection) ([]string, error) {
 		log.Println(err)
 		return nil, err
 	}
-
+	log.Println("ships positions:", coords["board"])
 	return coords["board"], nil
 }
 
@@ -54,14 +54,25 @@ func initGameBoard() {
 func Board(c *connect.Connection) error {
 	log.Println("Creating a new board...")
 	initGameBoard()
-	log.Println("downloading ships...")
-	ships, err := downloadShips(c)
-	if err != nil {
-		return fmt.Errorf("GetBoard error: %w", err)
+	// Type assertion
+	ships, ok := connect.GameConnectionData["coords"].([]string)
+	if !ok {
+		log.Println("board initialization error - wrong type assertion")
+		return fmt.Errorf("board initialization error - wrong type assertion")
 	}
-	log.Println("Adding ships to the board...")
+
+	if len(ships) == 0 {
+		var err error
+		log.Println("downloading ships...")
+		ships, err = downloadShips(c)
+		if err != nil {
+			return fmt.Errorf("GetBoard error: %w", err)
+		}
+		log.Println("ships downloaded")
+	}
+	fmt.Println("Adding ships to the board...")
 	board.Import(ships)
-	log.Println("board downloaded")
+	log.Println("Ships added")
 
 	board.Display()
 	return nil

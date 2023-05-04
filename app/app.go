@@ -79,8 +79,9 @@ func PlayTheGame(c *connect.Connection, playWithBot bool) {
 
 	// Initialize the game
 	playerNick, _ := GetPlayerInput("set your nickname!", false)
-	playerDescription, _ := GetPlayerInput("set your description1", false)
-	err := c.InitGame(playWithBot, "", playerNick, playerDescription)
+	playerDescription, _ := GetPlayerInput("set your description!", false)
+	playerShipsCoords, _ := GetPlayerInput("set your ships!", false)
+	err := c.InitGame(playWithBot, "", playerNick, playerDescription, playerShipsCoords)
 	if err != nil {
 		log.Printf("%v: %v", ErrInitGameException, err)
 		fmt.Println(ErrInitGameException)
@@ -138,7 +139,7 @@ gameloop:
 
 		if sr.Should_fire {
 			log.Println("player turn:", turnCounter)
-			log.Printf("DEBUG: %d %s", oppShotsDiff, sr.Opp_shots[oppShotsDiff:])
+			// log.Printf("DEBUG: %d %s", oppShotsDiff, sr.Opp_shots[oppShotsDiff:])
 			gamedata.UpdatePlayerBoard(sr.Opp_shots[oppShotsDiff:])
 			fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
 			for {

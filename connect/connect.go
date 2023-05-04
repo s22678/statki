@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 )
 
 const (
@@ -51,11 +52,12 @@ func (connection *Connection) GetToken() (string, error) {
 	return "", ErrEmptyTokenException
 }
 
-func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playerNick string, playerDescription string) error {
-	GameConnectionData["wpbot"] = playWithBot
+func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playerNick string, playerDescription string, playerShipsCoords string) error {
+	GameConnectionData["coords"] = strings.Split(playerShipsCoords, ",")
 	GameConnectionData["desc"] = playerDescription
-	GameConnectionData["target_nick"] = enemyNick
 	GameConnectionData["nick"] = playerNick
+	GameConnectionData["target_nick"] = enemyNick
+	GameConnectionData["wpbot"] = playWithBot
 	b, err := json.Marshal(GameConnectionData)
 	if err != nil {
 		log.Println(err)
