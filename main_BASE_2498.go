@@ -34,7 +34,7 @@ func init() {
 func main() {
 	defer LogFile.Close()
 	for {
-		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats \n6) quit", false)
+		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) quit", false)
 		switch {
 		case input == "1":
 			players, err := gamedata.ListPlayers()
@@ -47,36 +47,13 @@ func main() {
 			}
 		case input == "2":
 			c := &connect.Connection{}
-<<<<<<< HEAD
-			app.PlayGame(c, true)
-		case input == "3":
-			c := &connect.Connection{}
-			app.PlayGame(c, false)
-=======
-			app.PlaySingleplayer(c, true)
+			app.PlayTheGame(c, true)
+			// app.PlayNewGame(&c, true)
 		case input == "3":
 			fmt.Println("not implemented")
-			c := &connect.Connection{}
-			app.PlayMultiplayer(c, false)
->>>>>>> main
+			// c := connect.Connection{}
+			// app.PlayNewGame(&c, false)
 		case input == "4":
-			stats, err := gamedata.GetAllPlayersStats()
-			if err != nil {
-				log.Println("get all players stats error:", err)
-				continue
-			}
-			for _, stat := range stats {
-				fmt.Println("Nick:", stat.Nick, "Games:", stat.Games, "Wins:", stat.Wins, "Rank:", stat.Rank, "Points", stat.Points)
-			}
-		case input == "5":
-			input, _ := app.GetPlayerInput("get the stats for player:", false)
-			stats, err := gamedata.GetOnePlayerStats(input)
-			if err != nil {
-				log.Println("get player", input, "stats error:", err)
-				continue
-			}
-			fmt.Println("Nick:", stats.Nick, "Games:", stats.Games, "Wins:", stats.Wins, "Rank:", stats.Rank, "Points", stats.Points)
-		case input == "6":
 			return
 		default:
 			continue
