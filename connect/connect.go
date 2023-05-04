@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 )
 
 const (
@@ -18,13 +19,14 @@ var (
 	GameConnectionData = map[string]interface{}{
 		"coords":      nil,
 		"desc":        "",
-		"nick":        "Crimson_King",
+		"nick":        "",
 		"target_nick": "",
 		"wpbot":       true,
 	}
 
 	ErrEmptyTokenException      = errors.New("the connection token is empty. re-initialize connection to the game server")
 	ErrSessionNotFoundException = errors.New("the game is over")
+	ErrUnauthorizedException    = errors.New("error creating a new game, unauthorized")
 )
 
 type Connection struct {
@@ -51,10 +53,14 @@ func (connection *Connection) GetToken() (string, error) {
 	return "", ErrEmptyTokenException
 }
 
-func (connection *Connection) InitGame(playWithBot bool, targetNick string, myNick string) error {
+func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playerNick string, playerDescription string, playerShipsCoords string) error {
+	if playerShipsCoords != "" {
+		GameConnectionData["coords"] = strings.Split(playerShipsCoords, ",")
+	}
+	GameConnectionData["desc"] = playerDescription
+	GameConnectionData["nick"] = playerNick
+	GameConnectionData["target_nick"] = enemyNick
 	GameConnectionData["wpbot"] = playWithBot
-	GameConnectionData["target_nick"] = targetNick
-	GameConnectionData["nick"] = myNick
 	b, err := json.Marshal(GameConnectionData)
 	if err != nil {
 		log.Println(err)
@@ -98,6 +104,10 @@ func (connection *Connection) GameAPIConnection(HTTPMethod string, endpoint stri
 
 	if r.StatusCode == 403 {
 		return body, ErrSessionNotFoundException
+	}
+
+	if r.StatusCode == 401 {
+		return body, ErrUnauthorizedException
 	}
 
 	// TODO - should this method return a []byte?

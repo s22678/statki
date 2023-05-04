@@ -3,6 +3,7 @@ package app
 import (
 	"bufio"
 	"bytes"
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -23,6 +24,7 @@ const (
 	boardEndpoint         = "/api/game/board"
 	fireEndpoint          = "/api/game/fire"
 	descEndpoint          = "/api/game/desc"
+	refreshEndpoint       = "/api/game/refresh"
 )
 
 var (
@@ -71,15 +73,17 @@ func QuitGame(c *connect.Connection) error {
 	return nil
 }
 
-func PlayTheGame(c *connect.Connection, playWithBot bool) {
+func PlaySingleplayer(c *connect.Connection, playWithBot bool) {
 	oppShotsDiff := 0
 	turnCounter := 1
 	fireResponse := ""
 	sr := &gamedata.GameStatusData{}
 
 	// Initialize the game
-	myNick, _ := GetPlayerInput("set your nickname!", false)
-	err := c.InitGame(playWithBot, "", myNick)
+	playerNick, _ := GetPlayerInput("set your nickname!", false)
+	playerDescription, _ := GetPlayerInput("set your description!", false)
+	playerShipsCoords, _ := GetPlayerInput("set your ships!", false)
+	err := c.InitGame(playWithBot, "", playerNick, playerDescription, playerShipsCoords)
 	if err != nil {
 		log.Printf("%v: %v", ErrInitGameException, err)
 		fmt.Println(ErrInitGameException)
@@ -137,7 +141,7 @@ gameloop:
 
 		if sr.Should_fire {
 			log.Println("player turn:", turnCounter)
-			log.Printf("DEBUG: %d %s", oppShotsDiff, sr.Opp_shots[oppShotsDiff:])
+			// log.Printf("DEBUG: %d %s", oppShotsDiff, sr.Opp_shots[oppShotsDiff:])
 			gamedata.UpdatePlayerBoard(sr.Opp_shots[oppShotsDiff:])
 			fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
 			for {
@@ -157,6 +161,136 @@ gameloop:
 		} else {
 			log.Println("enemy turn", turnCounter)
 			fmt.Println("enemy turn", turnCounter)
+			time.Sleep(1000 * time.Millisecond)
+		}
+		sr, err = gamedata.Status(c)
+		if err != nil {
+			log.Println("can't get the status, exiting", err)
+			fmt.Println("can't get the status, exiting", err)
+			return
+		}
+	}
+}
+
+func Refresh(c *connect.Connection) error {
+	_, err := c.GameAPIConnection("GET", refreshEndpoint, nil)
+	if err != nil {
+		return err
+	}
+	log.Println("Refresh the session:")
+	return err
+}
+
+func PlayMultiplayer(c *connect.Connection, playWithBot bool) {
+	oppShotsDiff := 0
+	turnCounter := 1
+	fireResponse := ""
+	sr := &gamedata.GameStatusData{}
+
+	// Initialize the game
+	playerNick, _ := GetPlayerInput("set your nickname!", false)
+	playerDescription, _ := GetPlayerInput("set your description!", false)
+	playerShipsCoords, _ := GetPlayerInput("set your ships!", false)
+	enemyNick, _ := GetPlayerInput("choose your enemy!", false)
+	err := c.InitGame(playWithBot, enemyNick, playerNick, playerDescription, playerShipsCoords)
+	if err != nil {
+		log.Printf("%v: %v", ErrInitGameException, err)
+		fmt.Println(ErrInitGameException)
+		return
+	}
+
+	ctx, cancel := context.WithCancel(context.Background())
+
+	go func(ctx context.Context) {
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			default:
+				Refresh(c)
+			}
+
+			time.Sleep(10 * time.Second)
+		}
+	}(ctx)
+
+	// Check if the game has started
+	for {
+		sr, err = gamedata.Status(c)
+		if err != nil {
+			log.Printf("%v: %v", ErrGetStatusException, err)
+			fmt.Println(ErrGetStatusException)
+			cancel()
+			return
+		}
+		if sr.Game_status == "game_in_progress" {
+			break
+		}
+		if sr.Game_status == "waiting" {
+			fmt.Println(sr.Game_status)
+			time.Sleep(1 * time.Second)
+		}
+		time.Sleep(500 * time.Millisecond)
+	}
+	cancel()
+
+	// Get the enemy name and description
+	desc, err := gamedata.Description(c)
+	if err != nil {
+		log.Printf("%v: %v", ErrMissingEnemyDescriptionException, err)
+		fmt.Println(ErrMissingEnemyDescriptionException)
+	}
+
+	// Display ships and enemy description
+	err = gamedata.Board(c)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
+
+	// Run until the game has ended
+gameloop:
+	for {
+		if sr.Game_status == "ended" {
+			gamedata.UpdatePlayerBoard(sr.Opp_shots[oppShotsDiff:])
+			fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
+			switch sr.Last_game_status {
+			case "win":
+				fmt.Println("game ended: the player is the winner")
+				log.Println("game ended: the player is the winner")
+			case "lose":
+				fmt.Println("game ended: the enemy is the winner")
+				log.Println("game ended: the enemy is the winner")
+			case "session not found":
+				fmt.Println("game ended: timeout")
+				log.Println("game ended: timeout")
+			}
+			time.Sleep(3 * time.Second)
+			break gameloop
+		}
+
+		if sr.Should_fire {
+			log.Println("player turn:", turnCounter)
+			// log.Printf("DEBUG: %d %s", oppShotsDiff, sr.Opp_shots[oppShotsDiff:])
+			gamedata.UpdatePlayerBoard(sr.Opp_shots[oppShotsDiff:])
+			fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
+			for {
+				fireResponse, err = fire(c, desc)
+				if fireResponse == "hit" || fireResponse == "sunk" {
+					log.Println("DEBUG: inside fire loop")
+				} else if err == ErrPlayerQuitException || err == connect.ErrSessionNotFoundException {
+					log.Println(err)
+					QuitGame(c)
+					break gameloop
+				} else {
+					break
+				}
+			}
+			log.Println("enemy turn", turnCounter)
+			fmt.Println("enemy turn", turnCounter)
+			turnCounter++
+			oppShotsDiff = len(sr.Opp_shots)
+		} else {
 			time.Sleep(1000 * time.Millisecond)
 		}
 		sr, err = gamedata.Status(c)
