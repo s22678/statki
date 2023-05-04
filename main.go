@@ -47,11 +47,10 @@ func main() {
 			}
 		case input == "2":
 			c := &connect.Connection{}
-			app.PlaySingleplayer(c, true)
+			app.PlayGame(c, true)
 		case input == "3":
-			fmt.Println("not implemented")
 			c := &connect.Connection{}
-			app.PlayMultiplayer(c, false)
+			app.PlayGame(c, false)
 		case input == "4":
 			stats, err := gamedata.GetAllPlayersStats()
 			if err != nil {
