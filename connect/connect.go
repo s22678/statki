@@ -18,7 +18,7 @@ var (
 	GameConnectionData = map[string]interface{}{
 		"coords":      nil,
 		"desc":        "",
-		"nick":        "Crimson_King",
+		"nick":        "",
 		"target_nick": "",
 		"wpbot":       true,
 	}
@@ -51,10 +51,11 @@ func (connection *Connection) GetToken() (string, error) {
 	return "", ErrEmptyTokenException
 }
 
-func (connection *Connection) InitGame(playWithBot bool, targetNick string, myNick string) error {
+func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playerNick string, playerDescription string) error {
 	GameConnectionData["wpbot"] = playWithBot
-	GameConnectionData["target_nick"] = targetNick
-	GameConnectionData["nick"] = myNick
+	GameConnectionData["desc"] = playerDescription
+	GameConnectionData["target_nick"] = enemyNick
+	GameConnectionData["nick"] = playerNick
 	b, err := json.Marshal(GameConnectionData)
 	if err != nil {
 		log.Println(err)

@@ -78,8 +78,9 @@ func PlayTheGame(c *connect.Connection, playWithBot bool) {
 	sr := &gamedata.GameStatusData{}
 
 	// Initialize the game
-	myNick, _ := GetPlayerInput("set your nickname!", false)
-	err := c.InitGame(playWithBot, "", myNick)
+	playerNick, _ := GetPlayerInput("set your nickname!", false)
+	playerDescription, _ := GetPlayerInput("set your description1", false)
+	err := c.InitGame(playWithBot, "", playerNick, playerDescription)
 	if err != nil {
 		log.Printf("%v: %v", ErrInitGameException, err)
 		fmt.Println(ErrInitGameException)
