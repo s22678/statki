@@ -23,7 +23,8 @@ var (
 		"wpbot":       true,
 	}
 
-	ErrEmptyTokenException = errors.New("the connection token is empty. re-initialize connection to the game server")
+	ErrEmptyTokenException      = errors.New("the connection token is empty. re-initialize connection to the game server")
+	ErrSessionNotFoundException = errors.New("the game is over")
 )
 
 type Connection struct {
@@ -71,26 +72,9 @@ func (connection *Connection) InitGame(playWithBot bool, targetNick string, myNi
 	return err
 }
 
-func (connection *Connection) Status() (*StatusResponse, error) {
-	sr := StatusResponse{}
-	body, err := connection.GameAPIConnection("GET", gameEndpoint)
-	if err != nil {
-		return nil, err
-	}
-
-	err = json.Unmarshal(body, &sr)
-	if err != nil {
-		log.Println(err)
-	}
-
-	log.Println(string(body))
-
-	return &sr, err
-}
-
-func (connection *Connection) GameAPIConnection(HTTPMethod string, endpoint string) ([]byte, error) {
+func (connection *Connection) GameAPIConnection(HTTPMethod string, endpoint string, reqBody io.Reader) ([]byte, error) {
 	client := http.Client{}
-	req, err := http.NewRequest(HTTPMethod, ServerUrl+endpoint, nil)
+	req, err := http.NewRequest(HTTPMethod, ServerUrl+endpoint, reqBody)
 	if err != nil {
 		log.Println(req, err)
 		return nil, err
@@ -110,6 +94,10 @@ func (connection *Connection) GameAPIConnection(HTTPMethod string, endpoint stri
 	if err != nil {
 		log.Println(err)
 		return nil, err
+	}
+
+	if r.StatusCode == 403 {
+		return body, ErrSessionNotFoundException
 	}
 
 	// TODO - should this method return a []byte?

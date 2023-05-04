@@ -24,7 +24,7 @@ var (
 
 func downloadShips(c *connect.Connection) ([]string, error) {
 	coords := make(map[string][]string)
-	body, err := c.GameAPIConnection("GET", shipsCoordsEndpoint)
+	body, err := c.GameAPIConnection("GET", shipsCoordsEndpoint, nil)
 	if err != nil {
 		err = fmt.Errorf("%w %w", err, ErrBrokenShips)
 		log.Println(err)
@@ -51,20 +51,20 @@ func initGameBoard() {
 	board = gui.New(cfg)
 }
 
-func GetBoard(c *connect.Connection) {
+func Board(c *connect.Connection) error {
 	log.Println("Creating a new board...")
 	initGameBoard()
 	log.Println("downloading ships...")
 	ships, err := downloadShips(c)
 	if err != nil {
-		log.Println(err)
-		return
+		return fmt.Errorf("GetBoard error: %w", err)
 	}
 	log.Println("Adding ships to the board...")
 	board.Import(ships)
 	log.Println("board downloaded")
 
 	board.Display()
+	return nil
 }
 
 func UpdatePlayerBoard(coords []string) {
