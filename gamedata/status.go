@@ -24,6 +24,14 @@ type GameStatusData struct {
 	Timer            int      `json:"timer,omitempty"`
 }
 
+func (g *GameStatusData) GetOpponent() string {
+	return g.Opponent
+}
+
+func (g *GameStatusData) GetDescription() string {
+	return g.Desc
+}
+
 func Status(c *connect.Connection) (*GameStatusData, error) {
 	gd := &GameStatusData{}
 	body, err := c.GameAPIConnection("GET", gameEndpoint, nil)

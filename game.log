@@ -1,0 +1,601 @@
+2023/05/04 20:49:27 lista graczy:  null
+2023/05/04 20:49:32 ranking zawodników:  {"stats":[{"nick":"JulianKocon","games":5705,"wins":5703,"rank":1,"points":11406},{"nick":"WP_Bot","games":249,"wins":249,"rank":2,"points":498},{"nick":"test2","games":6,"wins":6,"rank":3,"points":12},{"nick":"ZhengHe","games":6,"wins":6,"rank":4,"points":12},{"nick":"WilliamBligh","games":4,"wins":4,"rank":5,"points":8},{"nick":"victim","games":22,"wins":2,"rank":6,"points":4},{"nick":"WilliamBlighy","games":1,"wins":1,"rank":7,"points":2},{"nick":"Ernest_King","games":1,"wins":1,"rank":8,"points":2},{"nick":"Chester_Nimitz","games":1,"wins":1,"rank":9,"points":2},{"nick":"UhyRXc","games":1,"wins":1,"rank":10,"points":2}]}
+2023/05/04 20:49:39 {"coords":null,"desc":"","nick":"","target_nick":"","wpbot":true}
+2023/05/04 20:49:39 08930c50-37d6-4513-a6e9-ab7cd6597fd9
+2023/05/04 20:49:39 GET /api/game 200 OK
+2023/05/04 20:49:39 Status: {"nick":"Charles_Middleton","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/05/04 20:49:40 GET /api/game 200 OK
+2023/05/04 20:49:40 Status: {"nick":"Charles_Middleton","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/05/04 20:49:40 GET /api/game 200 OK
+2023/05/04 20:49:40 Status: {"nick":"Charles_Middleton","game_status":"waiting_wpbot","last_game_status":"no_game"}
+2023/05/04 20:49:41 GET /api/game 200 OK
+2023/05/04 20:49:41 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","should_fire":true,"timer":60}
+2023/05/04 20:49:41 GET /api/game/desc 200 OK
+2023/05/04 20:49:41 Description: {"nick":"Charles_Middleton","desc":"brytyjski admirał, urodzony w 1726 roku, zmarł w 1813 roku, pierwszy Lord Commissioner of the Admiralty","opponent":"WP_Bot","opp_desc":"Siejący trwogę, latający WP Bot. 1000 walk wygranych przed czasem. Giń przeciwniku!"}
+2023/05/04 20:49:41 Creating a new board...
+2023/05/04 20:49:41 downloading ships...
+2023/05/04 20:49:41 GET /api/game/board 200 OK
+2023/05/04 20:49:41 ships positions: [A4 B4 B6 C1 C2 C6 C10 D6 E1 E10 F1 F3 F7 F10 G7 G10 H4 H7 I7 J9]
+2023/05/04 20:49:41 ships downloaded
+2023/05/04 20:49:41 Ships added
+2023/05/04 20:49:41 player turn: 1
+2023/05/04 20:49:41 Update player board:  []
+2023/05/04 20:49:45 Update enemy board:  2 A1
+2023/05/04 20:49:46 {"coord":"A1"}
+2023/05/04 20:49:46 POST /api/game/fire 200 OK
+2023/05/04 20:49:46 Fire response body {"result":"hit"}
+2023/05/04 20:49:46 DEBUG: inside fire loop
+2023/05/04 20:49:48 Update enemy board:  2 A2
+2023/05/04 20:49:48 {"coord":"A2"}
+2023/05/04 20:49:48 POST /api/game/fire 200 OK
+2023/05/04 20:49:48 Fire response body {"result":"sunk"}
+2023/05/04 20:49:48 DEBUG: inside fire loop
+2023/05/04 20:49:53 Update enemy board:  2 A4
+2023/05/04 20:49:53 {"coord":"A4"}
+2023/05/04 20:49:53 POST /api/game/fire 200 OK
+2023/05/04 20:49:53 Fire response body {"result":"miss"}
+2023/05/04 20:49:54 GET /api/game 200 OK
+2023/05/04 20:49:54 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5"],"should_fire":true,"timer":60}
+2023/05/04 20:49:54 player turn: 2
+2023/05/04 20:49:54 Update player board:  [F5]
+2023/05/04 20:49:56 Update enemy board:  2 A6
+2023/05/04 20:49:56 {"coord":"A6"}
+2023/05/04 20:49:56 POST /api/game/fire 200 OK
+2023/05/04 20:49:56 Fire response body {"result":"miss"}
+2023/05/04 20:49:57 GET /api/game 200 OK
+2023/05/04 20:49:57 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7"],"should_fire":true,"timer":60}
+2023/05/04 20:49:57 player turn: 3
+2023/05/04 20:49:57 Update player board:  [D7]
+2023/05/04 20:49:58 Update enemy board:  2 A8
+2023/05/04 20:49:58 {"coord":"A8"}
+2023/05/04 20:49:58 POST /api/game/fire 200 OK
+2023/05/04 20:49:58 Fire response body {"result":"miss"}
+2023/05/04 20:50:00 GET /api/game 200 OK
+2023/05/04 20:50:00 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3"],"should_fire":true,"timer":60}
+2023/05/04 20:50:00 player turn: 4
+2023/05/04 20:50:00 Update player board:  [D3]
+2023/05/04 20:50:01 Update enemy board:  2 A10
+2023/05/04 20:50:01 {"coord":"A10"}
+2023/05/04 20:50:01 POST /api/game/fire 200 OK
+2023/05/04 20:50:01 Fire response body {"result":"miss"}
+2023/05/04 20:50:02 GET /api/game 200 OK
+2023/05/04 20:50:02 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8"],"should_fire":true,"timer":59}
+2023/05/04 20:50:02 player turn: 5
+2023/05/04 20:50:02 Update player board:  [G8]
+2023/05/04 20:50:07 Update enemy board:  2 C1
+2023/05/04 20:50:07 {"coord":"C1"}
+2023/05/04 20:50:07 POST /api/game/fire 200 OK
+2023/05/04 20:50:07 Fire response body {"result":"miss"}
+2023/05/04 20:50:08 GET /api/game 200 OK
+2023/05/04 20:50:08 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3"],"should_fire":true,"timer":60}
+2023/05/04 20:50:08 player turn: 6
+2023/05/04 20:50:08 Update player board:  [H3]
+2023/05/04 20:50:09 Update enemy board:  2 C3
+2023/05/04 20:50:09 {"coord":"C3"}
+2023/05/04 20:50:09 POST /api/game/fire 200 OK
+2023/05/04 20:50:09 Fire response body {"result":"miss"}
+2023/05/04 20:50:10 GET /api/game 200 OK
+2023/05/04 20:50:10 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6"],"should_fire":true,"timer":60}
+2023/05/04 20:50:10 player turn: 7
+2023/05/04 20:50:10 Update player board:  [H6]
+2023/05/04 20:50:15 Update enemy board:  2 C5
+2023/05/04 20:50:15 {"coord":"C5"}
+2023/05/04 20:50:15 POST /api/game/fire 200 OK
+2023/05/04 20:50:15 Fire response body {"result":"hit"}
+2023/05/04 20:50:15 DEBUG: inside fire loop
+2023/05/04 20:50:23 Update enemy board:  2 D5
+2023/05/04 20:50:23 {"coord":"D5"}
+2023/05/04 20:50:23 POST /api/game/fire 200 OK
+2023/05/04 20:50:23 Fire response body {"result":"hit"}
+2023/05/04 20:50:23 DEBUG: inside fire loop
+2023/05/04 20:50:26 Update enemy board:  2 D4
+2023/05/04 20:50:26 {"coord":"D4"}
+2023/05/04 20:50:26 POST /api/game/fire 200 OK
+2023/05/04 20:50:26 Fire response body {"result":"miss"}
+2023/05/04 20:50:27 GET /api/game 200 OK
+2023/05/04 20:50:27 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5"],"should_fire":true,"timer":60}
+2023/05/04 20:50:27 player turn: 8
+2023/05/04 20:50:27 Update player board:  [C5]
+2023/05/04 20:50:29 Update enemy board:  2 D6
+2023/05/04 20:50:29 {"coord":"D6"}
+2023/05/04 20:50:29 POST /api/game/fire 200 OK
+2023/05/04 20:50:29 Fire response body {"result":"sunk"}
+2023/05/04 20:50:29 DEBUG: inside fire loop
+2023/05/04 20:50:35 Update enemy board:  2 B7
+2023/05/04 20:50:35 {"coord":"B7"}
+2023/05/04 20:50:35 POST /api/game/fire 200 OK
+2023/05/04 20:50:35 Fire response body {"result":"miss"}
+2023/05/04 20:50:36 GET /api/game 200 OK
+2023/05/04 20:50:36 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8"],"should_fire":true,"timer":60}
+2023/05/04 20:50:36 player turn: 9
+2023/05/04 20:50:36 Update player board:  [C8]
+2023/05/04 20:50:38 Update enemy board:  2 B9
+2023/05/04 20:50:38 {"coord":"B9"}
+2023/05/04 20:50:38 POST /api/game/fire 200 OK
+2023/05/04 20:50:38 Fire response body {"result":"miss"}
+2023/05/04 20:50:39 GET /api/game 200 OK
+2023/05/04 20:50:39 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2"],"should_fire":true,"timer":60}
+2023/05/04 20:50:39 player turn: 10
+2023/05/04 20:50:39 Update player board:  [F2]
+2023/05/04 20:50:42 Update enemy board:  2 C10
+2023/05/04 20:50:42 {"coord":"C10"}
+2023/05/04 20:50:42 POST /api/game/fire 200 OK
+2023/05/04 20:50:42 Fire response body {"result":"miss"}
+2023/05/04 20:50:43 GET /api/game 200 OK
+2023/05/04 20:50:43 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9"],"should_fire":true,"timer":60}
+2023/05/04 20:50:43 player turn: 11
+2023/05/04 20:50:43 Update player board:  [E9]
+2023/05/04 20:50:45 Update enemy board:  2 C8
+2023/05/04 20:50:45 {"coord":"C8"}
+2023/05/04 20:50:45 POST /api/game/fire 200 OK
+2023/05/04 20:50:45 Fire response body {"result":"hit"}
+2023/05/04 20:50:45 DEBUG: inside fire loop
+2023/05/04 20:50:53 Update enemy board:  2 B8
+2023/05/04 20:50:53 {"coord":"B8"}
+2023/05/04 20:50:53 POST /api/game/fire 200 OK
+2023/05/04 20:50:53 Fire response body {"result":"miss"}
+2023/05/04 20:50:54 GET /api/game 200 OK
+2023/05/04 20:50:54 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3"],"should_fire":true,"timer":60}
+2023/05/04 20:50:54 player turn: 12
+2023/05/04 20:50:54 Update player board:  [B3]
+2023/05/04 20:50:58 Update enemy board:  2 C9
+2023/05/04 20:50:58 {"coord":"C9"}
+2023/05/04 20:50:58 POST /api/game/fire 200 OK
+2023/05/04 20:50:58 Fire response body {"result":"miss"}
+2023/05/04 20:50:59 GET /api/game 200 OK
+2023/05/04 20:50:59 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8"],"should_fire":true,"timer":60}
+2023/05/04 20:50:59 player turn: 13
+2023/05/04 20:50:59 Update player board:  [I8]
+2023/05/04 20:51:01 Update enemy board:  2 C7
+2023/05/04 20:51:01 {"coord":"C7"}
+2023/05/04 20:51:01 POST /api/game/fire 200 OK
+2023/05/04 20:51:01 Fire response body {"result":"miss"}
+2023/05/04 20:51:02 GET /api/game 200 OK
+2023/05/04 20:51:02 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4"],"should_fire":true,"timer":59}
+2023/05/04 20:51:02 player turn: 14
+2023/05/04 20:51:02 Update player board:  [I4]
+2023/05/04 20:51:05 Update enemy board:  2 D8
+2023/05/04 20:51:05 {"coord":"D8"}
+2023/05/04 20:51:05 POST /api/game/fire 200 OK
+2023/05/04 20:51:05 Fire response body {"result":"sunk"}
+2023/05/04 20:51:05 DEBUG: inside fire loop
+2023/05/04 20:51:15 Update enemy board:  2 D1
+2023/05/04 20:51:15 {"coord":"D1"}
+2023/05/04 20:51:15 POST /api/game/fire 200 OK
+2023/05/04 20:51:15 Fire response body {"result":"hit"}
+2023/05/04 20:51:15 DEBUG: inside fire loop
+2023/05/04 20:51:17 Update enemy board:  2 D2
+2023/05/04 20:51:17 {"coord":"D2"}
+2023/05/04 20:51:17 POST /api/game/fire 200 OK
+2023/05/04 20:51:17 Fire response body {"result":"sunk"}
+2023/05/04 20:51:17 DEBUG: inside fire loop
+2023/05/04 20:51:45 Update enemy board:  2 E1
+2023/05/04 20:51:45 {"coord":"E1"}
+2023/05/04 20:51:45 POST /api/game/fire 200 OK
+2023/05/04 20:51:45 Fire response body {"result":"miss"}
+2023/05/04 20:51:46 GET /api/game 200 OK
+2023/05/04 20:51:46 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4"],"should_fire":true,"timer":60}
+2023/05/04 20:51:46 player turn: 15
+2023/05/04 20:51:46 Update player board:  [E4]
+2023/05/04 20:51:50 Update enemy board:  2 E3
+2023/05/04 20:51:50 {"coord":"E3"}
+2023/05/04 20:51:50 POST /api/game/fire 200 OK
+2023/05/04 20:51:50 Fire response body {"result":"miss"}
+2023/05/04 20:51:51 GET /api/game 200 OK
+2023/05/04 20:51:51 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7"],"should_fire":true,"timer":60}
+2023/05/04 20:51:51 player turn: 16
+2023/05/04 20:51:51 Update player board:  [B6 B7]
+2023/05/04 20:51:53 Update enemy board:  2 F1
+2023/05/04 20:51:53 {"coord":"F1"}
+2023/05/04 20:51:53 POST /api/game/fire 200 OK
+2023/05/04 20:51:53 Fire response body {"result":"miss"}
+2023/05/04 20:51:54 GET /api/game 200 OK
+2023/05/04 20:51:54 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6"],"timer":58}
+2023/05/04 20:51:54 enemy turn 17
+2023/05/04 20:51:55 GET /api/game 200 OK
+2023/05/04 20:51:55 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9"],"should_fire":true,"timer":60}
+2023/05/04 20:51:55 player turn: 17
+2023/05/04 20:51:55 Update player board:  [C6 D6 H9]
+2023/05/04 20:51:57 Update enemy board:  2 F2
+2023/05/04 20:51:57 {"coord":"F2"}
+2023/05/04 20:51:57 POST /api/game/fire 200 OK
+2023/05/04 20:51:57 Fire response body {"result":"miss"}
+2023/05/04 20:51:58 GET /api/game 200 OK
+2023/05/04 20:51:58 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2"],"should_fire":true,"timer":60}
+2023/05/04 20:51:58 player turn: 18
+2023/05/04 20:51:58 Update player board:  [C2 D2]
+2023/05/04 20:52:01 Update enemy board:  2 F3
+2023/05/04 20:52:01 {"coord":"F3"}
+2023/05/04 20:52:02 POST /api/game/fire 200 OK
+2023/05/04 20:52:02 Fire response body {"result":"miss"}
+2023/05/04 20:52:03 GET /api/game 200 OK
+2023/05/04 20:52:03 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4"],"should_fire":true,"timer":60}
+2023/05/04 20:52:03 player turn: 19
+2023/05/04 20:52:03 Update player board:  [C1 G4]
+2023/05/04 20:52:04 Update enemy board:  2 F4
+2023/05/04 20:52:04 {"coord":"F4"}
+2023/05/04 20:52:04 POST /api/game/fire 200 OK
+2023/05/04 20:52:04 Fire response body {"result":"miss"}
+2023/05/04 20:52:05 GET /api/game 200 OK
+2023/05/04 20:52:05 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2"],"should_fire":true,"timer":60}
+2023/05/04 20:52:05 player turn: 20
+2023/05/04 20:52:05 Update player board:  [I2]
+2023/05/04 20:52:08 Update enemy board:  2 F6
+2023/05/04 20:52:08 {"coord":"F6"}
+2023/05/04 20:52:08 POST /api/game/fire 200 OK
+2023/05/04 20:52:08 Fire response body {"result":"hit"}
+2023/05/04 20:52:08 DEBUG: inside fire loop
+2023/05/04 20:52:10 Update enemy board:  2 F7
+2023/05/04 20:52:10 {"coord":"F7"}
+2023/05/04 20:52:10 POST /api/game/fire 200 OK
+2023/05/04 20:52:10 Fire response body {"result":"hit"}
+2023/05/04 20:52:10 DEBUG: inside fire loop
+2023/05/04 20:52:12 Update enemy board:  2 F8
+2023/05/04 20:52:12 {"coord":"F8"}
+2023/05/04 20:52:13 POST /api/game/fire 200 OK
+2023/05/04 20:52:13 Fire response body {"result":"miss"}
+2023/05/04 20:52:14 GET /api/game 200 OK
+2023/05/04 20:52:14 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9"],"should_fire":true,"timer":59}
+2023/05/04 20:52:14 player turn: 21
+2023/05/04 20:52:14 Update player board:  [B9]
+2023/05/04 20:52:18 Update enemy board:  2 E7
+2023/05/04 20:52:18 {"coord":"E7"}
+2023/05/04 20:52:18 POST /api/game/fire 200 OK
+2023/05/04 20:52:18 Fire response body {"result":"miss"}
+2023/05/04 20:52:19 GET /api/game 200 OK
+2023/05/04 20:52:19 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7"],"should_fire":true,"timer":60}
+2023/05/04 20:52:19 player turn: 22
+2023/05/04 20:52:19 Update player board:  [I7 J7]
+2023/05/04 20:52:21 Update enemy board:  2 F7
+2023/05/04 20:52:21 {"coord":"F7"}
+2023/05/04 20:52:21 POST /api/game/fire 200 OK
+2023/05/04 20:52:21 Fire response body {"result":"miss"}
+2023/05/04 20:52:22 GET /api/game 200 OK
+2023/05/04 20:52:22 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6"],"should_fire":true,"timer":60}
+2023/05/04 20:52:22 player turn: 23
+2023/05/04 20:52:22 Update player board:  [I6]
+2023/05/04 20:52:28 Update enemy board:  2 G7
+2023/05/04 20:52:28 {"coord":"G7"}
+2023/05/04 20:52:28 POST /api/game/fire 200 OK
+2023/05/04 20:52:28 Fire response body {"result":"sunk"}
+2023/05/04 20:52:28 DEBUG: inside fire loop
+2023/05/04 20:52:38 Update enemy board:  2 E10
+2023/05/04 20:52:38 {"coord":"E10"}
+2023/05/04 20:52:38 POST /api/game/fire 200 OK
+2023/05/04 20:52:38 Fire response body {"result":"miss"}
+2023/05/04 20:52:39 GET /api/game 200 OK
+2023/05/04 20:52:39 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7"],"timer":50}
+2023/05/04 20:52:39 enemy turn 24
+2023/05/04 20:52:40 GET /api/game 200 OK
+2023/05/04 20:52:40 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1"],"should_fire":true,"timer":60}
+2023/05/04 20:52:40 player turn: 24
+2023/05/04 20:52:40 Update player board:  [H7 G7 F7 G1]
+2023/05/04 20:52:45 Update enemy board:  2 G10
+2023/05/04 20:52:45 {"coord":"G10"}
+2023/05/04 20:52:46 POST /api/game/fire 200 OK
+2023/05/04 20:52:46 Fire response body {"result":"miss"}
+2023/05/04 20:52:47 GET /api/game 200 OK
+2023/05/04 20:52:47 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10"],"should_fire":true,"timer":60}
+2023/05/04 20:52:47 player turn: 25
+2023/05/04 20:52:47 Update player board:  [D10]
+2023/05/04 20:52:49 Update enemy board:  2 I10
+2023/05/04 20:52:50 {"coord":"I10"}
+2023/05/04 20:52:50 POST /api/game/fire 200 OK
+2023/05/04 20:52:50 Fire response body {"result":"miss"}
+2023/05/04 20:52:51 GET /api/game 200 OK
+2023/05/04 20:52:51 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10"],"timer":56}
+2023/05/04 20:52:51 enemy turn 26
+2023/05/04 20:52:52 GET /api/game 200 OK
+2023/05/04 20:52:52 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5"],"should_fire":true,"timer":60}
+2023/05/04 20:52:52 player turn: 26
+2023/05/04 20:52:52 Update player board:  [G10 F10 E10 H5]
+2023/05/04 20:52:53 Update enemy board:  2 J10
+2023/05/04 20:52:53 {"coord":"J10"}
+2023/05/04 20:52:53 POST /api/game/fire 200 OK
+2023/05/04 20:52:53 Fire response body {"result":"miss"}
+2023/05/04 20:52:54 GET /api/game 200 OK
+2023/05/04 20:52:54 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3"],"should_fire":true,"timer":60}
+2023/05/04 20:52:54 player turn: 27
+2023/05/04 20:52:54 Update player board:  [F3 J3]
+2023/05/04 20:52:56 Update enemy board:  2 J8
+2023/05/04 20:52:56 {"coord":"J8"}
+2023/05/04 20:52:56 POST /api/game/fire 200 OK
+2023/05/04 20:52:56 Fire response body {"result":"miss"}
+2023/05/04 20:52:57 GET /api/game 200 OK
+2023/05/04 20:52:57 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8"],"should_fire":true,"timer":60}
+2023/05/04 20:52:57 player turn: 28
+2023/05/04 20:52:57 Update player board:  [A8]
+2023/05/04 20:52:59 Update enemy board:  2 J6
+2023/05/04 20:52:59 {"coord":"J6"}
+2023/05/04 20:52:59 POST /api/game/fire 200 OK
+2023/05/04 20:52:59 Fire response body {"result":"miss"}
+2023/05/04 20:53:00 GET /api/game 200 OK
+2023/05/04 20:53:00 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4"],"should_fire":true,"timer":60}
+2023/05/04 20:53:00 player turn: 29
+2023/05/04 20:53:00 Update player board:  [C4]
+2023/05/04 20:53:01 Update enemy board:  2 J5
+2023/05/04 20:53:01 {"coord":"J5"}
+2023/05/04 20:53:01 POST /api/game/fire 200 OK
+2023/05/04 20:53:01 Fire response body {"result":"sunk"}
+2023/05/04 20:53:01 DEBUG: inside fire loop
+2023/05/04 20:53:04 Update enemy board:  2 J3
+2023/05/04 20:53:04 {"coord":"J3"}
+2023/05/04 20:53:04 POST /api/game/fire 200 OK
+2023/05/04 20:53:04 Fire response body {"result":"miss"}
+2023/05/04 20:53:05 GET /api/game 200 OK
+2023/05/04 20:53:05 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5"],"should_fire":true,"timer":60}
+2023/05/04 20:53:05 player turn: 30
+2023/05/04 20:53:05 Update player board:  [J9 J5]
+2023/05/04 20:53:10 Update enemy board:  2 I3
+2023/05/04 20:53:10 {"coord":"I3"}
+2023/05/04 20:53:10 POST /api/game/fire 200 OK
+2023/05/04 20:53:10 Fire response body {"result":"hit"}
+2023/05/04 20:53:10 DEBUG: inside fire loop
+2023/05/04 20:53:14 Update enemy board:  2 I2
+2023/05/04 20:53:14 {"coord":"I2"}
+2023/05/04 20:53:14 POST /api/game/fire 200 OK
+2023/05/04 20:53:14 Fire response body {"result":"miss"}
+2023/05/04 20:53:15 GET /api/game 200 OK
+2023/05/04 20:53:15 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4"],"timer":56}
+2023/05/04 20:53:15 enemy turn 31
+2023/05/04 20:53:16 GET /api/game 200 OK
+2023/05/04 20:53:16 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1"],"should_fire":true,"timer":60}
+2023/05/04 20:53:16 player turn: 31
+2023/05/04 20:53:16 Update player board:  [A4 B4 C10 H1]
+2023/05/04 20:53:17 Update enemy board:  2 H3
+2023/05/04 20:53:17 {"coord":"H3"}
+2023/05/04 20:53:17 POST /api/game/fire 200 OK
+2023/05/04 20:53:17 Fire response body {"result":"hit"}
+2023/05/04 20:53:17 DEBUG: inside fire loop
+2023/05/04 20:53:21 Update enemy board:  2 G3
+2023/05/04 20:53:21 {"coord":"G3"}
+2023/05/04 20:53:21 POST /api/game/fire 200 OK
+2023/05/04 20:53:21 Fire response body {"result":"hit"}
+2023/05/04 20:53:21 DEBUG: inside fire loop
+2023/05/04 20:53:26 Update enemy board:  2 G4
+2023/05/04 20:53:26 {"coord":"G4"}
+2023/05/04 20:53:26 POST /api/game/fire 200 OK
+2023/05/04 20:53:26 Fire response body {"result":"miss"}
+2023/05/04 20:53:27 GET /api/game 200 OK
+2023/05/04 20:53:27 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1"],"should_fire":true,"timer":60}
+2023/05/04 20:53:27 player turn: 32
+2023/05/04 20:53:27 Update player board:  [J1]
+2023/05/04 20:53:29 Update enemy board:  2 G2
+2023/05/04 20:53:29 {"coord":"G2"}
+2023/05/04 20:53:29 POST /api/game/fire 200 OK
+2023/05/04 20:53:29 Fire response body {"result":"miss"}
+2023/05/04 20:53:30 GET /api/game 200 OK
+2023/05/04 20:53:30 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1","E1","F1"],"timer":57}
+2023/05/04 20:53:30 enemy turn 33
+2023/05/04 20:53:31 GET /api/game 200 OK
+2023/05/04 20:53:31 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1","E1","F1","A1"],"should_fire":true,"timer":60}
+2023/05/04 20:53:31 player turn: 33
+2023/05/04 20:53:31 Update player board:  [E1 F1 A1]
+2023/05/04 20:53:34 Update enemy board:  2 H2
+2023/05/04 20:53:34 {"coord":"H2"}
+2023/05/04 20:53:34 POST /api/game/fire 200 OK
+2023/05/04 20:53:34 Fire response body {"result":"miss"}
+2023/05/04 20:53:35 GET /api/game 200 OK
+2023/05/04 20:53:35 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1","E1","F1","A1","I5"],"should_fire":true,"timer":60}
+2023/05/04 20:53:35 player turn: 34
+2023/05/04 20:53:35 Update player board:  [I5]
+2023/05/04 20:53:37 Update enemy board:  2 H4
+2023/05/04 20:53:37 {"coord":"H4"}
+2023/05/04 20:53:37 POST /api/game/fire 200 OK
+2023/05/04 20:53:37 Fire response body {"result":"sunk"}
+2023/05/04 20:53:37 DEBUG: inside fire loop
+2023/05/04 20:53:43 Update enemy board:  2 I9
+2023/05/04 20:53:43 {"coord":"I9"}
+2023/05/04 20:53:43 POST /api/game/fire 200 OK
+2023/05/04 20:53:43 Fire response body {"result":"miss"}
+2023/05/04 20:53:45 GET /api/game 200 OK
+2023/05/04 20:53:45 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1","E1","F1","A1","I5","G5"],"should_fire":true,"timer":60}
+2023/05/04 20:53:45 player turn: 35
+2023/05/04 20:53:45 Update player board:  [G5]
+2023/05/04 20:53:47 Update enemy board:  2 I8
+2023/05/04 20:53:47 {"coord":"I8"}
+2023/05/04 20:53:47 POST /api/game/fire 200 OK
+2023/05/04 20:53:47 Fire response body {"result":"miss"}
+2023/05/04 20:53:48 GET /api/game 200 OK
+2023/05/04 20:53:48 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1","E1","F1","A1","I5","G5","B8"],"should_fire":true,"timer":60}
+2023/05/04 20:53:48 player turn: 36
+2023/05/04 20:53:48 Update player board:  [B8]
+2023/05/04 20:53:49 Update enemy board:  2 I7
+2023/05/04 20:53:50 {"coord":"I7"}
+2023/05/04 20:53:50 POST /api/game/fire 200 OK
+2023/05/04 20:53:50 Fire response body {"result":"miss"}
+2023/05/04 20:53:51 GET /api/game 200 OK
+2023/05/04 20:53:51 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1","E1","F1","A1","I5","G5","B8","J4"],"should_fire":true,"timer":59}
+2023/05/04 20:53:51 player turn: 37
+2023/05/04 20:53:51 Update player board:  [J4]
+2023/05/04 20:53:54 Update enemy board:  2 H9
+2023/05/04 20:53:54 {"coord":"H9"}
+2023/05/04 20:53:54 POST /api/game/fire 200 OK
+2023/05/04 20:53:54 Fire response body {"result":"miss"}
+2023/05/04 20:53:55 GET /api/game 200 OK
+2023/05/04 20:53:55 Status: {"nick":"Charles_Middleton","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1","E1","F1","A1","I5","G5","B8","J4","I1"],"should_fire":true,"timer":60}
+2023/05/04 20:53:55 player turn: 38
+2023/05/04 20:53:55 Update player board:  [I1]
+2023/05/04 20:53:57 Update enemy board:  2 H8
+2023/05/04 20:53:57 {"coord":"H8"}
+2023/05/04 20:53:57 POST /api/game/fire 200 OK
+2023/05/04 20:53:57 Fire response body {"result":"miss"}
+2023/05/04 20:53:58 GET /api/game 200 OK
+2023/05/04 20:53:58 Status: {"nick":"Charles_Middleton","game_status":"ended","last_game_status":"lose","opp_shots":["F5","D7","D3","G8","H3","H6","C5","C8","F2","E9","B3","I8","I4","E4","B6","B7","C6","D6","H9","C2","D2","C1","G4","I2","B9","I7","J7","I6","H7","G7","F7","G1","D10","G10","F10","E10","H5","F3","J3","A8","C4","J9","J5","A4","B4","C10","H1","J1","E1","F1","A1","I5","G5","B8","J4","I1","H4"]}
+2023/05/04 20:53:58 Update player board:  [H4]
+2023/05/04 20:53:58 game ended: the enemy is the winner
+2023/05/04 20:54:29 {"coords":null,"desc":"","nick":"","target_nick":"","wpbot":false}
+2023/05/04 20:54:29 5476f203-0f9e-401a-a675-021bc09dd618
+2023/05/04 20:54:29 GET /api/game/refresh 200 OK
+2023/05/04 20:54:29 GET /api/game 200 OK
+2023/05/04 20:54:29 Refresh the session:
+2023/05/04 20:54:29 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:30 GET /api/game 200 OK
+2023/05/04 20:54:30 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:32 GET /api/game 200 OK
+2023/05/04 20:54:32 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:33 GET /api/game 200 OK
+2023/05/04 20:54:33 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:35 GET /api/game 200 OK
+2023/05/04 20:54:35 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:35 lista graczy:  [{"nick":"Thomas_Ussher","game_status":"waiting"}]
+2023/05/04 20:54:37 GET /api/game 200 OK
+2023/05/04 20:54:37 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:38 GET /api/game 200 OK
+2023/05/04 20:54:38 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:39 GET /api/game/refresh 200 OK
+2023/05/04 20:54:39 Refresh the session:
+2023/05/04 20:54:40 GET /api/game 200 OK
+2023/05/04 20:54:40 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:41 GET /api/game 200 OK
+2023/05/04 20:54:41 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:43 GET /api/game 200 OK
+2023/05/04 20:54:43 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:44 GET /api/game 200 OK
+2023/05/04 20:54:44 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:46 GET /api/game 200 OK
+2023/05/04 20:54:46 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:48 GET /api/game 200 OK
+2023/05/04 20:54:48 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:49 GET /api/game/refresh 200 OK
+2023/05/04 20:54:49 Refresh the session:
+2023/05/04 20:54:49 GET /api/game 200 OK
+2023/05/04 20:54:49 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:50 {"coords":null,"desc":"","nick":"","target_nick":"","wpbot":false}
+2023/05/04 20:54:50 183893b6-829b-4821-949c-2a93541cc009
+2023/05/04 20:54:50 GET /api/game/refresh 200 OK
+2023/05/04 20:54:50 Refresh the session:
+2023/05/04 20:54:50 GET /api/game 200 OK
+2023/05/04 20:54:50 Status: {"nick":"Samuel_Hood","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:51 GET /api/game 200 OK
+2023/05/04 20:54:51 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:51 GET /api/game 200 OK
+2023/05/04 20:54:51 Status: {"nick":"Samuel_Hood","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:52 GET /api/game 200 OK
+2023/05/04 20:54:52 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:53 GET /api/game 200 OK
+2023/05/04 20:54:53 Status: {"nick":"Samuel_Hood","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:54 GET /api/game 200 OK
+2023/05/04 20:54:54 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:55 GET /api/game 200 OK
+2023/05/04 20:54:55 Status: {"nick":"Samuel_Hood","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:56 GET /api/game 200 OK
+2023/05/04 20:54:56 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:57 GET /api/game 200 OK
+2023/05/04 20:54:57 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:59 GET /api/game 200 OK
+2023/05/04 20:54:59 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:54:59 GET /api/game/refresh 200 OK
+2023/05/04 20:54:59 Refresh the session:
+2023/05/04 20:55:00 GET /api/game 200 OK
+2023/05/04 20:55:00 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:02 GET /api/game 200 OK
+2023/05/04 20:55:02 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:03 GET /api/game 200 OK
+2023/05/04 20:55:03 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:05 GET /api/game 200 OK
+2023/05/04 20:55:05 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:07 GET /api/game 200 OK
+2023/05/04 20:55:07 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:08 GET /api/game 200 OK
+2023/05/04 20:55:08 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:09 GET /api/game/refresh 200 OK
+2023/05/04 20:55:09 Refresh the session:
+2023/05/04 20:55:10 GET /api/game 200 OK
+2023/05/04 20:55:10 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:11 GET /api/game 200 OK
+2023/05/04 20:55:11 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:13 GET /api/game 200 OK
+2023/05/04 20:55:13 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:14 GET /api/game 200 OK
+2023/05/04 20:55:14 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:16 GET /api/game 200 OK
+2023/05/04 20:55:16 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:16 {"coords":null,"desc":"","nick":"","target_nick":"","wpbot":false}
+2023/05/04 20:55:16 1980c69d-fd80-4c34-b332-320b60be5674
+2023/05/04 20:55:17 GET /api/game/refresh 200 OK
+2023/05/04 20:55:17 Refresh the session:
+2023/05/04 20:55:17 GET /api/game 200 OK
+2023/05/04 20:55:17 Status: {"nick":"Robert_Calder","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:17 GET /api/game 200 OK
+2023/05/04 20:55:17 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:18 GET /api/game 200 OK
+2023/05/04 20:55:18 Status: {"nick":"Robert_Calder","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:19 GET /api/game 200 OK
+2023/05/04 20:55:19 GET /api/game/refresh 200 OK
+2023/05/04 20:55:19 Refresh the session:
+2023/05/04 20:55:19 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:55:21 GET /api/game 200 OK
+2023/05/04 20:55:21 Status: {"nick":"Thomas_Ussher","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:16 {"coords":null,"desc":"","nick":"","target_nick":"","wpbot":false}
+2023/05/04 20:56:16 3bd35ca1-3e72-4830-b9c1-a7597c2f86ae
+2023/05/04 20:56:16 GET /api/game/refresh 200 OK
+2023/05/04 20:56:16 Refresh the session:
+2023/05/04 20:56:16 GET /api/game 200 OK
+2023/05/04 20:56:16 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:18 GET /api/game 200 OK
+2023/05/04 20:56:18 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:19 GET /api/game 200 OK
+2023/05/04 20:56:19 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:21 GET /api/game 200 OK
+2023/05/04 20:56:21 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:22 GET /api/game 200 OK
+2023/05/04 20:56:22 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:22 lista graczy:  [{"nick":"Thomas_Cochrane","game_status":"waiting"}]
+2023/05/04 20:56:24 GET /api/game 200 OK
+2023/05/04 20:56:24 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:26 GET /api/game 200 OK
+2023/05/04 20:56:26 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:26 GET /api/game/refresh 200 OK
+2023/05/04 20:56:26 Refresh the session:
+2023/05/04 20:56:27 GET /api/game 200 OK
+2023/05/04 20:56:27 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:29 GET /api/game 200 OK
+2023/05/04 20:56:29 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:31 GET /api/game 200 OK
+2023/05/04 20:56:31 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:32 {"coords":null,"desc":"","nick":"","target_nick":"Thomas_Cochrane","wpbot":false}
+2023/05/04 20:56:32 GET /api/game 200 OK
+2023/05/04 20:56:32 Status: {"nick":"Thomas_Cochrane","game_status":"waiting","last_game_status":"no_game"}
+2023/05/04 20:56:32 5b6709aa-76db-46a9-a8f3-cee4d3549f0b
+2023/05/04 20:56:32 GET /api/game 200 OK
+2023/05/04 20:56:32 Status: {"nick":"John_B._Warren","game_status":"game_in_progress","last_game_status":"no_game","opponent":"Thomas_Cochrane"}
+2023/05/04 20:56:32 GET /api/game/refresh 200 OK
+2023/05/04 20:56:32 Refresh the session:
+2023/05/04 20:56:33 GET /api/game/desc 200 OK
+2023/05/04 20:56:33 Description: {"nick":"John_B._Warren","desc":"brytyjski admirał, urodzony w 1753 roku, zmarł w 1822 roku, zwycięzca bitwy pod Groix Island","opponent":"Thomas_Cochrane","opp_desc":"Thomas Cochrane (1775-1860) - brytyjski admirał, znany z wielu zwycięskich działań wojennych"}
+2023/05/04 20:56:33 Creating a new board...
+2023/05/04 20:56:33 downloading ships...
+2023/05/04 20:56:33 GET /api/game/board 200 OK
+2023/05/04 20:56:33 ships positions: [A8 A9 B1 C1 C8 C9 C10 E2 E4 E6 F6 G6 G9 H4 H6 I4 J1 J8 J9 J10]
+2023/05/04 20:56:33 ships downloaded
+2023/05/04 20:56:33 Ships added
+2023/05/04 20:56:33 enemy turn 1
+2023/05/04 20:56:34 GET /api/game 200 OK
+2023/05/04 20:56:34 Status: {"nick":"John_B._Warren","game_status":"game_in_progress","last_game_status":"no_game","opponent":"Thomas_Cochrane"}
+2023/05/04 20:56:34 enemy turn 1
+2023/05/04 20:56:34 GET /api/game 200 OK
+2023/05/04 20:56:34 Status: {"nick":"Thomas_Cochrane","game_status":"game_in_progress","last_game_status":"no_game","opponent":"John_B._Warren","should_fire":true,"timer":59}
+2023/05/04 20:56:34 GET /api/game/desc 200 OK
+2023/05/04 20:56:34 Description: {"nick":"Thomas_Cochrane","desc":"Thomas Cochrane (1775-1860) - brytyjski admirał, znany z wielu zwycięskich działań wojennych","opponent":"John_B._Warren","opp_desc":"brytyjski admirał, urodzony w 1753 roku, zmarł w 1822 roku, zwycięzca bitwy pod Groix Island"}
+2023/05/04 20:56:34 Creating a new board...
+2023/05/04 20:56:34 downloading ships...
+2023/05/04 20:56:34 GET /api/game/board 200 OK
+2023/05/04 20:56:34 ships positions: [A6 B1 B2 C5 C6 C7 C10 D3 D10 E10 F4 F6 G1 G2 G4 H4 H7 H8 I4 J10]
+2023/05/04 20:56:34 ships downloaded
+2023/05/04 20:56:34 Ships added
+2023/05/04 20:56:34 player turn: 1
+2023/05/04 20:56:34 Update player board:  []
+2023/05/04 20:56:35 GET /api/game 200 OK
+2023/05/04 20:56:35 Status: {"nick":"John_B._Warren","game_status":"game_in_progress","last_game_status":"no_game","opponent":"Thomas_Cochrane"}
+2023/05/04 20:56:35 enemy turn 1
+2023/05/04 20:56:36 GET /api/game 200 OK
+2023/05/04 20:56:36 Status: {"nick":"John_B._Warren","game_status":"game_in_progress","last_game_status":"no_game","opponent":"Thomas_Cochrane"}
+2023/05/04 20:56:36 enemy turn 1
+2023/05/04 20:56:38 GET /api/game 200 OK
+2023/05/04 20:56:38 Status: {"nick":"John_B._Warren","game_status":"game_in_progress","last_game_status":"no_game","opponent":"Thomas_Cochrane"}
+2023/05/04 20:56:38 enemy turn 1
+2023/05/04 20:56:39 GET /api/game 200 OK
+2023/05/04 20:56:39 Status: {"nick":"John_B._Warren","game_status":"game_in_progress","last_game_status":"no_game","opponent":"Thomas_Cochrane"}
+2023/05/04 20:56:39 enemy turn 1
+2023/05/04 20:56:43 getPlayerInput: EOF
