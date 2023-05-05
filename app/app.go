@@ -73,6 +73,135 @@ func QuitGame(c *connect.Connection) error {
 	return nil
 }
 
+func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
+	// Initialize the game
+	oppShotsDiff := 0
+	sr := &gamedata.GameStatusData{}
+
+	// Initialize the game
+	playerNick, _ := GetPlayerInput("set your nickname!", false)
+	playerDescription, _ := GetPlayerInput("set your description!", false)
+	playerShipsCoords, _ := GetPlayerInput("set your ships!", false)
+	enemyNick, _ := GetPlayerInput("choose your enemy!", false)
+	err := c.InitGame(playWithBot, enemyNick, playerNick, playerDescription, playerShipsCoords)
+	if err != nil {
+		log.Printf("%v: %v", ErrInitGameException, err)
+		fmt.Println(ErrInitGameException)
+		return
+	}
+
+	if playWithBot {
+
+		// Check if the game has started
+		for {
+			sr, err = gamedata.Status(c)
+			if err != nil {
+				log.Printf("%v: %v", ErrGetStatusException, err)
+				fmt.Println(ErrGetStatusException)
+				return
+			}
+			if sr.Game_status == "game_in_progress" {
+				break
+			}
+			time.Sleep(500 * time.Millisecond)
+		}
+	} else {
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+
+		go func(ctx context.Context) {
+			for {
+				select {
+				case <-ctx.Done():
+					return
+				default:
+					Refresh(c)
+				}
+
+				time.Sleep(10 * time.Second)
+			}
+		}(ctx)
+
+		// Check if the game has started
+		for {
+			sr, err = gamedata.Status(c)
+			if err != nil {
+				log.Printf("%v: %v", ErrGetStatusException, err)
+				fmt.Println(ErrGetStatusException)
+				cancel()
+				return
+			}
+			if sr.Game_status == "game_in_progress" {
+				break
+			}
+			if sr.Game_status == "waiting" {
+				fmt.Println(sr.Game_status)
+				time.Sleep(1 * time.Second)
+			}
+			time.Sleep(500 * time.Millisecond)
+		}
+		cancel()
+	}
+
+	// Get the enemy name and description
+	desc, err := gamedata.Description(c)
+	if err != nil {
+		log.Printf("%v: %v", ErrMissingEnemyDescriptionException, err)
+		fmt.Println(ErrMissingEnemyDescriptionException)
+	}
+	shotCoord := make(chan string)
+	message := make(chan string)
+
+	go func(sh chan string, msg chan string, g *gamedata.GameStatusData, c *connect.Connection) {
+		for {
+			if g.Game_status == "ended" {
+				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
+				switch g.Last_game_status {
+				case "win":
+					msg <- "game ended: the player is the winner"
+				case "lose":
+					msg <- "game ended: the enemy is the winner"
+				case "session not found":
+					msg <- "game ended: timeout"
+				}
+				return
+			}
+			if g.Should_fire {
+				msg <- "play"
+				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
+				oppShotsDiff = len(g.Opp_shots)
+				for {
+					shot := <-sh
+					resp, err := Fire(c, shot)
+					if err != nil {
+						log.Fatalf("Error during firing %v", err)
+					}
+					gamedata.UpdateEnemyState(shot, resp)
+					msg <- resp
+					if resp == "miss" {
+						msg <- "pause"
+						break
+					} else {
+						msg <- "play"
+					}
+				}
+			} else {
+				time.Sleep(1000 * time.Millisecond)
+			}
+			g, err = gamedata.Status(c)
+			if err != nil {
+				log.Println("Error running gameloop", err)
+				return
+			}
+		}
+	}(shotCoord, message, sr, c)
+	err = gamedata.AdvBoard(c, shotCoord, message, desc)
+	if err != nil {
+		log.Println("cannot create an advanced GUI")
+		return
+	}
+}
+
 func PlayGame(c *connect.Connection, playWithBot bool) {
 	oppShotsDiff := 0
 	turnCounter := 1

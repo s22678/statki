@@ -34,7 +34,7 @@ func init() {
 func main() {
 	defer LogFile.Close()
 	for {
-		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats \n6) quit", false)
+		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) show advanced board\n7) quit", false)
 		switch {
 		case input == "1":
 			players, err := gamedata.ListPlayers()
@@ -69,6 +69,9 @@ func main() {
 			}
 			fmt.Println("Nick:", stats.Nick, "Games:", stats.Games, "Wins:", stats.Wins, "Rank:", stats.Rank, "Points", stats.Points)
 		case input == "6":
+			c := &connect.Connection{}
+			app.PlayGameAdvGui(c, true)
+		case input == "7":
 			return
 		default:
 			continue
