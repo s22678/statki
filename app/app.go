@@ -82,7 +82,10 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 	playerNick, _ := GetPlayerInput("set your nickname!", false)
 	playerDescription, _ := GetPlayerInput("set your description!", false)
 	playerShipsCoords, _ := GetPlayerInput("set your ships!", false)
-	enemyNick, _ := GetPlayerInput("choose your enemy!", false)
+	enemyNick := ""
+	if !playWithBot {
+		enemyNick, _ = GetPlayerInput("choose your enemy!", false)
+	}
 	err := c.InitGame(playWithBot, enemyNick, playerNick, playerDescription, playerShipsCoords)
 	if err != nil {
 		log.Printf("%v: %v", ErrInitGameException, err)
@@ -106,15 +109,17 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 			time.Sleep(500 * time.Millisecond)
 		}
 	} else {
+		log.Println("the game online has been initiated")
 		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
 
 		go func(ctx context.Context) {
 			for {
 				select {
 				case <-ctx.Done():
+					log.Println("finished refreshing")
 					return
 				default:
+					log.Println("refresh")
 					Refresh(c)
 				}
 
@@ -132,15 +137,18 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 				return
 			}
 			if sr.Game_status == "game_in_progress" {
+				log.Println("connection was established")
+				fmt.Println("connection was established")
+				cancel()
 				break
 			}
 			if sr.Game_status == "waiting" {
-				fmt.Println(sr.Game_status)
+				log.Println("waiting", sr.Game_status)
+				fmt.Println("waiting")
 				time.Sleep(1 * time.Second)
 			}
 			time.Sleep(500 * time.Millisecond)
 		}
-		cancel()
 	}
 
 	// Get the enemy name and description
@@ -151,8 +159,15 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 	}
 	shotCoord := make(chan string)
 	message := make(chan string)
-
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	err = gamedata.LoadHeatMap()
+	if err != nil {
+		log.Println("Error loading heatmap", err)
+		return
+	}
 	go func(sh chan string, msg chan string, g *gamedata.GameStatusData, c *connect.Connection) {
+		fmt.Println("game started")
 		for {
 			if g.Game_status == "ended" {
 				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
@@ -164,9 +179,12 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 				case "session not found":
 					msg <- "game ended: timeout"
 				}
+				cancel()
+				gamedata.SaveHeatMap()
 				return
 			}
 			if g.Should_fire {
+				log.Println("time to fire")
 				msg <- "play"
 				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
 				oppShotsDiff = len(g.Opp_shots)
@@ -179,11 +197,24 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 					gamedata.UpdateEnemyState(shot, resp)
 					msg <- resp
 					if resp == "miss" {
-						msg <- "pause"
 						break
-					} else {
-						msg <- "play"
 					}
+					if resp == "hit" || resp == "sunk" {
+						gamedata.AddShotToHeatMap(shot)
+					}
+					// if resp == "miss" {
+					// msg <- "pause"
+					// msg <- "missed!"
+					// break
+					// } else {
+					// msg <- "play"
+					// if resp == "hit" {
+					// 	msg <- "hit!"
+					// }
+					// if resp == "sunk" {
+					// 	msg <- "you've sunk the ship! congrats!"
+					// }
+					// }
 				}
 			} else {
 				time.Sleep(1000 * time.Millisecond)
@@ -194,8 +225,8 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 				return
 			}
 		}
-	}(shotCoord, message, sr, c)
-	err = gamedata.AdvBoard(c, shotCoord, message, desc)
+	}(shotCoord, message, desc, c)
+	err = gamedata.AdvBoard(ctx, c, shotCoord, message, desc)
 	if err != nil {
 		log.Println("cannot create an advanced GUI")
 		return
