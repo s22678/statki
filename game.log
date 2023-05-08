@@ -3023,3 +3023,6 @@
 2023/05/08 10:28:40 DEBUG_2 &{ ended lose Marcin_lose  []  false 0}
 2023/05/08 10:28:44 finished refreshing
 2023/05/08 10:28:44 finished refreshing
+2023/05/08 11:28:45 getPlayerInput: read /dev/stdin: input/output error
+2023/05/08 11:28:45 getPlayerInput: EOF
+2023/05/08 11:28:45 getPlayerInput: EOF

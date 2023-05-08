@@ -19,14 +19,27 @@ func GetHeatMap() map[string]int {
 }
 
 func DisplayHeatMap() {
+	heat := [10][10]int{}
 	LoadHeatMap()
-	keys := make([]string, len(heatmap))
-	i := 0
-	for k := range heatmap {
-		keys[i] = k
-		i++
+	// keys := make([]string, len(heatmap))
+	// i := 0
+	for k, v := range heatmap {
+		x, y, _ := CoordToIndex(k)
+		heat[x][y] = v
 	}
-	fmt.Println(keys)
+
+	for row := 0; row < 10; row++ {
+		for column := 0; column < 12; column++ {
+			if column == 10 {
+				continue
+			} else if column == 11 {
+				fmt.Print(row - 1)
+			} else {
+				fmt.Print(heat[row][column], " ")
+			}
+		}
+		fmt.Print("\n")
+	}
 }
 
 func LoadHeatMap() error {
