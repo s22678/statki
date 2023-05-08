@@ -7,7 +7,6 @@ import (
 	"os"
 
 	"github.com/s22678/statki/app"
-	"github.com/s22678/statki/connect"
 	"github.com/s22678/statki/gamedata"
 )
 
@@ -21,6 +20,7 @@ var (
 	ErrWrongCoordinates       = errors.New("coordinates did not match pattern [A-J]([0-9]|10), try again with correct coordinates")
 	LogFile                   *os.File
 	LogErr                    error
+	gameInitiated             = false
 )
 
 func init() {
@@ -34,7 +34,7 @@ func init() {
 func main() {
 	defer LogFile.Close()
 	for {
-		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) play with bot on advanced board\n7) play online on advanced board\n8) quit", false)
+		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) display heatmap\n7)quit")
 		switch {
 		case input == "1":
 			players, err := gamedata.ListPlayers()
@@ -46,11 +46,11 @@ func main() {
 				fmt.Println(v.Nick, v.Game_status)
 			}
 		case input == "2":
-			c := &connect.Connection{}
-			app.PlayGame(c, true)
+			app.PlayGameAdvGui(true)
+			gameInitiated = true
 		case input == "3":
-			c := &connect.Connection{}
-			app.PlayGame(c, false)
+			app.PlayGameAdvGui(false)
+			gameInitiated = true
 		case input == "4":
 			stats, err := gamedata.GetAllPlayersStats()
 			if err != nil {
@@ -61,7 +61,7 @@ func main() {
 				fmt.Println("Nick:", stat.Nick, "Games:", stat.Games, "Wins:", stat.Wins, "Rank:", stat.Rank, "Points", stat.Points)
 			}
 		case input == "5":
-			input, _ := app.GetPlayerInput("get the stats for player:", false)
+			input, _ := app.GetPlayerInput("get the stats for player:")
 			stats, err := gamedata.GetOnePlayerStats(input)
 			if err != nil {
 				log.Println("get player", input, "stats error:", err)
@@ -69,15 +69,17 @@ func main() {
 			}
 			fmt.Println("Nick:", stats.Nick, "Games:", stats.Games, "Wins:", stats.Wins, "Rank:", stats.Rank, "Points", stats.Points)
 		case input == "6":
-			c := &connect.Connection{}
-			app.PlayGameAdvGui(c, true)
+			gamedata.DisplayHeatMap()
 		case input == "7":
-			c := &connect.Connection{}
-			app.PlayGameAdvGui(c, false)
-		case input == "8":
 			return
 		default:
 			continue
+		}
+		if gameInitiated {
+			input, _ = app.GetPlayerInput("play again? [yes]/[no]")
+			if input == "yes" {
+				app.PlayGameAdvGui(false)
+			}
 		}
 	}
 }

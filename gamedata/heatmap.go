@@ -2,6 +2,7 @@ package gamedata
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 )
 
@@ -15,6 +16,17 @@ func AddShotToHeatMap(coord string) {
 
 func GetHeatMap() map[string]int {
 	return heatmap
+}
+
+func DisplayHeatMap() {
+	LoadHeatMap()
+	keys := make([]string, len(heatmap))
+	i := 0
+	for k := range heatmap {
+		keys[i] = k
+		i++
+	}
+	fmt.Println(keys)
 }
 
 func LoadHeatMap() error {

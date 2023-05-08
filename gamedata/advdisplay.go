@@ -2,6 +2,8 @@ package gamedata
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"strconv"
@@ -12,37 +14,23 @@ import (
 	"github.com/takuoki/clmconv"
 )
 
+const (
+	shipsCoordsEndpoint = "/api/game/board"
+)
+
 var (
-	playerBoard       = &advgui.Board{}
-	enemyBoard        = &advgui.Board{}
-	ui                = &advgui.GUI{}
+	playerBoard = &advgui.Board{}
+	enemyBoard  = &advgui.Board{}
+	// ui                = &advgui.GUI{}
 	PlayerShipsCoords = []string{}
 	PlayerState       = [10][10]advgui.State{}
 	EnemyState        = [10][10]advgui.State{}
+	ErrBrokenShips    = errors.New("error downloading ships coordinates")
 )
-
-// func drawDescription(xPos int, yPos int, text string) {
-
-// 	log.Println("drawDescription", len(text))
-// 	re := regexp.MustCompile(`\s+`)
-// 	s := re.Split(text, -1)
-// 	size := len(s)
-// 	length := size / 4
-// 	var j, count int
-// 	for i := 0; i < size; i += length {
-// 		j += length
-// 		if j > size {
-// 			j = size
-// 		}
-
-// 		ui.Draw(advgui.NewText(xPos, yPos+count, strings.Join(s[i:j], " "), nil))
-// 		count++
-// 	}
-// }
 
 func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, gd *GameStatusData) error {
 	log.Println("Creating a board")
-	ui = advgui.NewGUI(true)
+	ui := advgui.NewGUI(true)
 
 	// Display player info
 	log.Println("Adv board 1")
@@ -126,12 +114,22 @@ func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg ch
 				}
 			case <-ctx.Done():
 				log.Println("GAME OVER", gd.Nick)
+				QuitGame(c)
 				return
 			}
 		}
 	}(ctx, turn, displayMessage, ch, msg)
 	log.Println("starting ui")
 	ui.Start(nil)
+
+	return nil
+}
+
+func QuitGame(c *connect.Connection) error {
+	_, err := c.GameAPIConnection("DELETE", "/api/game/abandon", nil)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -181,6 +179,25 @@ func InitPlayerShips(c *connect.Connection) error {
 		}
 	}
 	return nil
+}
+
+func DownloadShips(c *connect.Connection) ([]string, error) {
+	coords := make(map[string][]string)
+	body, err := c.GameAPIConnection("GET", shipsCoordsEndpoint, nil)
+	if err != nil {
+		err = fmt.Errorf("%w %w", err, ErrBrokenShips)
+		log.Println(err)
+		return nil, err
+	}
+
+	err = json.Unmarshal(body, &coords)
+	if err != nil {
+		err = fmt.Errorf("%w %w", err, ErrBrokenShips)
+		log.Println(err)
+		return nil, err
+	}
+	log.Println("ships positions:", coords["board"])
+	return coords["board"], nil
 }
 
 func UpdatePlayerState(shots []string) error {

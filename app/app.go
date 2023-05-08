@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"regexp"
 	"strings"
 	"time"
 
@@ -35,6 +34,7 @@ var (
 	ErrInitGameException                = errors.New("error during game initialization")
 	ErrMissingEnemyDescriptionException = errors.New("cannot get enemy name and description")
 	ErrGetStatusException               = errors.New("cannot get status")
+	playerDefinedUsername               = false
 )
 
 func Fire(c *connect.Connection, coord string) (string, error) {
@@ -65,26 +65,29 @@ func Fire(c *connect.Connection, coord string) (string, error) {
 	return fireResponse["result"], nil
 }
 
-func QuitGame(c *connect.Connection) error {
-	_, err := c.GameAPIConnection("DELETE", "/api/game/abandon", nil)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
+func PlayGameAdvGui(playWithBot bool) {
+	c := &connect.Connection{}
 	// Initialize the game
 	oppShotsDiff := 0
 	sr := &gamedata.GameStatusData{}
 
+	var playerNick string
+	var playerDescription string
 	// Initialize the game
-	playerNick, _ := GetPlayerInput("set your nickname!", false)
-	playerDescription, _ := GetPlayerInput("set your description!", false)
-	playerShipsCoords, _ := GetPlayerInput("set your ships!", false)
+	if playerDefinedUsername {
+		playerNick, _ = connect.GameConnectionData["nick"].(string)
+		playerDescription, _ = connect.GameConnectionData["desc"].(string)
+	} else {
+		playerNick, _ = GetPlayerInput("set your nickname!")
+		playerDescription, _ = GetPlayerInput("set your description!")
+		if len(playerNick) > 0 {
+			playerDefinedUsername = true
+		}
+	}
+	playerShipsCoords, _ := GetPlayerInput("set your ships!")
 	enemyNick := ""
 	if !playWithBot {
-		enemyNick, _ = GetPlayerInput("choose your enemy!", false)
+		enemyNick, _ = GetPlayerInput("choose your enemy!")
 	}
 	err := c.InitGame(playWithBot, enemyNick, playerNick, playerDescription, playerShipsCoords)
 	if err != nil {
@@ -106,7 +109,7 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 			if sr.Game_status == "game_in_progress" {
 				break
 			}
-			time.Sleep(500 * time.Millisecond)
+			time.Sleep(1000 * time.Millisecond)
 		}
 	} else {
 		log.Println("the game online has been initiated")
@@ -147,7 +150,7 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 				fmt.Println("waiting")
 				time.Sleep(1 * time.Second)
 			}
-			time.Sleep(500 * time.Millisecond)
+			time.Sleep(1000 * time.Millisecond)
 		}
 	}
 
@@ -169,7 +172,9 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 	go func(sh chan string, msg chan string, g *gamedata.GameStatusData, c *connect.Connection) {
 		fmt.Println("game started")
 		for {
+			log.Println("DEBUG_1", g)
 			if g.Game_status == "ended" {
+				log.Println("DEBUG_2", g)
 				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
 				switch g.Last_game_status {
 				case "win":
@@ -183,7 +188,9 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 				gamedata.SaveHeatMap()
 				return
 			}
+			log.Println("DEBUG_3", g)
 			if g.Should_fire {
+				log.Println("DEBUG_4", g)
 				log.Println("time to fire")
 				msg <- "play"
 				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
@@ -192,7 +199,9 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 					shot := <-sh
 					resp, err := Fire(c, shot)
 					if err != nil {
-						log.Fatalf("Error during firing %v", err)
+						log.Printf("Error during firing %v", err)
+						cancel()
+						break
 					}
 					gamedata.UpdateEnemyState(shot, resp)
 					msg <- resp
@@ -202,24 +211,14 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 					if resp == "hit" || resp == "sunk" {
 						gamedata.AddShotToHeatMap(shot)
 					}
-					// if resp == "miss" {
-					// msg <- "pause"
-					// msg <- "missed!"
-					// break
-					// } else {
-					// msg <- "play"
-					// if resp == "hit" {
-					// 	msg <- "hit!"
-					// }
-					// if resp == "sunk" {
-					// 	msg <- "you've sunk the ship! congrats!"
-					// }
-					// }
 				}
 			} else {
+				log.Println("DEBUG_5", g)
 				time.Sleep(1000 * time.Millisecond)
 			}
+			log.Println("DEBUG_6", g)
 			g, err = gamedata.Status(c)
+			log.Println("DEBUG_7", g)
 			if err != nil {
 				log.Println("Error running gameloop", err)
 				return
@@ -233,144 +232,6 @@ func PlayGameAdvGui(c *connect.Connection, playWithBot bool) {
 	}
 }
 
-func PlayGame(c *connect.Connection, playWithBot bool) {
-	oppShotsDiff := 0
-	turnCounter := 1
-	fireResponse := ""
-	sr := &gamedata.GameStatusData{}
-
-	// Initialize the game
-	playerNick, _ := GetPlayerInput("set your nickname!", false)
-	playerDescription, _ := GetPlayerInput("set your description!", false)
-	playerShipsCoords, _ := GetPlayerInput("set your ships!", false)
-	enemyNick, _ := GetPlayerInput("choose your enemy!", false)
-	err := c.InitGame(playWithBot, enemyNick, playerNick, playerDescription, playerShipsCoords)
-	if err != nil {
-		log.Printf("%v: %v", ErrInitGameException, err)
-		fmt.Println(ErrInitGameException)
-		return
-	}
-
-	if playWithBot {
-
-		// Check if the game has started
-		for {
-			sr, err = gamedata.Status(c)
-			if err != nil {
-				log.Printf("%v: %v", ErrGetStatusException, err)
-				fmt.Println(ErrGetStatusException)
-				return
-			}
-			if sr.Game_status == "game_in_progress" {
-				break
-			}
-			time.Sleep(500 * time.Millisecond)
-		}
-	} else {
-		ctx, cancel := context.WithCancel(context.Background())
-
-		go func(ctx context.Context) {
-			for {
-				select {
-				case <-ctx.Done():
-					return
-				default:
-					Refresh(c)
-				}
-
-				time.Sleep(10 * time.Second)
-			}
-		}(ctx)
-
-		// Check if the game has started
-		for {
-			sr, err = gamedata.Status(c)
-			if err != nil {
-				log.Printf("%v: %v", ErrGetStatusException, err)
-				fmt.Println(ErrGetStatusException)
-				cancel()
-				return
-			}
-			if sr.Game_status == "game_in_progress" {
-				break
-			}
-			if sr.Game_status == "waiting" {
-				fmt.Println(sr.Game_status)
-				time.Sleep(1 * time.Second)
-			}
-			time.Sleep(500 * time.Millisecond)
-		}
-		cancel()
-	}
-
-	// Get the enemy name and description
-	desc, err := gamedata.Description(c)
-	if err != nil {
-		log.Printf("%v: %v", ErrMissingEnemyDescriptionException, err)
-		fmt.Println(ErrMissingEnemyDescriptionException)
-	}
-
-	// Display ships and enemy description
-	err = gamedata.Board(c)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
-
-	// Run until the game has ended
-gameloop:
-	for {
-		if sr.Game_status == "ended" {
-			gamedata.UpdatePlayerBoard(sr.Opp_shots[oppShotsDiff:])
-			fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
-			switch sr.Last_game_status {
-			case "win":
-				fmt.Println("game ended: the player is the winner")
-				log.Println("game ended: the player is the winner")
-			case "lose":
-				fmt.Println("game ended: the enemy is the winner")
-				log.Println("game ended: the enemy is the winner")
-			case "session not found":
-				fmt.Println("game ended: timeout")
-				log.Println("game ended: timeout")
-			}
-			time.Sleep(3 * time.Second)
-			break gameloop
-		}
-
-		if sr.Should_fire {
-			log.Println("player turn:", turnCounter)
-			// log.Printf("DEBUG: %d %s", oppShotsDiff, sr.Opp_shots[oppShotsDiff:])
-			gamedata.UpdatePlayerBoard(sr.Opp_shots[oppShotsDiff:])
-			fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
-			for {
-				fireResponse, err = fire(c, desc)
-				if fireResponse == "hit" || fireResponse == "sunk" {
-					log.Println("DEBUG: inside fire loop")
-				} else if err == ErrPlayerQuitException || err == connect.ErrSessionNotFoundException {
-					log.Println(err)
-					QuitGame(c)
-					break gameloop
-				} else {
-					break
-				}
-			}
-			log.Println("enemy turn", turnCounter)
-			fmt.Println("enemy turn", turnCounter)
-			turnCounter++
-			oppShotsDiff = len(sr.Opp_shots)
-		} else {
-			time.Sleep(1000 * time.Millisecond)
-		}
-		sr, err = gamedata.Status(c)
-		if err != nil {
-			log.Println("can't get the status, exiting", err)
-			fmt.Println("can't get the status, exiting", err)
-			return
-		}
-	}
-}
-
 func Refresh(c *connect.Connection) error {
 	_, err := c.GameAPIConnection("GET", refreshEndpoint, nil)
 	if err != nil {
@@ -380,83 +241,22 @@ func Refresh(c *connect.Connection) error {
 	return err
 }
 
-func fire(c *connect.Connection, desc *gamedata.GameStatusData) (string, error) {
-	input, err := GetPlayerInput("your move!", true)
-	if err == ErrPlayerQuitException {
-		return "", ErrPlayerQuitException
-	}
-	gamedata.UpdateEnemyBoard(input)
-	fmt.Println("You're playing against: ", desc.Opponent, desc.Opp_desc)
-	resp, err := Fire(c, input)
-	if err != nil {
-		return "", err
-	}
-	switch resp {
-	case "miss":
-		fmt.Println("miss")
-		time.Sleep(1000 * time.Millisecond)
-	case "hit":
-		fmt.Println("hit")
-	case "sunk":
-		fmt.Println("You've sunk the ship! Congrats!")
-	default:
-		return "", err
-	}
-	return resp, nil
-}
-
-func GetPlayerInput(message string, shot bool) (string, error) {
+func GetPlayerInput(message string) (string, error) {
 	reader := bufio.NewReader(os.Stdin)
 	var input string
 	var err error
 	fmt.Println(message)
-	for {
-		input, err = reader.ReadString('\n')
-		if err != nil {
-			log.Println("getPlayerInput:", err)
-			fmt.Println("Unexpected error when getting the input, try again")
-			continue
-		}
-		input = strings.TrimSpace(input)
-		if input == "quit" || input == "exit" {
-			return "", ErrPlayerQuitException
-		}
-		if shot {
-			err = validateShotCoords(input)
-			if err != nil {
-				log.Println("getPlayerInput:", err)
-				fmt.Println(err)
-				continue
-			}
-		}
-		break
+
+	input, err = reader.ReadString('\n')
+	if err != nil {
+		log.Println("getPlayerInput:", err)
+		fmt.Println("Unexpected error when getting the input, try again")
+
 	}
+	input = strings.TrimSpace(input)
+	if input == "quit" || input == "exit" {
+		return "", ErrPlayerQuitException
+	}
+
 	return input, nil
-}
-
-func validateShotCoords(coords string) error {
-	if len(coords) < 2 {
-		fmt.Println(ErrWrongCoordinates)
-		return ErrWrongCoordinates
-	}
-
-	matched, err := regexp.MatchString("[A-J]", string(coords[0]))
-	if !matched || err != nil {
-		return ErrWrongCoordinates
-	}
-
-	if len(coords) == 2 {
-		matched, err = regexp.MatchString("[0-9]", string(coords[1]))
-		if !matched || err != nil {
-			return ErrWrongCoordinates
-		}
-	}
-
-	if len(coords) > 2 {
-		matched, err = regexp.MatchString("10", coords[1:3])
-		if !matched || err != nil {
-			return ErrWrongCoordinates
-		}
-	}
-	return nil
 }
