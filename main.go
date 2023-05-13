@@ -80,6 +80,7 @@ func main() {
 			if input == "yes" {
 				app.PlayGameAdvGui(false)
 			}
+			gameInitiated = false
 		}
 	}
 }

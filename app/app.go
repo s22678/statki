@@ -172,9 +172,7 @@ func PlayGameAdvGui(playWithBot bool) {
 	go func(sh chan string, msg chan string, g *gamedata.GameStatusData, c *connect.Connection) {
 		fmt.Println("game started")
 		for {
-			log.Println("DEBUG_1", g)
 			if g.Game_status == "ended" {
-				log.Println("DEBUG_2", g)
 				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
 				switch g.Last_game_status {
 				case "win":
@@ -188,9 +186,7 @@ func PlayGameAdvGui(playWithBot bool) {
 				gamedata.SaveHeatMap()
 				return
 			}
-			log.Println("DEBUG_3", g)
 			if g.Should_fire {
-				log.Println("DEBUG_4", g)
 				log.Println("time to fire")
 				msg <- "play"
 				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
@@ -213,12 +209,9 @@ func PlayGameAdvGui(playWithBot bool) {
 					}
 				}
 			} else {
-				log.Println("DEBUG_5", g)
 				time.Sleep(1000 * time.Millisecond)
 			}
-			log.Println("DEBUG_6", g)
 			g, err = gamedata.Status(c)
-			log.Println("DEBUG_7", g)
 			if err != nil {
 				log.Println("Error running gameloop", err)
 				return
