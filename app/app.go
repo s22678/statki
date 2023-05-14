@@ -210,7 +210,7 @@ func PlayGameAdvGui(playWithBot bool) {
 
 	}(shotCoord, message, desc, c)
 	// Print the gameboard
-	err = view.AdvBoard(ctx, c, shotCoord, message, desc)
+	err = view.AdvGui(ctx, c, shotCoord, message, desc)
 	if err != nil {
 		log.Println("cannot create an advanced GUI")
 		return

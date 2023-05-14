@@ -30,7 +30,7 @@ var (
 	ErrEnemyBoardUpdate  = errors.New("error while updating enemy board")
 )
 
-func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, gd *gamedata.GameStatusData) error {
+func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, gd *gamedata.GameStatusData) error {
 	log.Println("Creating a board")
 	ui := gui.NewGUI(true)
 
@@ -64,10 +64,10 @@ func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg ch
 	ui.Draw(gui.NewText(1, 3, "Press Ctrl+C to exit", nil))
 
 	// Display player board
-	playerBoard := gui.NewBoard(1, 5, nil)
+	playerBoard = gui.NewBoard(1, 5, nil)
 
 	// Display enemy board
-	enemyBoard := gui.NewBoard(50, 5, nil)
+	enemyBoard = gui.NewBoard(50, 5, nil)
 
 	// Draw tux
 	drawTux(ui)
