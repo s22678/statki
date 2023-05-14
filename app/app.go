@@ -14,6 +14,7 @@ import (
 
 	"github.com/s22678/statki/connect"
 	"github.com/s22678/statki/gamedata"
+	"github.com/s22678/statki/view"
 )
 
 const (
@@ -34,6 +35,7 @@ var (
 	ErrInitGameException                = errors.New("error during game initialization")
 	ErrMissingEnemyDescriptionException = errors.New("cannot get enemy name and description")
 	ErrGetStatusException               = errors.New("cannot get status")
+	ErrLoadHeatmap                      = errors.New("cannot open heatmap file")
 	playerDefinedUsername               = false
 )
 
@@ -91,32 +93,19 @@ func PlayGameAdvGui(playWithBot bool) {
 	}
 	err := c.InitGame(playWithBot, enemyNick, playerNick, playerDescription, playerShipsCoords)
 	if err != nil {
-		log.Printf("%v: %v", ErrInitGameException, err)
+		log.Printf("%v: %v\n", ErrInitGameException, err)
 		fmt.Println(ErrInitGameException)
 		return
 	}
 
+	ctx, cancel := context.WithCancel(context.Background())
 	if playWithBot {
 
-		// Check if the game has started
-		for {
-			sr, err = gamedata.Status(c)
-			if err != nil {
-				log.Printf("%v: %v", ErrGetStatusException, err)
-				fmt.Println(ErrGetStatusException)
-				return
-			}
-			if sr.Game_status == "game_in_progress" {
-				break
-			}
-			time.Sleep(1000 * time.Millisecond)
-		}
-	} else {
-		log.Println("the game online has been initiated")
-		ctx, cancel := context.WithCancel(context.Background())
+		log.Println("the game has been initiated")
 
 		go func(ctx context.Context) {
 			for {
+				time.Sleep(10 * time.Second)
 				select {
 				case <-ctx.Done():
 					log.Println("finished refreshing")
@@ -125,55 +114,83 @@ func PlayGameAdvGui(playWithBot bool) {
 					log.Println("refresh")
 					Refresh(c)
 				}
-
-				time.Sleep(10 * time.Second)
 			}
 		}(ctx)
-
-		// Check if the game has started
-		for {
-			sr, err = gamedata.Status(c)
-			if err != nil {
-				log.Printf("%v: %v", ErrGetStatusException, err)
-				fmt.Println(ErrGetStatusException)
-				cancel()
-				return
-			}
-			if sr.Game_status == "game_in_progress" {
-				log.Println("connection was established")
-				fmt.Println("connection was established")
-				cancel()
-				break
-			}
-			if sr.Game_status == "waiting" {
-				log.Println("waiting", sr.Game_status)
-				fmt.Println("waiting")
-				time.Sleep(1 * time.Second)
-			}
-			time.Sleep(1000 * time.Millisecond)
+	}
+	// Check if the game has started
+	for {
+		sr, err = gamedata.Status(c)
+		if err != nil {
+			log.Printf("%v: %v\n", ErrGetStatusException, err)
+			fmt.Println(ErrGetStatusException)
+			cancel()
+			return
 		}
+		if sr.Game_status == "game_in_progress" {
+			log.Println("connection was established")
+			fmt.Println("connection was established")
+			cancel()
+			break
+		}
+		if sr.Game_status == "waiting" {
+			log.Println("waiting", sr.Game_status)
+			fmt.Println("waiting")
+		}
+		time.Sleep(1000 * time.Millisecond)
 	}
 
 	// Get the enemy name and description
 	desc, err := gamedata.Description(c)
 	if err != nil {
-		log.Printf("%v: %v", ErrMissingEnemyDescriptionException, err)
+		log.Printf("%v: %v\n", ErrMissingEnemyDescriptionException, err)
 		fmt.Println(ErrMissingEnemyDescriptionException)
 	}
+	ctx, cancel = context.WithCancel(context.Background())
 	shotCoord := make(chan string)
 	message := make(chan string)
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-	err = gamedata.LoadHeatMap()
-	if err != nil {
-		log.Println("Error loading heatmap", err)
-		return
-	}
+
 	go func(sh chan string, msg chan string, g *gamedata.GameStatusData, c *connect.Connection) {
-		fmt.Println("game started")
+		err = gamedata.LoadHeatMap()
+		if err != nil {
+			log.Printf("%v: %v\n", ErrLoadHeatmap, err)
+			return
+		}
 		for {
+			time.Sleep(1000 * time.Millisecond)
+			if g.Game_status == "game_in_progress" {
+				if g.Should_fire {
+					msg <- "player"
+					view.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
+					oppShotsDiff = len(g.Opp_shots)
+					for {
+						shot := <-sh
+						resp, err := Fire(c, shot)
+						if err != nil {
+							log.Printf("Error during firing %v", err)
+							break
+						}
+						view.UpdateEnemyState(shot, resp)
+						msg <- resp
+						if resp == "miss" {
+							break
+						}
+						if resp == "hit" || resp == "sunk" {
+							gamedata.AddShotToHeatMap(shot)
+							gamedata.SaveHeatMap()
+						}
+					}
+				} else {
+					msg <- "enemy"
+				}
+				g, err = gamedata.Status(c)
+				if err != nil {
+					log.Println("Error running gameloop", err)
+					return
+				}
+				time.Sleep(1000 * time.Millisecond)
+			}
 			if g.Game_status == "ended" {
-				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
+				view.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
 				switch g.Last_game_status {
 				case "win":
 					msg <- "game ended: the player is the winner"
@@ -183,33 +200,6 @@ func PlayGameAdvGui(playWithBot bool) {
 					msg <- "game ended: timeout"
 				}
 				cancel()
-				gamedata.SaveHeatMap()
-				return
-			}
-			if g.Should_fire {
-				log.Println("time to fire")
-				msg <- "play"
-				gamedata.UpdatePlayerState(g.Opp_shots[oppShotsDiff:])
-				oppShotsDiff = len(g.Opp_shots)
-				for {
-					shot := <-sh
-					resp, err := Fire(c, shot)
-					if err != nil {
-						log.Printf("Error during firing %v", err)
-						cancel()
-						break
-					}
-					gamedata.UpdateEnemyState(shot, resp)
-					msg <- resp
-					if resp == "miss" {
-						break
-					}
-					if resp == "hit" || resp == "sunk" {
-						gamedata.AddShotToHeatMap(shot)
-					}
-				}
-			} else {
-				time.Sleep(1000 * time.Millisecond)
 			}
 			g, err = gamedata.Status(c)
 			if err != nil {
@@ -217,8 +207,10 @@ func PlayGameAdvGui(playWithBot bool) {
 				return
 			}
 		}
+
 	}(shotCoord, message, desc, c)
-	err = gamedata.AdvBoard(ctx, c, shotCoord, message, desc)
+	// Print the gameboard
+	err = view.AdvBoard(ctx, c, shotCoord, message, desc)
 	if err != nil {
 		log.Println("cannot create an advanced GUI")
 		return

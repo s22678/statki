@@ -21,6 +21,7 @@ var (
 	LogFile                   *os.File
 	LogErr                    error
 	gameInitiated             = false
+	withBot                   = false
 )
 
 func init() {
@@ -46,10 +47,12 @@ func main() {
 				fmt.Println(v.Nick, v.Game_status)
 			}
 		case input == "2":
-			app.PlayGameAdvGui(true)
+			withBot = true
+			app.PlayGameAdvGui(withBot)
 			gameInitiated = true
 		case input == "3":
-			app.PlayGameAdvGui(false)
+			withBot = false
+			app.PlayGameAdvGui(withBot)
 			gameInitiated = true
 		case input == "4":
 			stats, err := gamedata.GetAllPlayersStats()
@@ -78,7 +81,7 @@ func main() {
 		if gameInitiated {
 			input, _ = app.GetPlayerInput("play again? [yes]/[no]")
 			if input == "yes" {
-				app.PlayGameAdvGui(false)
+				app.PlayGameAdvGui(withBot)
 			}
 			gameInitiated = false
 		}
