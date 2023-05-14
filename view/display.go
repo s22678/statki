@@ -1,4 +1,4 @@
-package gamedata
+package view
 
 import (
 	"context"
@@ -6,13 +6,13 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"strconv"
 	"strings"
 	"time"
 
 	gui "github.com/grupawp/warships-gui/v2"
 	"github.com/s22678/statki/connect"
-	"github.com/takuoki/clmconv"
+	"github.com/s22678/statki/gamedata"
+	"github.com/s22678/statki/lib"
 )
 
 const (
@@ -30,14 +30,13 @@ var (
 	ErrEnemyBoardUpdate  = errors.New("error while updating enemy board")
 )
 
-func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, gd *GameStatusData) error {
+func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, gd *gamedata.GameStatusData) error {
 	log.Println("Creating a board")
 	ui := gui.NewGUI(true)
 
 	// Display player info
 	ui.Draw(gui.NewText(1, 28, gd.Nick, nil))
 	playerDescritpion := word_wrap(gd.Desc)
-	// ui.Draw(gui.NewText(1, 30, gd.Desc, nil))
 	for i, line := range playerDescritpion {
 		ui.Draw(gui.NewText(1, 30+i, strings.Join(line, " "), nil))
 	}
@@ -48,12 +47,14 @@ func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg ch
 	for i, line := range enemyDescription {
 		ui.Draw(gui.NewText(50, 30+i, strings.Join(line, " "), nil))
 	}
-	// ui.Draw(gui.NewText(50, 32, gd.Opp_desc, nil))
-	// ui.Draw(gui.NewText(50, 32, enemyDescription, nil))
 
 	// Display whose turn is it
 	turn := gui.NewText(1, 1, "Press on any coordinate to log it.", nil)
 	ui.Draw(turn)
+
+	// Display time left until the end of the turn
+	timer := gui.NewText(50, 1, "", nil)
+	ui.Draw(timer)
 
 	// Display hit, miss, sunk, win and lose messages
 	displayMessage := gui.NewText(1, 2, "", nil)
@@ -63,10 +64,10 @@ func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg ch
 	ui.Draw(gui.NewText(1, 3, "Press Ctrl+C to exit", nil))
 
 	// Display player board
-	playerBoard = gui.NewBoard(1, 5, nil)
+	playerBoard := gui.NewBoard(1, 5, nil)
 
 	// Display enemy board
-	enemyBoard = gui.NewBoard(50, 5, nil)
+	enemyBoard := gui.NewBoard(50, 5, nil)
 
 	// Draw tux
 	drawTux(ui)
@@ -83,30 +84,34 @@ func AdvBoard(ctx context.Context, c *connect.Connection, ch chan string, msg ch
 	ui.Draw(playerBoard)
 	ui.Draw(enemyBoard)
 
-	go func(ctx context.Context, turn *gui.Text, displayText *gui.Text, ch chan string, msg chan string) {
+	go func(ctx context.Context, turn *gui.Text, displayMessage *gui.Text, ch chan string, msg chan string) {
 		var char string
 		for {
 			select {
 			case cmd := <-msg:
 				switch cmd {
-				case "hit", "sunk", "play":
+				case "hit", "sunk", "player":
 					turn.SetText("Your turn")
 					if cmd == "hit" {
-						displayText.SetText("hit!!")
+						displayMessage.SetText("hit!!")
 					}
 					if cmd == "sunk" {
-						displayText.SetText("you've sunk enemy ship! congratulations!!")
+						displayMessage.SetText("you've sunk enemy ship! congratulations!!")
+					}
+					if cmd == "player" {
+						turn.SetText("Your turn")
 					}
 					char = enemyBoard.Listen(context.TODO())
-					displayText.SetText(fmt.Sprintf("Coordinate: %s", char))
+					displayMessage.SetText(fmt.Sprintf("Coordinate: %s", char))
 					ch <- char
 					ui.Log("Coordinate: %s", char) // logs are displayed after the game exits
-				case "miss":
+				case "miss", "enemy":
 					turn.SetText("Enemy turn")
 					time.Sleep(1 * time.Second)
 				default:
-					displayText.SetText(cmd)
+					displayMessage.SetText(cmd)
 				}
+
 			case <-ctx.Done():
 				log.Println("GAME OVER", gd.Nick)
 				QuitGame(c)
@@ -127,8 +132,6 @@ func QuitGame(c *connect.Connection) error {
 	}
 	return nil
 }
-
-// 43
 
 func InitPlayerShips(c *connect.Connection) error {
 	if connect.GameConnectionData["coords"] == nil {
@@ -169,7 +172,7 @@ func DownloadShips(c *connect.Connection) ([]string, error) {
 
 func UpdatePlayerState(shots []string) error {
 	for _, shot := range shots {
-		setX, setY, err := CoordToIndex(shot)
+		setX, setY, err := lib.CoordToIndex(shot)
 		if err != nil {
 			return fmt.Errorf("%v %v", ErrPlayerBoardUpdate, err)
 		}
@@ -187,7 +190,7 @@ func UpdatePlayerState(shots []string) error {
 }
 
 func UpdateEnemyState(shot, state string) error {
-	setX, setY, err := CoordToIndex(shot)
+	setX, setY, err := lib.CoordToIndex(shot)
 	if err != nil {
 		return fmt.Errorf("%v %v", ErrEnemyBoardUpdate, err)
 	}
@@ -213,34 +216,13 @@ func loadPlayerShips(coords []string) ([10][10]gui.State, error) {
 	}
 
 	for _, val := range coords {
-		setX, setY, err := CoordToIndex(val)
+		setX, setY, err := lib.CoordToIndex(val)
 		if err != nil {
 			return states, err
 		}
 		states[setX][setY] = gui.Ship
 	}
 	return states, nil
-}
-
-// Modified coordinates like A1, B2 to (int, int) pair. A1 = (1,1), B3 = (2,3) etc.
-func CoordToIndex(coord string) (setx int, sety int, err error) {
-	setx, err = clmconv.Atoi(coord[:1])
-	if err != nil {
-		return 0, 0, err
-	}
-	if len(coord) == 2 {
-		sety, err = strconv.Atoi(coord[1:2])
-		if err != nil {
-			return 0, 0, err
-		}
-	}
-	if len(coord) >= 3 {
-		sety, err = strconv.Atoi(coord[1:3])
-		if err != nil {
-			return 0, 0, err
-		}
-	}
-	return setx, sety - 1, nil
 }
 
 func word_wrap(text string) [][]string {
