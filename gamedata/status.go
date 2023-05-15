@@ -9,10 +9,9 @@ import (
 
 var (
 	gameEndpoint = "/api/game"
-	descEndpoint = "/api/game/desc"
 )
 
-type GameStatusData struct {
+type StatusResponse struct {
 	Desc             string   `json:"desc,omitempty"`
 	Game_status      string   `json:"game_status,omitempty"`
 	Last_game_status string   `json:"last_game_status,omitempty"`
@@ -24,16 +23,16 @@ type GameStatusData struct {
 	Timer            int      `json:"timer,omitempty"`
 }
 
-func (g *GameStatusData) GetOpponent() string {
-	return g.Opponent
+func (sr *StatusResponse) GetOpponent() string {
+	return sr.Opponent
 }
 
-func (g *GameStatusData) GetDescription() string {
+func (g *StatusResponse) GetDescription() string {
 	return g.Desc
 }
 
-func Status(c *connect.Connection) (*GameStatusData, error) {
-	gd := &GameStatusData{}
+func GetStatus(c *connect.Connection) (*StatusResponse, error) {
+	gd := &StatusResponse{}
 	body, err := c.GameAPIConnection("GET", gameEndpoint, nil)
 	if err != nil {
 		return nil, err
@@ -45,24 +44,6 @@ func Status(c *connect.Connection) (*GameStatusData, error) {
 	}
 
 	log.Println("Status:", string(body))
-
-	return gd, err
-}
-
-func Description(c *connect.Connection) (*GameStatusData, error) {
-	gd := &GameStatusData{}
-
-	body, err := c.GameAPIConnection("GET", descEndpoint, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	err = json.Unmarshal(body, &gd)
-	if err != nil {
-		log.Println(err)
-	}
-
-	log.Println("Description:", string(body))
 
 	return gd, err
 }

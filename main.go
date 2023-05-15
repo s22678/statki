@@ -48,11 +48,11 @@ func main() {
 			}
 		case input == "2":
 			withBot = true
-			app.PlayGameAdvGui(withBot)
+			app.Play(withBot)
 			gameInitiated = true
 		case input == "3":
 			withBot = false
-			app.PlayGameAdvGui(withBot)
+			app.Play(withBot)
 			gameInitiated = true
 		case input == "4":
 			stats, err := gamedata.GetAllPlayersStats()
@@ -81,7 +81,7 @@ func main() {
 		if gameInitiated {
 			input, _ = app.GetPlayerInput("play again? [yes]/[no]")
 			if input == "yes" {
-				app.PlayGameAdvGui(withBot)
+				app.Play(withBot)
 			}
 			gameInitiated = false
 		}

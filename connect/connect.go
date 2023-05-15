@@ -16,33 +16,22 @@ const (
 )
 
 var (
-	GameConnectionData = map[string]interface{}{
-		"coords":      nil,
-		"desc":        "",
-		"nick":        "",
-		"target_nick": "",
-		"wpbot":       true,
-	}
-
 	ErrEmptyTokenException      = errors.New("the connection token is empty. re-initialize connection to the game server")
 	ErrSessionNotFoundException = errors.New("the game is over")
 	ErrUnauthorizedException    = errors.New("error creating a new game, unauthorized")
 )
 
-type Connection struct {
-	token string
+type ConnectionData struct {
+	Coords      []string `json:"coords,omitempty"`
+	Desc        string   `json:"desc,omitempty"`
+	Nick        string   `json:"nick,omitempty"`
+	Target_nick string   `json:"target_nick,omitempty"`
+	Wpbot       bool     `json:"wpbot,omitempty"`
 }
 
-type StatusResponse struct {
-	Desc             string   `json:"desc,omitempty"`
-	Game_status      string   `json:"game_status,omitempty"`
-	Last_game_status string   `json:"last_game_status,omitempty"`
-	Nick             string   `json:"nick,omitempty"`
-	Opp_desc         string   `json:"opp_desc,omitempty"`
-	Opp_shots        []string `json:"opp_shots,omitempty"`
-	Opponent         string   `json:"opponent,omitempty"`
-	Should_fire      bool     `json:"should_fire,omitempty"`
-	Timer            int      `json:"timer,omitempty"`
+type Connection struct {
+	Data  ConnectionData
+	token string
 }
 
 func (connection *Connection) GetToken() (string, error) {
@@ -55,13 +44,13 @@ func (connection *Connection) GetToken() (string, error) {
 
 func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playerNick string, playerDescription string, playerShipsCoords string) error {
 	if playerShipsCoords != "" {
-		GameConnectionData["coords"] = strings.Split(playerShipsCoords, ",")
+		connection.Data.Coords = strings.Split(playerShipsCoords, ",")
 	}
-	GameConnectionData["desc"] = playerDescription
-	GameConnectionData["nick"] = playerNick
-	GameConnectionData["target_nick"] = enemyNick
-	GameConnectionData["wpbot"] = playWithBot
-	b, err := json.Marshal(GameConnectionData)
+	connection.Data.Desc = playerDescription
+	connection.Data.Nick = playerNick
+	connection.Data.Target_nick = enemyNick
+	connection.Data.Wpbot = playWithBot
+	b, err := json.Marshal(connection.Data)
 	if err != nil {
 		log.Println(err)
 	}

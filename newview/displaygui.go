@@ -1,4 +1,4 @@
-package view
+package newview
 
 import (
 	"context"
@@ -19,35 +19,130 @@ const (
 	shipsCoordsEndpoint = "/api/game/board"
 )
 
+type descriptions struct {
+	playerDescription [][]string
+	enemyDescription  [][]string
+}
+
+type texts struct {
+	turn    *gui.Text
+	status  *gui.Text
+	exitMsg *gui.Text
+}
+
+type shot struct {
+	state string
+	shots []string
+}
+
+func (s shot) AddShot(state string, shots []string) {
+	s.state = state
+	s.shots = shots
+}
+
+type updateable interface {
+	Update([]string) error
+}
+
+type player struct {
+	board  *gui.Board
+	state  [10][10]gui.State
+	coords []string
+}
+
+func (p *player) Update(s shot) error {
+	for _, shot := range s.shots {
+		setX, setY, err := lib.CoordToIndex(shot)
+		if err != nil {
+			return fmt.Errorf("%v %v", ErrPlayerBoardUpdate, err)
+		}
+		if p.state[setX][setY] == gui.Ship || p.state[setX][setY] == gui.Hit {
+			p.state[setX][setY] = gui.Hit
+			continue
+		} else {
+			p.state[setX][setY] = gui.Miss
+			continue
+		}
+	}
+
+	p.board.SetStates(p.state)
+	return nil
+}
+
+
+func (p *player)DownloadShips(c *connect.Connection) error {
+	body, err := c.GameAPIConnection("GET", shipsCoordsEndpoint, nil)
+	if err != nil {
+		err = fmt.Errorf("%w %w", err, ErrBrokenShips)
+		log.Println(err)
+		return err
+	}
+
+	err = json.Unmarshal(body, &p.coords)
+	if err != nil {
+		err = fmt.Errorf("%w %w", err, ErrBrokenShips)
+		log.Println(err)
+		return err
+	}
+	log.Println("ships positions:", p.coords)
+	return nil
+}
+
+type enemy struct {
+	board *gui.Board
+	state [10][10]gui.State
+}
+
+func (e *enemy) Update(s shot) error {
+	setX, setY, err := lib.CoordToIndex(s.shots[0])
+	if err != nil {
+		return fmt.Errorf("%v %v", ErrEnemyBoardUpdate, err)
+	}
+	if s.state == "hit" || s.state == "sunk" {
+
+		e.state[setX][setY] = gui.Hit
+	} else {
+
+		if e.state[setX][setY] == gui.Hit {
+			e.state[setX][setY] = gui.Hit
+		} else {
+			e.state[setX][setY] = gui.Miss
+		}
+	}
+	e.board.SetStates(e.state)
+	return nil
+}
+
+type GBoardGUIElements struct {
+	playable          *player
+	enemy             *enemy
+}
+
+type GBoard struct {
+	gge GBoardGUIElements
+	ui  *gui.GUI
+}
+
 var (
-	playerBoard          = &gui.Board{}
-	enemyBoard           = &gui.Board{}
-	PlayerShipsCoords    = []string{}
-	PlayerState          = [10][10]gui.State{}
-	EnemyState           = [10][10]gui.State{}
 	ErrBrokenShips       = errors.New("error downloading ships coordinates")
 	ErrPlayerBoardUpdate = errors.New("error while updating player board")
 	ErrEnemyBoardUpdate  = errors.New("error while updating enemy board")
 )
 
-func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string) error {
-	pi, err := gamedata.GetPlayerInfo(c)
-	if err != nil {
-		return err
-	}
+func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, gd *gamedata.GameStatusData) error {
 	log.Println("Creating a board")
 	ui := gui.NewGUI(true)
 
 	// Display player info
-	ui.Draw(gui.NewText(1, 28, pi.Nick, nil))
-	playerDescritpion := word_wrap(pi.Desc)
+	ui.Draw(gui.NewText(1, 28, gd.Nick, nil))
+	playerDescritpion := word_wrap(gd.Desc)
 	for i, line := range playerDescritpion {
 		ui.Draw(gui.NewText(1, 30+i, strings.Join(line, " "), nil))
 	}
 
 	// Display enemy info
-	ui.Draw(gui.NewText(50, 28, pi.Opponent, nil))
-	enemyDescription := word_wrap(pi.Opp_desc)
+	ui.Draw(gui.NewText(50, 28, gd.Opponent, nil))
+	enemyDescription := word_wrap(gd.Opp_desc)
 	for i, line := range enemyDescription {
 		ui.Draw(gui.NewText(50, 30+i, strings.Join(line, " "), nil))
 	}
@@ -77,6 +172,7 @@ func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 	drawTux(ui)
 
 	// Init player ships on player board
+	var err error
 	InitPlayerShips(c)
 	PlayerState, err = loadPlayerShips(PlayerShipsCoords)
 	if err != nil {
@@ -116,7 +212,7 @@ func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 				}
 
 			case <-ctx.Done():
-				log.Println("GAME OVER", pi.Nick)
+				log.Println("GAME OVER", gd.Nick)
 				QuitGame(c)
 				return
 			}
@@ -137,7 +233,7 @@ func QuitGame(c *connect.Connection) error {
 }
 
 func InitPlayerShips(c *connect.Connection) error {
-	if c.Data.Coords == nil {
+	if c.Data.coords == nil {
 		var err error
 		PlayerShipsCoords, err = DownloadShips(c)
 		if err != nil {
@@ -145,7 +241,7 @@ func InitPlayerShips(c *connect.Connection) error {
 		}
 	} else {
 		var ok bool
-		PlayerShipsCoords = c.Data.Coords
+		PlayerShipsCoords, ok = connect.GameConnectionData["coords"].([]string)
 		if !ok {
 			log.Println("board initialization error - wrong type assertion")
 			return fmt.Errorf("board initialization error - wrong type assertion")
@@ -171,45 +267,6 @@ func DownloadShips(c *connect.Connection) ([]string, error) {
 	}
 	log.Println("ships positions:", coords["board"])
 	return coords["board"], nil
-}
-
-func UpdatePlayerState(shots []string) error {
-	for _, shot := range shots {
-		setX, setY, err := lib.CoordToIndex(shot)
-		if err != nil {
-			return fmt.Errorf("%v %v", ErrPlayerBoardUpdate, err)
-		}
-		if PlayerState[setX][setY] == gui.Ship || PlayerState[setX][setY] == gui.Hit {
-			PlayerState[setX][setY] = gui.Hit
-			continue
-		} else {
-			PlayerState[setX][setY] = gui.Miss
-			continue
-		}
-	}
-
-	playerBoard.SetStates(PlayerState)
-	return nil
-}
-
-func UpdateEnemyState(shot, state string) error {
-	setX, setY, err := lib.CoordToIndex(shot)
-	if err != nil {
-		return fmt.Errorf("%v %v", ErrEnemyBoardUpdate, err)
-	}
-	if state == "hit" || state == "sunk" {
-
-		EnemyState[setX][setY] = gui.Hit
-	} else {
-
-		if EnemyState[setX][setY] == gui.Hit {
-			EnemyState[setX][setY] = gui.Hit
-		} else {
-			EnemyState[setX][setY] = gui.Miss
-		}
-	}
-	enemyBoard.SetStates(EnemyState)
-	return nil
 }
 
 func loadPlayerShips(coords []string) ([10][10]gui.State, error) {
