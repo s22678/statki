@@ -1,0 +1,80 @@
+2023/05/16 00:10:15 Creating a board
+2023/05/16 00:10:15 starting ui
+2023/05/16 00:10:16 {"wpbot":true}
+2023/05/16 00:10:16 c48811e7-e067-4549-822c-77b42cd1eada
+2023/05/16 00:10:16 the game has been initiated
+2023/05/16 00:10:17 GET /api/game 200 OK
+2023/05/16 00:10:17 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot"}
+2023/05/16 00:10:17 connection was established
+2023/05/16 00:10:17 GET /api/game/desc 200 OK
+2023/05/16 00:10:17 Player Info: {"nick":"William_Brown","desc":"argentyński admirał, urodzony w 1777 roku, zmarł w 1857 roku, twórca argentyńskiej floty wojennej","opponent":"WP_Bot","opp_desc":"Siejący trwogę, latający WP Bot. 1000 walk wygranych przed czasem. Giń przeciwniku!"}
+2023/05/16 00:10:17 Creating a board
+2023/05/16 00:10:17 GET /api/game/board 200 OK
+2023/05/16 00:10:17 ships positions: [A1 A2 A3 A10 B10 C7 C10 D7 E10 F1 F2 F3 F4 G8 H5 I8 I10 J3 J4 J8]
+2023/05/16 00:10:17 starting ui
+2023/05/16 00:10:18 GET /api/game 200 OK
+2023/05/16 00:10:18 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7"]}
+2023/05/16 00:10:18 GET /api/game 200 OK
+2023/05/16 00:10:18 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7"]}
+2023/05/16 00:10:19 GET /api/game 200 OK
+2023/05/16 00:10:19 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"should_fire":true,"timer":60}
+2023/05/16 00:10:19 GET /api/game 200 OK
+2023/05/16 00:10:19 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"should_fire":true,"timer":60}
+2023/05/16 00:10:20 GET /api/game 200 OK
+2023/05/16 00:10:20 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"should_fire":true,"timer":59}
+2023/05/16 00:10:21 GET /api/game 200 OK
+2023/05/16 00:10:21 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"should_fire":true,"timer":58}
+2023/05/16 00:10:22 GET /api/game 200 OK
+2023/05/16 00:10:22 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"should_fire":true,"timer":57}
+2023/05/16 00:10:23 GET /api/game 200 OK
+2023/05/16 00:10:23 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"should_fire":true,"timer":56}
+2023/05/16 00:10:24 GET /api/game 200 OK
+2023/05/16 00:10:24 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"should_fire":true,"timer":55}
+2023/05/16 00:10:26 GET /api/game 200 OK
+2023/05/16 00:10:26 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"should_fire":true,"timer":54}
+2023/05/16 00:10:26 {"coord":"G4"}
+2023/05/16 00:10:26 POST /api/game/fire 200 OK
+2023/05/16 00:10:26 Fire response body {"result":"miss"}
+2023/05/16 00:10:26 GET /api/game 200 OK
+2023/05/16 00:10:26 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4"],"timer":53}
+2023/05/16 00:10:26 finished refreshing
+2023/05/16 00:10:27 GET /api/game 200 OK
+2023/05/16 00:10:27 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"should_fire":true,"timer":60}
+2023/05/16 00:10:27 GET /api/game 200 OK
+2023/05/16 00:10:27 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"should_fire":true,"timer":60}
+2023/05/16 00:10:28 GET /api/game 200 OK
+2023/05/16 00:10:28 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"should_fire":true,"timer":59}
+2023/05/16 00:10:29 GET /api/game 200 OK
+2023/05/16 00:10:29 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"should_fire":true,"timer":58}
+2023/05/16 00:10:30 GET /api/game 200 OK
+2023/05/16 00:10:30 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"should_fire":true,"timer":57}
+2023/05/16 00:10:31 GET /api/game 200 OK
+2023/05/16 00:10:31 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"should_fire":true,"timer":56}
+2023/05/16 00:10:31 {"coord":"E5"}
+2023/05/16 00:10:31 POST /api/game/fire 200 OK
+2023/05/16 00:10:31 Fire response body {"result":"hit"}
+2023/05/16 00:10:32 GET /api/game 200 OK
+2023/05/16 00:10:32 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"should_fire":true,"timer":60}
+2023/05/16 00:10:33 GET /api/game 200 OK
+2023/05/16 00:10:33 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"should_fire":true,"timer":59}
+2023/05/16 00:10:34 {"coord":"F7"}
+2023/05/16 00:10:34 POST /api/game/fire 200 OK
+2023/05/16 00:10:34 Fire response body {"result":"miss"}
+2023/05/16 00:10:34 GET /api/game 200 OK
+2023/05/16 00:10:34 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"timer":58}
+2023/05/16 00:10:34 GET /api/game 200 OK
+2023/05/16 00:10:34 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3"],"timer":58}
+2023/05/16 00:10:35 GET /api/game 200 OK
+2023/05/16 00:10:35 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3","H7"],"should_fire":true,"timer":60}
+2023/05/16 00:10:35 GET /api/game 200 OK
+2023/05/16 00:10:35 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3","H7"],"should_fire":true,"timer":60}
+2023/05/16 00:10:36 GET /api/game 200 OK
+2023/05/16 00:10:36 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3","H7"],"should_fire":true,"timer":59}
+2023/05/16 00:10:37 GET /api/game 200 OK
+2023/05/16 00:10:37 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3","H7"],"should_fire":true,"timer":58}
+2023/05/16 00:10:38 GET /api/game 200 OK
+2023/05/16 00:10:38 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3","H7"],"should_fire":true,"timer":56}
+2023/05/16 00:10:39 GET /api/game 200 OK
+2023/05/16 00:10:39 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3","H7"],"should_fire":true,"timer":55}
+2023/05/16 00:10:40 GET /api/game 200 OK
+2023/05/16 00:10:40 Status: {"nick":"William_Brown","game_status":"game_in_progress","last_game_status":"no_game","opponent":"WP_Bot","opp_shots":["D7","C7","G4","D3","H7"],"should_fire":true,"timer":54}

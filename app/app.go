@@ -91,6 +91,7 @@ func Play(playWithBot bool) {
 	time.Sleep(1 * time.Second)
 	view.SetShips()
 	playerShipsCoords := view.GetShips()
+	fmt.Println(playerShipsCoords)
 	// playerShipsCoords := strings.Join(gs, " ")
 	enemyNick := ""
 	if !playWithBot {
@@ -230,9 +231,9 @@ func Play(playWithBot bool) {
 
 	}(shotCoord, message, status, c)
 	// Print the gameboard
-	err = view.AdvGui(ctx, c, shotCoord, message, timer)
+	err = view.OldGui(ctx, c, shotCoord, message, timer)
 	if err != nil {
-		log.Println("cannot create an advanced GUI")
+		log.Println("cannot create a GUI")
 		return
 	}
 }

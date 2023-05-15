@@ -15,6 +15,13 @@ import (
 	"github.com/s22678/statki/lib"
 )
 
+type PlayerType int
+
+const (
+	Player PlayerType = iota
+	Enemy
+)
+
 const (
 	shipsCoordsEndpoint = "/api/game/board"
 )
@@ -22,7 +29,6 @@ const (
 var (
 	playerBoard          = &gui.Board{}
 	enemyBoard           = &gui.Board{}
-	PlayerShipsCoords    = []string{}
 	PlayerState          = [10][10]gui.State{}
 	EnemyState           = [10][10]gui.State{}
 	ErrBrokenShips       = errors.New("error downloading ships coordinates")
@@ -30,7 +36,25 @@ var (
 	ErrEnemyBoardUpdate  = errors.New("error while updating enemy board")
 )
 
-func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, timerchan chan string) error {
+type WarshipGui struct {
+	boards []*gui.Board
+	msgs   []*gui.Text
+	states [][10][10]gui.State
+	ui     *gui.GUI
+}
+
+func NewGui(c *connect.Connection) (*WarshipGui, error) {
+	pi, err := gamedata.GetPlayerInfo(c)
+	if err != nil {
+		return nil, err
+	}
+	wg := &WarshipGui{}
+	wg.msgs = append(wg.msgs, gui.NewText(1, 28, pi.Nick, nil))
+	wg.msgs = append(wg.msgs, gui.NewText(1, 28, "player nick placeholder", nil))
+	return wg, nil
+}
+
+func OldGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, timerchan chan string) error {
 	pi, err := gamedata.GetPlayerInfo(c)
 	if err != nil {
 		return err
@@ -42,14 +66,14 @@ func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 	ui.Draw(gui.NewText(1, 28, pi.Nick, nil))
 	playerDescritpion := word_wrap(pi.Desc)
 	for i, line := range playerDescritpion {
-		ui.Draw(gui.NewText(1, 30+i, strings.Join(line, " "), nil))
+		ui.Draw(gui.NewText(1, 30+i, line, nil))
 	}
 
 	// Display enemy info
 	ui.Draw(gui.NewText(50, 28, pi.Opponent, nil))
 	enemyDescription := word_wrap(pi.Opp_desc)
 	for i, line := range enemyDescription {
-		ui.Draw(gui.NewText(50, 30+i, strings.Join(line, " "), nil))
+		ui.Draw(gui.NewText(50, 30+i, line, nil))
 	}
 
 	// Display whose turn is it
@@ -77,9 +101,14 @@ func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 	drawTux(ui)
 
 	// Init player ships on player board
-	InitPlayerShips(c)
-	PlayerState, err = loadPlayerShips(PlayerShipsCoords)
+	coords, err := InitPlayerShips(c)
 	if err != nil {
+		log.Println("(Init)Display:", err)
+		return err
+	}
+	PlayerState, err = loadPlayerShips(coords)
+	if err != nil {
+		log.Println("(loadPlayerShips)Display:", err)
 		return err
 	}
 	playerBoard.SetStates(PlayerState)
@@ -115,7 +144,7 @@ func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 					if cmd == "player" {
 						turn.SetText("Your turn")
 					}
-					char = enemyBoard.Listen(context.TODO())
+					char = enemyBoard.Listen(ctx)
 					displayMessage.SetText(fmt.Sprintf("Coordinate: %s", char))
 					ch <- char
 					ui.Log("Coordinate: %s", char) // logs are displayed after the game exits
@@ -147,22 +176,19 @@ func QuitGame(c *connect.Connection) error {
 	return nil
 }
 
-func InitPlayerShips(c *connect.Connection) error {
-	if c.Data.Coords == nil {
+func InitPlayerShips(c *connect.Connection) ([]string, error) {
+	if c.Data.Coords == nil || len(c.Data.Coords) == 0 {
 		var err error
-		PlayerShipsCoords, err = DownloadShips(c)
+		PlayerShipsCoords, err := DownloadShips(c)
 		if err != nil {
-			return fmt.Errorf("board initialization error - cannot download the board: %v", err)
+			return nil, fmt.Errorf("board initialization error - cannot download the board: %v", err)
 		}
-	} else {
-		var ok bool
-		PlayerShipsCoords = c.Data.Coords
-		if !ok {
-			log.Println("board initialization error - wrong type assertion")
-			return fmt.Errorf("board initialization error - wrong type assertion")
-		}
+		return PlayerShipsCoords, nil
 	}
-	return nil
+
+	PlayerShipsCoords := c.Data.Coords
+
+	return PlayerShipsCoords, nil
 }
 
 func DownloadShips(c *connect.Connection) ([]string, error) {
@@ -239,32 +265,32 @@ func loadPlayerShips(coords []string) ([10][10]gui.State, error) {
 	return states, nil
 }
 
-func word_wrap(text string) [][]string {
-
-	maxLength := 40
-	length := len(text)
-	if length == 0 {
-		return [][]string{}
-	}
-
-	offset := 0
-	mod := length % maxLength
-	if mod != 0 {
-		offset = 1
-	}
-
-	lines := length/maxLength + offset
-	whole := make([][]string, length)
-	i := 1
-	for {
-		if i == lines {
-			break
+func word_wrap(text string) []string {
+	totalLines := len(text)/40 + 1
+	sltext := strings.Split(text, " ")
+	charCounter := 0
+	lineCounter := 0
+	lines := make([]string, totalLines)
+	spacer := " "
+	for _, t := range sltext {
+		wordLen := len(t)
+		spacer = ""
+		if wordLen+charCounter > 40 {
+			lineCounter++
+			charCounter = 0
 		}
-		whole[i-1] = []string{text[maxLength*(i-1) : maxLength*i]}
-		i++
+
+		if len(lines[lineCounter]) > 0 {
+			spacer = " "
+		}
+
+		line := lines[lineCounter] + spacer + t
+		lines[lineCounter] = line
+		charCounter = len(lines[lineCounter])
+
 	}
-	whole[i-1] = []string{text[maxLength*(i-1):]}
-	return whole
+
+	return lines
 }
 
 func drawTux(ui *gui.GUI) {
