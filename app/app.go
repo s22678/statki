@@ -86,7 +86,12 @@ func Play(playWithBot bool) {
 			playerDefinedUsername = true
 		}
 	}
-	playerShipsCoords, _ := GetPlayerInput("set your ships!")
+	// playerShipsCoords, _ := GetPlayerInput("set your ships!")
+	fmt.Println("Set your ships!")
+	time.Sleep(1 * time.Second)
+	view.SetShips()
+	playerShipsCoords := view.GetShips()
+	// playerShipsCoords := strings.Join(gs, " ")
 	enemyNick := ""
 	if !playWithBot {
 		enemyNick, _ = GetPlayerInput("choose your enemy!")
@@ -119,12 +124,12 @@ func Play(playWithBot bool) {
 	}
 	// Check if the game has started
 	for {
+		time.Sleep(1000 * time.Millisecond)
 		status, err = gamedata.GetStatus(c)
 		if err != nil {
 			log.Printf("%v: %v\n", ErrGetStatusException, err)
 			fmt.Println(ErrGetStatusException)
-			cancel()
-			return
+			continue
 		}
 		if status.Game_status == "game_in_progress" {
 			log.Println("connection was established")
@@ -136,12 +141,33 @@ func Play(playWithBot bool) {
 			log.Println("waiting", status.Game_status)
 			fmt.Println("waiting")
 		}
-		time.Sleep(1000 * time.Millisecond)
 	}
 
 	ctx, cancel = context.WithCancel(context.Background())
 	shotCoord := make(chan string)
 	message := make(chan string)
+	timer := make(chan string)
+
+	go func(timer chan string) {
+		for {
+			time.Sleep(1 * time.Second)
+			select {
+			case <-ctx.Done():
+				return
+			default:
+				s, e := gamedata.GetStatus(c)
+				if e != nil {
+					log.Printf("error getting timer: %v\n", e)
+					return
+				}
+				if s.Should_fire {
+					timer <- fmt.Sprint(s.Timer)
+					continue
+				}
+				timer <- "--*--"
+			}
+		}
+	}(timer)
 
 	go func(sh chan string, msg chan string, status *gamedata.StatusResponse, c *connect.Connection) {
 		err = gamedata.LoadHeatMap()
@@ -204,7 +230,7 @@ func Play(playWithBot bool) {
 
 	}(shotCoord, message, status, c)
 	// Print the gameboard
-	err = view.AdvGui(ctx, c, shotCoord, message)
+	err = view.AdvGui(ctx, c, shotCoord, message, timer)
 	if err != nil {
 		log.Println("cannot create an advanced GUI")
 		return

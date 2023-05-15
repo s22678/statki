@@ -30,7 +30,7 @@ var (
 	ErrEnemyBoardUpdate  = errors.New("error while updating enemy board")
 )
 
-func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string) error {
+func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, timerchan chan string) error {
 	pi, err := gamedata.GetPlayerInfo(c)
 	if err != nil {
 		return err
@@ -87,7 +87,18 @@ func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 	ui.Draw(playerBoard)
 	ui.Draw(enemyBoard)
 
-	go func(ctx context.Context, turn *gui.Text, displayMessage *gui.Text, ch chan string, msg chan string) {
+	go func(timerchan chan string) {
+		for {
+			select {
+			case msg := <-timerchan:
+				timer.SetText(msg)
+			case <-ctx.Done():
+				return
+			}
+		}
+	}(timerchan)
+
+	go func(turn *gui.Text, displayMessage *gui.Text, ch chan string, msg chan string) {
 		var char string
 		for {
 			select {
@@ -121,7 +132,7 @@ func AdvGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 				return
 			}
 		}
-	}(ctx, turn, displayMessage, ch, msg)
+	}(turn, displayMessage, ch, msg)
 	log.Println("starting ui")
 	ui.Start(nil)
 

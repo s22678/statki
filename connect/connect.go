@@ -7,7 +7,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"strings"
 )
 
 const (
@@ -42,10 +41,9 @@ func (connection *Connection) GetToken() (string, error) {
 	return "", ErrEmptyTokenException
 }
 
-func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playerNick string, playerDescription string, playerShipsCoords string) error {
-	if playerShipsCoords != "" {
-		connection.Data.Coords = strings.Split(playerShipsCoords, ",")
-	}
+func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playerNick string, playerDescription string, playerShipsCoords []string) error {
+
+	connection.Data.Coords = playerShipsCoords
 	connection.Data.Desc = playerDescription
 	connection.Data.Nick = playerNick
 	connection.Data.Target_nick = enemyNick
@@ -61,6 +59,7 @@ func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playe
 	if err != nil {
 		log.Println(resp)
 		log.Println(err)
+		return err
 	}
 	connection.token = resp.Header.Get("X-Auth-Token")
 	log.Println(resp.Header.Get("X-Auth-Token"))
