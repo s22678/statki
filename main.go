@@ -1,13 +1,17 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/s22678/statki/app"
+	"github.com/s22678/statki/connect"
 	"github.com/s22678/statki/gamedata"
+	"github.com/s22678/statki/view"
 )
 
 const (
@@ -35,7 +39,7 @@ func init() {
 func main() {
 	defer LogFile.Close()
 	for {
-		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) display heatmap\n7) quit")
+		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) display heatmap\n7) quit\n8) new gui prototype")
 		switch {
 		case input == "1":
 			players, err := gamedata.ListPlayers()
@@ -75,6 +79,51 @@ func main() {
 			gamedata.DisplayHeatMap()
 		case input == "7":
 			return
+		case input == "8":
+			ctx, cancel := context.WithCancel(context.Background())
+			defer cancel()
+			c := &connect.Connection{}
+			err := c.InitGame(true, "", "", "", nil)
+			if err != nil {
+				log.Println("main:", err)
+				return
+			}
+
+			statuschan := make(chan gamedata.StatusResponse)
+
+			go func(statuschan chan gamedata.StatusResponse) {
+				for {
+					time.Sleep(1 * time.Second)
+					select {
+					case <-ctx.Done():
+						return
+					default:
+						status, err := gamedata.GetStatus(c)
+						if err != nil {
+							log.Println("main:", err)
+							return
+						}
+						statuschan <- *status
+					}
+				}
+			}(statuschan)
+
+			for {
+				fmt.Println("waiting")
+				status := <-statuschan
+
+				if status.Should_fire {
+					wg, err := view.NewGui(c)
+					if err != nil {
+						log.Println("main:", err)
+						break
+					}
+					wg.Play()
+					fmt.Println("done!")
+					break
+				}
+			}
+
 		default:
 			continue
 		}

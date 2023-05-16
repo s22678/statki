@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"sync"
 	"time"
 
 	gui "github.com/grupawp/warships-gui/v2"
@@ -16,10 +17,23 @@ import (
 )
 
 type PlayerType int
+type GuiElem int
+type TextElem int
 
 const (
 	Player PlayerType = iota
 	Enemy
+)
+
+const (
+	PlayerBoard GuiElem = iota
+	EnemyBoard
+)
+
+const (
+	Turn TextElem = iota
+	Timer
+	DisplayMessage
 )
 
 const (
@@ -37,21 +51,171 @@ var (
 )
 
 type WarshipGui struct {
-	boards []*gui.Board
-	msgs   []*gui.Text
-	states [][10][10]gui.State
-	ui     *gui.GUI
+	textElements  []*gui.Text
+	boardElements []*gui.Board
+	states        [][10][10]gui.State
+	ui            *gui.GUI
+}
+
+func (wg *WarshipGui) Play() {
+	ctx, cancel := context.WithCancel(context.Background())
+	wgr := &sync.WaitGroup{}
+
+	wgr.Add(1)
+	go func(egr *sync.WaitGroup) {
+		defer wgr.Done()
+		for {
+			char := wg.boardElements[Enemy].Listen(ctx)
+			wg.textElements[Enemy].SetText(fmt.Sprintf("Coordinate: %s", char))
+			if char == "" {
+				return
+			}
+			wg.ui.Log("Coordinate: %s", char) // logs are displayed after the game exits
+		}
+	}(wgr)
+	log.Println("starting ui")
+
+	wgr.Add(1)
+	go func(wgr *sync.WaitGroup) {
+		defer wgr.Done()
+		wg.ui.Start(nil)
+		cancel()
+	}(wgr)
+
+	wgr.Wait()
 }
 
 func NewGui(c *connect.Connection) (*WarshipGui, error) {
+	wg := &WarshipGui{}
+	wg.states = append(wg.states, [10][10]gui.State{})
+	wg.states = append(wg.states, [10][10]gui.State{})
+	log.Println("initiating a new board")
+	ui := gui.NewGUI(false)
+
+	// Create player board and add it to []*gui.Board slice as element 0
+	wg.boardElements = append(wg.boardElements, gui.NewBoard(1, 5, nil))
+
+	coords, err := initPlayerShips(c)
+	if err != nil {
+		log.Println("(Init)Display:", err)
+		return nil, err
+	}
+
+	err = wg.loadPlayerShips(coords)
+	if err != nil {
+		log.Println("(loadPlayerShips)Display:", err)
+		return nil, err
+	}
+	wg.boardElements[Player].SetStates(wg.states[Player])
+
+	// Add player board to GUI
+	ui.Draw(wg.boardElements[Player])
+
+	// Create enemy board and add it to []*gui.Board slice as element 1
+	wg.boardElements = append(wg.boardElements, gui.NewBoard(50, 5, nil))
+	// Add enemy board to GUI
+	ui.Draw(wg.boardElements[Enemy])
+
+	// Create "turn" info and add it to []*gui.Text slice as element 0
+	wg.textElements = append(wg.textElements, gui.NewText(1, 1, "Press on any coordinate to log it.", nil))
+	// Add "turn" info to GUI
+	ui.Draw(wg.textElements[Turn])
+
+	// Create "timer" info and add it to []*gui.Text slice as element 1
+	wg.textElements = append(wg.textElements, gui.NewText(50, 1, "", nil))
+	// Add "timer" info to GUI
+	ui.Draw(wg.textElements[Timer])
+
+	// Create "displayMessage" info and add it to []*gui.Text slice as element 2
+	wg.textElements = append(wg.textElements, gui.NewText(1, 2, "", nil))
+	// Add "displayMessage" info to GUI
+	ui.Draw(wg.textElements[DisplayMessage])
+
+	// Get information about both players from the server
 	pi, err := gamedata.GetPlayerInfo(c)
 	if err != nil {
 		return nil, err
 	}
-	wg := &WarshipGui{}
-	wg.msgs = append(wg.msgs, gui.NewText(1, 28, pi.Nick, nil))
-	wg.msgs = append(wg.msgs, gui.NewText(1, 28, "player nick placeholder", nil))
+
+	// Add player nick
+	ui.Draw(gui.NewText(1, 28, pi.Nick, nil))
+
+	// Add player description
+	for i, line := range word_wrap(pi.Desc) {
+		ui.Draw(gui.NewText(1, 30+i, line, nil))
+	}
+
+	// Add enemy nick
+	ui.Draw(gui.NewText(50, 28, pi.Opponent, nil))
+
+	// Add enemy description
+	for i, line := range word_wrap(pi.Opp_desc) {
+		ui.Draw(gui.NewText(50, 30+i, line, nil))
+	}
+
+	// Add tux
+	drawTux(ui)
+
+	wg.ui = ui
+
 	return wg, nil
+}
+
+func (wg *WarshipGui) loadPlayerShips(coords []string) error {
+	states := [10][10]gui.State{}
+	for i := range states {
+		states[i] = [10]gui.State{}
+	}
+
+	for _, val := range coords {
+		setX, setY, err := lib.CoordToIndex(val)
+		if err != nil {
+			return err
+		}
+		states[setX][setY] = gui.Ship
+	}
+	wg.states[Player] = states
+	return nil
+}
+
+func (wg *WarshipGui) UpdatePlayerState(shots []string) error {
+	for _, shot := range shots {
+		setX, setY, err := lib.CoordToIndex(shot)
+		if err != nil {
+			return fmt.Errorf("%v: %v", ErrPlayerBoardUpdate, err)
+		}
+		if wg.states[Player][setX][setY] == gui.Ship || wg.states[Player][setX][setY] == gui.Hit {
+			wg.states[Player][setX][setY] = gui.Hit
+			continue
+		} else {
+			wg.states[Player][setX][setY] = gui.Miss
+			continue
+		}
+	}
+
+	playerBoard.SetStates(PlayerState)
+	return nil
+}
+
+func (wg *WarshipGui) UpdateEnemyState(shot, state string) error {
+	setX, setY, err := lib.CoordToIndex(shot)
+	if err != nil {
+		return fmt.Errorf("%v: %v", ErrEnemyBoardUpdate, err)
+	}
+	if state == "hit" || state == "sunk" {
+
+		wg.states[Enemy][setX][setY] = gui.Hit
+		enemyBoard.SetStates(wg.states[Enemy])
+		return nil
+	}
+
+	if wg.states[Enemy][setX][setY] == gui.Hit {
+		return nil
+	}
+
+	wg.states[Enemy][setX][setY] = gui.Miss
+	enemyBoard.SetStates(wg.states[Enemy])
+	return nil
 }
 
 func OldGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, timerchan chan string) error {
@@ -101,7 +265,7 @@ func OldGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 	drawTux(ui)
 
 	// Init player ships on player board
-	coords, err := InitPlayerShips(c)
+	coords, err := initPlayerShips(c)
 	if err != nil {
 		log.Println("(Init)Display:", err)
 		return err
@@ -176,22 +340,22 @@ func QuitGame(c *connect.Connection) error {
 	return nil
 }
 
-func InitPlayerShips(c *connect.Connection) ([]string, error) {
+func initPlayerShips(c *connect.Connection) ([]string, error) {
 	if c.Data.Coords == nil || len(c.Data.Coords) == 0 {
 		var err error
-		PlayerShipsCoords, err := DownloadShips(c)
+		playerShipsCoords, err := downloadShips(c)
 		if err != nil {
 			return nil, fmt.Errorf("board initialization error - cannot download the board: %v", err)
 		}
-		return PlayerShipsCoords, nil
+		return playerShipsCoords, nil
 	}
 
-	PlayerShipsCoords := c.Data.Coords
+	playerShipsCoords := c.Data.Coords
 
-	return PlayerShipsCoords, nil
+	return playerShipsCoords, nil
 }
 
-func DownloadShips(c *connect.Connection) ([]string, error) {
+func downloadShips(c *connect.Connection) ([]string, error) {
 	coords := make(map[string][]string)
 	body, err := c.GameAPIConnection("GET", shipsCoordsEndpoint, nil)
 	if err != nil {
@@ -266,7 +430,7 @@ func loadPlayerShips(coords []string) ([10][10]gui.State, error) {
 }
 
 func word_wrap(text string) []string {
-	totalLines := len(text)/40 + 1
+	totalLines := len(text)/40 + 2
 	sltext := strings.Split(text, " ")
 	charCounter := 0
 	lineCounter := 0
