@@ -66,7 +66,7 @@ func (wg *WarshipGui) Play() {
 		defer wgr.Done()
 		for {
 			char := wg.boardElements[Enemy].Listen(ctx)
-			wg.textElements[Enemy].SetText(fmt.Sprintf("Coordinate: %s", char))
+			wg.textElements[DisplayMessage].SetText(fmt.Sprintf("Coordinate: %s", char))
 			if char == "" {
 				return
 			}
@@ -78,7 +78,7 @@ func (wg *WarshipGui) Play() {
 	wgr.Add(1)
 	go func(wgr *sync.WaitGroup) {
 		defer wgr.Done()
-		wg.ui.Start(nil)
+		wg.ui.Start(context.TODO(), nil)
 		cancel()
 	}(wgr)
 
@@ -219,6 +219,8 @@ func (wg *WarshipGui) UpdateEnemyState(shot, state string) error {
 }
 
 func OldGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, timerchan chan string) error {
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
 	pi, err := gamedata.GetPlayerInfo(c)
 	if err != nil {
 		return err
@@ -321,14 +323,13 @@ func OldGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan
 
 			case <-ctx.Done():
 				log.Println("GAME OVER", pi.Nick)
-				QuitGame(c)
 				return
 			}
 		}
 	}(turn, displayMessage, ch, msg)
 	log.Println("starting ui")
-	ui.Start(nil)
-
+	ui.Start(ctx, nil)
+	cancel()
 	return nil
 }
 

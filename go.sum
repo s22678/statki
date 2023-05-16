@@ -1,9 +1,9 @@
-github.com/JoelOtter/termloop v0.0.0-20210806173944-5f7c38744afb h1:wXR5fXM/+4VFARcWVtjwb0wxfQl5RxemkNzzs2Jb918=
-github.com/JoelOtter/termloop v0.0.0-20210806173944-5f7c38744afb/go.mod h1:Tie7OOEgasw91JpzA8UywemPyGehxZ06Gqtl5B1/vXI=
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/grupawp/warships-gui/v2 v2.0.1 h1:ukk5NCs/mZ7ppxh6//oytPk5fwY8vojIB1bh3Qq34Sc=
-github.com/grupawp/warships-gui/v2 v2.0.1/go.mod h1:gicH6dppNs2SfM6kKfHVgOcYwnx5V65/HXhoiX4uIgw=
+github.com/grupawp/termloop v0.0.0-20230516071741-9af5ae3e8663 h1:i7NFke0u3aDNkrcbeNkIvVlTi+JjUUwyWVUVorvudpw=
+github.com/grupawp/termloop v0.0.0-20230516071741-9af5ae3e8663/go.mod h1:fsqxxfr00T/zMXg4CdhvRgqTMKC+AOJd58rPAPtMKvs=
+github.com/grupawp/warships-gui/v2 v2.1.4 h1:McSXZ1DqvWEjdejJmMcmLixcqfiv+knTwkTZn/67mLg=
+github.com/grupawp/warships-gui/v2 v2.1.4/go.mod h1:A2lDlr6TGlyihKw0+kQYQiLhSr1cC4gAi3/5/aSZ9x4=
 github.com/mattn/go-runewidth v0.0.9/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=
 github.com/mattn/go-runewidth v0.0.14 h1:+xnbZSEeDbOIg5/mE6JF0w6n9duR1l3/WmbinWVwUuU=
 github.com/mattn/go-runewidth v0.0.14/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=

@@ -89,9 +89,9 @@ func main() {
 				return
 			}
 
-			statuschan := make(chan gamedata.StatusResponse)
+			statuschan := make(chan gamedata.Status)
 
-			go func(statuschan chan gamedata.StatusResponse) {
+			go func(statuschan chan gamedata.Status) {
 				for {
 					time.Sleep(1 * time.Second)
 					select {
@@ -101,13 +101,12 @@ func main() {
 						status, err := gamedata.GetStatus(c)
 						if err != nil {
 							log.Println("main:", err)
-							return
+							fmt.Println("main:", err)
 						}
 						statuschan <- *status
 					}
 				}
 			}(statuschan)
-
 			for {
 				fmt.Println("waiting")
 				status := <-statuschan
@@ -122,6 +121,11 @@ func main() {
 					fmt.Println("done!")
 					break
 				}
+			}
+
+			status, _ := gamedata.GetStatus(c)
+			if status.Game_status == "game_in_progress" {
+				view.QuitGame(c)
 			}
 
 		default:

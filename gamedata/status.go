@@ -11,7 +11,7 @@ var (
 	gameEndpoint = "/api/game"
 )
 
-type StatusResponse struct {
+type Status struct {
 	Desc             string   `json:"desc,omitempty"`
 	Game_status      string   `json:"game_status,omitempty"`
 	Last_game_status string   `json:"last_game_status,omitempty"`
@@ -23,16 +23,8 @@ type StatusResponse struct {
 	Timer            int      `json:"timer,omitempty"`
 }
 
-func (sr *StatusResponse) GetOpponent() string {
-	return sr.Opponent
-}
-
-func (g *StatusResponse) GetDescription() string {
-	return g.Desc
-}
-
-func GetStatus(c *connect.Connection) (*StatusResponse, error) {
-	gd := &StatusResponse{}
+func GetStatus(c *connect.Connection) (*Status, error) {
+	gd := &Status{}
 	body, err := c.GameAPIConnection("GET", gameEndpoint, nil)
 	if err != nil {
 		return nil, err

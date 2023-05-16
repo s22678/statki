@@ -71,7 +71,7 @@ func Play(playWithBot bool) {
 	c := &connect.Connection{}
 	// Initialize the game
 	oppShotsDiff := 0
-	status := &gamedata.StatusResponse{}
+	status := &gamedata.Status{}
 
 	var playerNick string
 	var playerDescription string
@@ -89,15 +89,21 @@ func Play(playWithBot bool) {
 	// playerShipsCoords, _ := GetPlayerInput("set your ships!")
 	fmt.Println("Set your ships!")
 	time.Sleep(1 * time.Second)
-	view.SetShips()
-	playerShipsCoords := view.GetShips()
+	view.CreateShipyard()
+	sh, err := view.CreateShipyard()
+	if err != nil {
+		log.Println("error creating a shipyard", err)
+		return
+	}
+	sh.SetShips()
+	playerShipsCoords := sh.GetShips()
 	fmt.Println(playerShipsCoords)
 	// playerShipsCoords := strings.Join(gs, " ")
 	enemyNick := ""
 	if !playWithBot {
 		enemyNick, _ = GetPlayerInput("choose your enemy!")
 	}
-	err := c.InitGame(playWithBot, enemyNick, playerNick, playerDescription, playerShipsCoords)
+	err = c.InitGame(playWithBot, enemyNick, playerNick, playerDescription, playerShipsCoords)
 	if err != nil {
 		log.Printf("%v: %v\n", ErrInitGameException, err)
 		fmt.Println(ErrInitGameException)
@@ -170,7 +176,7 @@ func Play(playWithBot bool) {
 		}
 	}(timer)
 
-	go func(sh chan string, msg chan string, status *gamedata.StatusResponse, c *connect.Connection) {
+	go func(sh chan string, msg chan string, status *gamedata.Status, c *connect.Connection) {
 		err = gamedata.LoadHeatMap()
 		if err != nil {
 			log.Printf("%v: %v\n", ErrLoadHeatmap, err)
@@ -235,6 +241,14 @@ func Play(playWithBot bool) {
 	if err != nil {
 		log.Println("cannot create a GUI")
 		return
+	}
+
+	status, err = gamedata.GetStatus(c)
+	if err != nil {
+		return
+	}
+	if status.Game_status == "game_in_progress" {
+		view.QuitGame(c)
 	}
 }
 
