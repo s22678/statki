@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -90,14 +91,28 @@ func (connection *Connection) GameAPIConnection(HTTPMethod string, endpoint stri
 		return nil, err
 	}
 
-	if r.StatusCode == 403 {
-		return body, ErrSessionNotFoundException
+	if r.StatusCode == http.StatusOK {
+		return body, nil
 	}
 
-	if r.StatusCode == 401 {
-		return body, ErrUnauthorizedException
-	}
+	return nil, fmt.Errorf("error getting request: %d", r.StatusCode)
 
-	// TODO - should this method return a []byte?
-	return body, nil
+	// if r.StatusCode == 503 {
+	// 	return body, ErrSessionNotFoundException
+	// }
+
+	// if r.StatusCode == 403 {
+	// 	return body, ErrSessionNotFoundException
+	// }
+
+	// if r.StatusCode == st {
+	// 	return body, ErrUnauthorizedException
+	// }
+
+	// if r.StatusCode != http.StatusOK {
+	// 	return body, nil
+	// }
+
+	// // TODO - should this method return a []byte?
+	// return body, nil
 }

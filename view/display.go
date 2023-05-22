@@ -62,7 +62,7 @@ func (wg *WarshipGui) Play() {
 	wgr := &sync.WaitGroup{}
 
 	wgr.Add(1)
-	go func(egr *sync.WaitGroup) {
+	go func(wgr *sync.WaitGroup) {
 		defer wgr.Done()
 		for {
 			char := wg.boardElements[Enemy].Listen(ctx)

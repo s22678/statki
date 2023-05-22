@@ -1,0 +1,15 @@
+func (a *app) doRequest(f func() error) error {
+    for i := 0; i < maxConnectionAttempts; i++ {
+        if err := f(); err != nil {
+            log.Println("error, retrying")
+            time.Sleep(1 * time.Second)
+            continue
+        }
+        return nil
+    }
+    return fmt.Errorf("max connection attempts reached")
+}
+
+func (a *app) getDesc() (s *statusResponse, err error) {
+    
+}

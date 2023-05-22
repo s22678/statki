@@ -1,6 +1,7 @@
 package lib
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/takuoki/clmconv"
@@ -8,6 +9,9 @@ import (
 
 // Modified coordinates like A1, B2 to (int, int) pair. A1 = (1,1), B3 = (2,3) etc.
 func CoordToIndex(coord string) (setx int, sety int, err error) {
+	if len(coord) == 0 {
+		return 0, 0, fmt.Errorf("empty coord")
+	}
 	setx, err = clmconv.Atoi(coord[:1])
 	if err != nil {
 		return 0, 0, err
