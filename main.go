@@ -39,7 +39,7 @@ func init() {
 func main() {
 	defer LogFile.Close()
 	for {
-		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) display heatmap\n7) quit\n8) new gui prototype")
+		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) display heatmap\n7) quit\n8) new gui prototype\n12) newgui bot \n13) new gui online")
 		switch {
 		case input == "1":
 			players, err := gamedata.ListPlayers()
@@ -127,14 +127,21 @@ func main() {
 			if status.Game_status == "game_in_progress" {
 				view.QuitGame(c)
 			}
-
+		case input == "12":
+			withBot = true
+			app.NewPlay(withBot)
+			gameInitiated = true
+		case input == "13":
+			withBot = false
+			app.NewPlay(withBot)
+			gameInitiated = true
 		default:
 			continue
 		}
 		if gameInitiated {
 			input, _ = app.GetPlayerInput("play again? [yes]/[no]")
 			if input == "yes" {
-				app.Play(withBot)
+				app.NewPlay(withBot)
 			}
 			gameInitiated = false
 		}

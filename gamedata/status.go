@@ -27,6 +27,7 @@ func GetStatus(c *connect.Connection) (*Status, error) {
 	gd := &Status{}
 	body, err := c.GameAPIConnection("GET", gameEndpoint, nil)
 	if err != nil {
+		log.Println("Status:", string(body))
 		return nil, err
 	}
 
@@ -34,8 +35,6 @@ func GetStatus(c *connect.Connection) (*Status, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	log.Println("Status:", string(body))
 
 	return gd, err
 }

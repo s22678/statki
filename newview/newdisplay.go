@@ -56,70 +56,75 @@ type WarshipGui struct {
 	ui            *gui.GUI
 }
 
-func (wg *WarshipGui) Play(ctxO context.Context, hmsg chan string, mmsg chan string, timerchan chan string) {
-	ctx, cancel := context.WithCancel(ctxO)
-	wgr := &sync.WaitGroup{}
+func (wgui *WarshipGui) Play(ctx context.Context, hmsg chan string, mmsg chan string, timerchan chan string, playerShot chan string) {
+	ctx, cancel := context.WithCancel(ctx)
+	wg := &sync.WaitGroup{}
 
-	wgr.Add(1)
+	wg.Add(1)
 	go func(timerchan chan string) {
+		defer wg.Done()
 		for {
 			select {
 			case msg := <-timerchan:
-				wg.textElements[Timer].SetText(msg)
+				wgui.textElements[Timer].SetText(msg)
 			case <-ctx.Done():
 				return
 			}
 		}
 	}(timerchan)
 
-	wgr.Add(1)
-	go func(wgr *sync.WaitGroup, hmsg chan string, mmsg chan string) {
+	wg.Add(1)
+	go func(wgr *sync.WaitGroup, hmsg chan string, mmsg chan string, playerShot chan string) {
 		defer wgr.Done()
 		for {
 			select {
 			case hitmsg := <-hmsg:
-				wg.textElements[Turn].SetText("Your turn")
-				wg.textElements[DisplayMessage].SetText(hitmsg)
-				char := wg.boardElements[Enemy].Listen(ctx)
-				wg.textElements[DisplayMessage].SetText(fmt.Sprintf("Coordinate: %s", char))
+				wgui.textElements[Turn].SetText("Your turn")
+				wgui.textElements[DisplayMessage].SetText(hitmsg)
+				char := wgui.boardElements[Enemy].Listen(ctx)
+				wgui.textElements[DisplayMessage].SetText(fmt.Sprintf("Coordinate: %s", char))
 				if char == "" {
 					return
 				}
-				wg.ui.Log("Coordinate: %s", char) // logs are displayed after the game exits
+				playerShot <- char
+				wgui.ui.Log("Coordinate: %s", char) // logs are displayed after the game exits
 			case missmsg := <-mmsg:
-				wg.textElements[Turn].SetText("Enemy turn")
-				wg.textElements[DisplayMessage].SetText(missmsg)
+				wgui.textElements[Turn].SetText("Enemy turn")
+				wgui.textElements[DisplayMessage].SetText(missmsg)
 				time.Sleep(1 * time.Second)
 			case <-ctx.Done():
-				wg.textElements[Turn].SetText("GAME OVER")
-				wg.textElements[DisplayMessage].SetText("")
 				log.Println("GAME OVER")
 				return
 			}
 		}
-	}(wgr, hmsg, mmsg)
+	}(wg, hmsg, mmsg, playerShot)
 
 	log.Println("starting ui")
 
-	wgr.Add(1)
+	wg.Add(1)
 	go func(wgr *sync.WaitGroup) {
 		defer wgr.Done()
-		wg.ui.Start(context.TODO(), nil)
+		wgui.ui.Start(ctx, nil)
 		cancel()
-	}(wgr)
+	}(wg)
 
-	wgr.Wait()
+	wg.Wait()
+}
+
+func (wgui *WarshipGui) FinishGame(msg string) {
+	wgui.textElements[Turn].SetText("GAME OVER")
+	wgui.textElements[DisplayMessage].SetText(msg)
 }
 
 func NewGui(c *connect.Connection) (*WarshipGui, error) {
-	wg := &WarshipGui{}
-	wg.states = append(wg.states, [10][10]gui.State{})
-	wg.states = append(wg.states, [10][10]gui.State{})
+	wgui := &WarshipGui{}
+	wgui.states = append(wgui.states, [10][10]gui.State{})
+	wgui.states = append(wgui.states, [10][10]gui.State{})
 	log.Println("initiating a new board")
 	ui := gui.NewGUI(false)
 
 	// Create player board and add it to []*gui.Board slice as element 0
-	wg.boardElements = append(wg.boardElements, gui.NewBoard(1, 5, nil))
+	wgui.boardElements = append(wgui.boardElements, gui.NewBoard(1, 5, nil))
 
 	coords, err := initPlayerShips(c)
 	if err != nil {
@@ -127,35 +132,35 @@ func NewGui(c *connect.Connection) (*WarshipGui, error) {
 		return nil, err
 	}
 
-	err = wg.loadPlayerShips(coords)
+	err = wgui.loadPlayerShips(coords)
 	if err != nil {
 		log.Println("(loadPlayerShips)Display:", err)
 		return nil, err
 	}
-	wg.boardElements[Player].SetStates(wg.states[Player])
+	wgui.boardElements[Player].SetStates(wgui.states[Player])
 
 	// Add player board to GUI
-	ui.Draw(wg.boardElements[Player])
+	ui.Draw(wgui.boardElements[Player])
 
 	// Create enemy board and add it to []*gui.Board slice as element 1
-	wg.boardElements = append(wg.boardElements, gui.NewBoard(50, 5, nil))
+	wgui.boardElements = append(wgui.boardElements, gui.NewBoard(50, 5, nil))
 	// Add enemy board to GUI
-	ui.Draw(wg.boardElements[Enemy])
+	ui.Draw(wgui.boardElements[Enemy])
 
 	// Create "turn" info and add it to []*gui.Text slice as element 0
-	wg.textElements = append(wg.textElements, gui.NewText(1, 1, "Press on any coordinate to log it.", nil))
+	wgui.textElements = append(wgui.textElements, gui.NewText(1, 1, "Press on any coordinate to log it.", nil))
 	// Add "turn" info to GUI
-	ui.Draw(wg.textElements[Turn])
+	ui.Draw(wgui.textElements[Turn])
 
 	// Create "timer" info and add it to []*gui.Text slice as element 1
-	wg.textElements = append(wg.textElements, gui.NewText(50, 1, "", nil))
+	wgui.textElements = append(wgui.textElements, gui.NewText(50, 1, "", nil))
 	// Add "timer" info to GUI
-	ui.Draw(wg.textElements[Timer])
+	ui.Draw(wgui.textElements[Timer])
 
 	// Create "displayMessage" info and add it to []*gui.Text slice as element 2
-	wg.textElements = append(wg.textElements, gui.NewText(1, 2, "", nil))
+	wgui.textElements = append(wgui.textElements, gui.NewText(1, 2, "", nil))
 	// Add "displayMessage" info to GUI
-	ui.Draw(wg.textElements[DisplayMessage])
+	ui.Draw(wgui.textElements[DisplayMessage])
 
 	// Get information about both players from the server
 	pi, err := gamedata.GetPlayerInfo(c)
@@ -182,12 +187,12 @@ func NewGui(c *connect.Connection) (*WarshipGui, error) {
 	// Add tux
 	drawTux(ui)
 
-	wg.ui = ui
+	wgui.ui = ui
 
-	return wg, nil
+	return wgui, nil
 }
 
-func (wg *WarshipGui) loadPlayerShips(coords []string) error {
+func (wgui *WarshipGui) loadPlayerShips(coords []string) error {
 	states := [10][10]gui.State{}
 	for i := range states {
 		states[i] = [10]gui.State{}
@@ -200,47 +205,47 @@ func (wg *WarshipGui) loadPlayerShips(coords []string) error {
 		}
 		states[setX][setY] = gui.Ship
 	}
-	wg.states[Player] = states
+	wgui.states[Player] = states
 	return nil
 }
 
-func (wg *WarshipGui) UpdatePlayerState(shots []string) error {
+func (wgui *WarshipGui) UpdatePlayerState(shots []string) error {
 	for _, shot := range shots {
 		setX, setY, err := lib.CoordToIndex(shot)
 		if err != nil {
 			return fmt.Errorf("%v: %v", ErrPlayerBoardUpdate, err)
 		}
-		if wg.states[Player][setX][setY] == gui.Ship || wg.states[Player][setX][setY] == gui.Hit {
-			wg.states[Player][setX][setY] = gui.Hit
+		if wgui.states[Player][setX][setY] == gui.Ship || wgui.states[Player][setX][setY] == gui.Hit {
+			wgui.states[Player][setX][setY] = gui.Hit
 			continue
 		} else {
-			wg.states[Player][setX][setY] = gui.Miss
+			wgui.states[Player][setX][setY] = gui.Miss
 			continue
 		}
 	}
 
-	wg.boardElements[Player].SetStates(wg.states[Player])
+	wgui.boardElements[Player].SetStates(wgui.states[Player])
 	return nil
 }
 
-func (wg *WarshipGui) UpdateEnemyState(shot, state string) error {
+func (wgui *WarshipGui) UpdateEnemyState(shot, state string) error {
 	setX, setY, err := lib.CoordToIndex(shot)
 	if err != nil {
 		return fmt.Errorf("%v: %v", ErrEnemyBoardUpdate, err)
 	}
 	if state == "hit" || state == "sunk" {
 
-		wg.states[Enemy][setX][setY] = gui.Hit
-		wg.boardElements[Enemy].SetStates(wg.states[Enemy])
+		wgui.states[Enemy][setX][setY] = gui.Hit
+		wgui.boardElements[Enemy].SetStates(wgui.states[Enemy])
 		return nil
 	}
 
-	if wg.states[Enemy][setX][setY] == gui.Hit {
+	if wgui.states[Enemy][setX][setY] == gui.Hit {
 		return nil
 	}
 
-	wg.states[Enemy][setX][setY] = gui.Miss
-	wg.boardElements[Enemy].SetStates(wg.states[Enemy])
+	wgui.states[Enemy][setX][setY] = gui.Miss
+	wgui.boardElements[Enemy].SetStates(wgui.states[Enemy])
 	return nil
 }
 

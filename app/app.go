@@ -320,15 +320,16 @@ func NewPlay(playWithBot bool) {
 	}
 
 	ctx, cancel = context.WithCancel(context.Background())
-	shotCoord := make(chan string)
 
 	timer := make(chan string)
 	statusChan := make(chan *gamedata.Status, 1)
 	hitMessage := make(chan string)
 	missMessage := make(chan string)
+	playerShot := make(chan string)
 	wGui, err := newview.NewGui(c)
 	if err != nil {
 		log.Println("EEEERRRRRRRRRRORRRRR")
+		cancel()
 		return
 	}
 
@@ -340,58 +341,60 @@ func NewPlay(playWithBot bool) {
 	go GetStatusAsync(ctx, statusChan, c)
 	go GetTimeAsync(ctx, statusChan, timer, c)
 
-	for 
-
-	go func(c *connect.Connection, statusChan chan *gamedata.Status, timer chan string) {
-
+	go func(playerShot chan string, c *connect.Connection, statusChan chan *gamedata.Status, wGui *newview.WarshipGui, hitMessage chan string, missMessage chan string) {
 		for {
 			status := <-statusChan
 			if status.Game_status == "game_in_progress" {
 				if status.Should_fire {
-					hitMessage <- "select coort to shoot"
-					view.UpdatePlayerState(status.Opp_shots[oppShotsDiff:])
+					hitMessage <- "select coord to shoot"
+					wGui.UpdatePlayerState(status.Opp_shots[oppShotsDiff:])
 					oppShotsDiff = len(status.Opp_shots)
 					for {
-						shot := <-sh
+						shot := <-playerShot
 						resp, err := Fire(c, shot)
 						if err != nil {
 							log.Printf("Error during firing %v", err)
 							break
 						}
-						err = view.UpdateEnemyState(shot, resp)
+						err = wGui.UpdateEnemyState(shot, resp)
 						if err != nil {
 							return
 						}
-						msg <- resp
+
 						if resp == "miss" {
-							timer <- "--*--"
+							missMessage <- resp
 							break
 						}
 						if resp == "hit" || resp == "sunk" {
+							hitMessage <- resp
+							status := <-statusChan
+							if status.Game_status == "ended" {
+								break
+							}
 							gamedata.AddShotToHeatMap(shot)
 							gamedata.SaveHeatMap()
 						}
 					}
 				} else {
-					msg <- "enemy"
+					missMessage <- "enemy"
 				}
 				// status, err = gamedata.GetStatus(c)
 				status = <-statusChan
-				if err != nil {
-					log.Println("Error running gameloop", err)
-					continue
-				}
+				// if err != nil {
+				// 	log.Println("Error running gameloop", err)
+				// 	continue
+				// }
 				time.Sleep(1000 * time.Millisecond)
 			}
 			if status.Game_status == "ended" {
 				view.UpdatePlayerState(status.Opp_shots[oppShotsDiff:])
 				switch status.Last_game_status {
 				case "win":
-					msg <- "game ended: the player is the winner"
+					wGui.FinishGame("game ended: the player is the winner")
 				case "lose":
-					msg <- "game ended: the enemy is the winner"
+					wGui.FinishGame("game ended: the enemy is the winner")
 				case "session not found":
-					msg <- "game ended: timeout"
+					wGui.FinishGame("game ended: timeout")
 				}
 				time.Sleep(2 * time.Second)
 				cancel()
@@ -399,18 +402,11 @@ func NewPlay(playWithBot bool) {
 			}
 		}
 
-	}(shotCoord, message, status, c, statusChan, timer)
+	}(playerShot, c, statusChan, wGui, hitMessage, missMessage)
 	// Print the gameboard
-	err = wg.Play(ctx, c, shotCoord, message, timer)
-	if err != nil {
-		log.Println("cannot create a GUI")
-		return
-	}
+	wGui.Play(ctx, hitMessage, missMessage, timer, playerShot)
 
-	status, err = gamedata.GetStatus(c)
-	if err != nil {
-		return
-	}
+	status = <-statusChan
 	if status.Game_status == "game_in_progress" {
 		cancel()
 		QuitGame(c)
@@ -437,22 +433,28 @@ func GetTimeAsync(ctx context.Context, statusChan chan *gamedata.Status, timer c
 				timer <- fmt.Sprint(status.Timer)
 				continue
 			}
+			log.Println("GET ASYNC TIMER")
+			timer <- "--*--"
 		}
 	}
 }
 
 func GetStatusAsync(ctx context.Context, statusChan chan *gamedata.Status, c *connect.Connection) {
+	ctx, cancel := context.WithCancel(ctx)
 	for {
 		select {
 		case <-ctx.Done():
+			cancel()
 			return
 		default:
 			s, e := gamedata.GetStatus(c)
 			if e != nil {
-				log.Printf("error getting timer: %v\n", e)
+				log.Printf("error getting status: %v\n", e)
 				time.Sleep(1 * time.Second)
 				continue
 			}
+
+			log.Println("GET ASYNC STATUS")
 			statusChan <- s
 		}
 	}
