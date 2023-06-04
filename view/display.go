@@ -218,6 +218,15 @@ func (wg *WarshipGui) UpdateEnemyState(shot, state string) error {
 	return nil
 }
 
+func stateCleanup() {
+	for idx, row := range PlayerState {
+		for idxC, _ := range row {
+			PlayerState[idx][idxC] = gui.Empty
+			EnemyState[idx][idxC] = gui.Empty
+		}
+	}
+}
+
 func OldGui(ctx context.Context, c *connect.Connection, ch chan string, msg chan string, timerchan chan string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()

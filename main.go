@@ -52,12 +52,28 @@ func main() {
 			}
 		case input == "2":
 			withBot = true
-			app.Play(withBot)
-			gameInitiated = true
+			// app.Play(withBot)
+			// gameInitiated = true
+			for {
+				app.NewPlay(withBot)
+				pInput, _ := app.GetPlayerInput("play again? [yes]/[no]")
+				if pInput == "yes" {
+					continue
+				}
+				break
+			}
 		case input == "3":
 			withBot = false
-			app.Play(withBot)
-			gameInitiated = true
+			// app.Play(withBot)
+			// gameInitiated = true
+			for {
+				app.NewPlay(withBot)
+				pInput, _ := app.GetPlayerInput("play again? [yes]/[no]")
+				if pInput == "yes" {
+					continue
+				}
+				break
+			}
 		case input == "4":
 			stats, err := gamedata.GetAllPlayersStats()
 			if err != nil {
@@ -138,12 +154,6 @@ func main() {
 		default:
 			continue
 		}
-		if gameInitiated {
-			input, _ = app.GetPlayerInput("play again? [yes]/[no]")
-			if input == "yes" {
-				app.NewPlay(withBot)
-			}
-			gameInitiated = false
-		}
+
 	}
 }
