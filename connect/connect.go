@@ -59,7 +59,7 @@ func (connection *Connection) InitGame(playWithBot bool, enemyNick string, playe
 	resp, err := http.Post(ServerUrl+gameEndpoint, "application/json", reader)
 	if err != nil {
 		log.Println(resp)
-		log.Println(err)
+		log.Println("InitGame error:", err)
 		return err
 	}
 	connection.token = resp.Header.Get("X-Auth-Token")

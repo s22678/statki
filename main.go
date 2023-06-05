@@ -1,17 +1,13 @@
 package main
 
 import (
-	"context"
 	"errors"
 	"fmt"
 	"log"
 	"os"
-	"time"
 
 	"github.com/s22678/statki/app"
-	"github.com/s22678/statki/connect"
 	"github.com/s22678/statki/gamedata"
-	"github.com/s22678/statki/view"
 )
 
 const (
@@ -39,7 +35,7 @@ func init() {
 func main() {
 	defer LogFile.Close()
 	for {
-		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) display heatmap\n7) quit\n8) new gui prototype\n12) newgui bot \n13) new gui online")
+		input, _ := app.GetPlayerInput("1) show players\n2) play with the bot\n3) play online\n4) display all players stats\n5) display single player stats\n6) display heatmap\n7) quit")
 		switch {
 		case input == "1":
 			players, err := gamedata.ListPlayers()
@@ -51,29 +47,9 @@ func main() {
 				fmt.Println(v.Nick, v.Game_status)
 			}
 		case input == "2":
-			withBot = true
-			// app.Play(withBot)
-			// gameInitiated = true
-			for {
-				app.NewPlay(withBot)
-				pInput, _ := app.GetPlayerInput("play again? [yes]/[no]")
-				if pInput == "yes" {
-					continue
-				}
-				break
-			}
+			gameLoop(true)
 		case input == "3":
-			withBot = false
-			// app.Play(withBot)
-			// gameInitiated = true
-			for {
-				app.NewPlay(withBot)
-				pInput, _ := app.GetPlayerInput("play again? [yes]/[no]")
-				if pInput == "yes" {
-					continue
-				}
-				break
-			}
+			gameLoop(false)
 		case input == "4":
 			stats, err := gamedata.GetAllPlayersStats()
 			if err != nil {
@@ -93,67 +69,20 @@ func main() {
 			fmt.Println("Nick:", stats.Nick, "Games:", stats.Games, "Wins:", stats.Wins, "Rank:", stats.Rank, "Points", stats.Points)
 		case input == "6":
 			gamedata.DisplayHeatMap()
-		case input == "7":
-			return
-		case input == "8":
-			ctx, cancel := context.WithCancel(context.Background())
-			defer cancel()
-			c := &connect.Connection{}
-			err := c.InitGame(true, "", "", "", nil)
-			if err != nil {
-				log.Println("main:", err)
-				return
-			}
-
-			statuschan := make(chan gamedata.Status)
-
-			go func(statuschan chan gamedata.Status) {
-				for {
-					time.Sleep(1 * time.Second)
-					select {
-					case <-ctx.Done():
-						return
-					default:
-						status, err := gamedata.GetStatus(c)
-						if err != nil {
-							log.Println("main:", err)
-							fmt.Println("main:", err)
-						}
-						statuschan <- *status
-					}
-				}
-			}(statuschan)
-			for {
-				fmt.Println("waiting")
-				status := <-statuschan
-
-				if status.Should_fire {
-					wg, err := view.NewGui(c)
-					if err != nil {
-						log.Println("main:", err)
-						break
-					}
-					wg.Play()
-					fmt.Println("done!")
-					break
-				}
-			}
-
-			status, _ := gamedata.GetStatus(c)
-			if status.Game_status == "game_in_progress" {
-				view.QuitGame(c)
-			}
-		case input == "12":
-			withBot = true
-			app.NewPlay(withBot)
-			gameInitiated = true
-		case input == "13":
-			withBot = false
-			app.NewPlay(withBot)
-			gameInitiated = true
 		default:
 			continue
 		}
 
+	}
+}
+
+func gameLoop(withBot bool) {
+	for {
+		app.Play(withBot)
+		pInput, _ := app.GetPlayerInput("play again? [yes]/[no]")
+		if pInput == "yes" {
+			continue
+		}
+		break
 	}
 }
